@@ -1,0 +1,22 @@
+[package]
+name = "sprite-cli"
+description = "psm: servidor MCP, runtime e linha de comando do Pixel Studio Maker (um único executável)."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "psm"
+path = "src/main.rs"
+
+[dependencies]
+sprite-core.workspace = true
+sprite-project.workspace = true
+sprite-commands.workspace = true
+sprite-runtime.workspace = true
+sprite-mcp.workspace = true
+serde_json.workspace = true
+base64.workspace = true
+tokio.workspace = true
+rmcp.workspace = true

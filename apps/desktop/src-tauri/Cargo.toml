@@ -1,0 +1,24 @@
+[package]
+name = "sprite-desktop"
+description = "Aplicativo desktop (Tauri) do Pixel Studio Maker: um cliente do runtime, como o servidor MCP."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[lib]
+name = "sprite_desktop_lib"
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+sprite-runtime.workspace = true
+sprite-commands.workspace = true
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+base64.workspace = true

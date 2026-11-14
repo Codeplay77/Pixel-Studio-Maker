@@ -1,0 +1,1 @@
+[{"tool":"animation_preview","args":{"project":"da7b5485","animation":"voar","direction":"E","scale":3},"save_as":"f1-voar-strip"},{"tool":"frame_preview","args":{"project":"da7b5485","frame":{"animation":"voar","direction":"E","index":4},"scale":8},"save_as":"f3-frame4"}]

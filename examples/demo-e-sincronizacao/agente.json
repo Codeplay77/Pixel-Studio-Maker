@@ -1,0 +1,1060 @@
+[
+ {
+  "tool": "project_open",
+  "args": {
+   "path": "demo-a-guerreiro/guerreiro.psmproj"
+  }
+ },
+ {
+  "tool": "transaction_begin",
+  "args": {
+   "label": "armadura verde"
+  }
+ },
+ {
+  "tool": "palette_replace",
+  "args": {
+   "from": "#1d3f7a",
+   "to": "#1e5136"
+  }
+ },
+ {
+  "tool": "palette_replace",
+  "args": {
+   "from": "#2f6ad0",
+   "to": "#2f9a5a"
+  }
+ },
+ {
+  "tool": "palette_replace",
+  "args": {
+   "from": "#6fa8f0",
+   "to": "#6fd08c"
+  }
+ },
+ {
+  "tool": "palette_replace",
+  "args": {
+   "from": "#c5e2ff",
+   "to": "#c8f5d2"
+  }
+ },
+ {
+  "tool": "transaction_commit",
+  "args": {}
+ },
+ {
+  "tool": "frame_preview",
+  "args": {
+   "frame": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 0
+   },
+   "scale": 6
+  },
+  "save_as": "e1-armadura-verde"
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "escudo maior no frame 0",
+   "ops": [
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "rect",
+     "x": 23,
+     "y": 34,
+     "w": 4,
+     "h": 5,
+     "color": 1,
+     "fill": true
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "rect",
+     "x": 24,
+     "y": 38,
+     "w": 4,
+     "h": 3,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "pixel",
+     "x": 24,
+     "y": 38,
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "polygon",
+     "points": [
+      [
+       27,
+       29
+      ],
+      [
+       42,
+       29
+      ],
+      [
+       42,
+       41
+      ],
+      [
+       34,
+       54
+      ],
+      [
+       27,
+       41
+      ]
+     ],
+     "color": 6
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "polygon",
+     "points": [
+      [
+       28,
+       30
+      ],
+      [
+       41,
+       30
+      ],
+      [
+       41,
+       41
+      ],
+      [
+       34,
+       52
+      ],
+      [
+       28,
+       41
+      ]
+     ],
+     "color": 2
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      40,
+      31
+     ],
+     "to": [
+      40,
+      41
+     ],
+     "color": 1
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      39,
+      42
+     ],
+     "to": [
+      35,
+      49
+     ],
+     "color": 1
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      29,
+      31
+     ],
+     "to": [
+      29,
+      41
+     ],
+     "color": 3
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      29,
+      42
+     ],
+     "to": [
+      33,
+      49
+     ],
+     "color": 3
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      34,
+      33
+     ],
+     "to": [
+      34,
+      47
+     ],
+     "color": 13
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      30,
+      38
+     ],
+     "to": [
+      38,
+      38
+     ],
+     "color": 13
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      27,
+      29
+     ],
+     "to": [
+      41,
+      29
+     ],
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      27,
+      30
+     ],
+     "to": [
+      27,
+      40
+     ],
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      42,
+      30
+     ],
+     "to": [
+      42,
+      41
+     ],
+     "color": 5
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      41,
+      42
+     ],
+     "to": [
+      35,
+      52
+     ],
+     "color": 5
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 2,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "escudo maior no frame 1",
+   "ops": [
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "rect",
+     "x": 23,
+     "y": 35,
+     "w": 4,
+     "h": 5,
+     "color": 1,
+     "fill": true
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "rect",
+     "x": 24,
+     "y": 39,
+     "w": 4,
+     "h": 3,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "pixel",
+     "x": 24,
+     "y": 39,
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "polygon",
+     "points": [
+      [
+       27,
+       30
+      ],
+      [
+       42,
+       30
+      ],
+      [
+       42,
+       42
+      ],
+      [
+       34,
+       55
+      ],
+      [
+       27,
+       42
+      ]
+     ],
+     "color": 6
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "polygon",
+     "points": [
+      [
+       28,
+       31
+      ],
+      [
+       41,
+       31
+      ],
+      [
+       41,
+       42
+      ],
+      [
+       34,
+       53
+      ],
+      [
+       28,
+       42
+      ]
+     ],
+     "color": 2
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      40,
+      32
+     ],
+     "to": [
+      40,
+      42
+     ],
+     "color": 1
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      39,
+      43
+     ],
+     "to": [
+      35,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      29,
+      32
+     ],
+     "to": [
+      29,
+      42
+     ],
+     "color": 3
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      29,
+      43
+     ],
+     "to": [
+      33,
+      50
+     ],
+     "color": 3
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      34,
+      34
+     ],
+     "to": [
+      34,
+      48
+     ],
+     "color": 13
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      30,
+      39
+     ],
+     "to": [
+      38,
+      39
+     ],
+     "color": 13
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      27,
+      30
+     ],
+     "to": [
+      41,
+      30
+     ],
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      27,
+      31
+     ],
+     "to": [
+      27,
+      41
+     ],
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      42,
+      31
+     ],
+     "to": [
+      42,
+      42
+     ],
+     "color": 5
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      41,
+      43
+     ],
+     "to": [
+      35,
+      53
+     ],
+     "color": 5
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 2,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "escudo maior no frame 2",
+   "ops": [
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "rect",
+     "x": 24,
+     "y": 33,
+     "w": 4,
+     "h": 5,
+     "color": 1,
+     "fill": true
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "rect",
+     "x": 25,
+     "y": 37,
+     "w": 4,
+     "h": 3,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "pixel",
+     "x": 25,
+     "y": 37,
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "polygon",
+     "points": [
+      [
+       28,
+       28
+      ],
+      [
+       43,
+       28
+      ],
+      [
+       43,
+       40
+      ],
+      [
+       35,
+       53
+      ],
+      [
+       28,
+       40
+      ]
+     ],
+     "color": 6
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "polygon",
+     "points": [
+      [
+       29,
+       29
+      ],
+      [
+       42,
+       29
+      ],
+      [
+       42,
+       40
+      ],
+      [
+       35,
+       51
+      ],
+      [
+       29,
+       40
+      ]
+     ],
+     "color": 2
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      41,
+      30
+     ],
+     "to": [
+      41,
+      40
+     ],
+     "color": 1
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      40,
+      41
+     ],
+     "to": [
+      36,
+      48
+     ],
+     "color": 1
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      30,
+      30
+     ],
+     "to": [
+      30,
+      40
+     ],
+     "color": 3
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      30,
+      41
+     ],
+     "to": [
+      34,
+      48
+     ],
+     "color": 3
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      35,
+      32
+     ],
+     "to": [
+      35,
+      46
+     ],
+     "color": 13
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      31,
+      37
+     ],
+     "to": [
+      39,
+      37
+     ],
+     "color": 13
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      28,
+      28
+     ],
+     "to": [
+      42,
+      28
+     ],
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      28,
+      29
+     ],
+     "to": [
+      28,
+      39
+     ],
+     "color": 7
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      43,
+      29
+     ],
+     "to": [
+      43,
+      40
+     ],
+     "color": 5
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      42,
+      41
+     ],
+     "to": [
+      36,
+      51
+     ],
+     "color": 5
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 2,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "frame_compare",
+  "args": {
+   "a": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 3
+   },
+   "b": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 2
+   },
+   "scale": 4
+  },
+  "save_as": "e2-escudo-maior"
+ },
+ {
+  "tool": "project_save",
+  "args": {}
+ }
+]

@@ -1,0 +1,20 @@
+[package]
+name = "sprite-runtime"
+description = "Processo local com o estado oficial dos projetos abertos; a interface e o MCP se conectam a ele por IPC (Named Pipes no Windows)."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+sprite-core.workspace = true
+sprite-project.workspace = true
+sprite-commands.workspace = true
+sprite-animation.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+schemars.workspace = true
+base64.workspace = true
+tokio.workspace = true
+dirs.workspace = true
+thiserror.workspace = true

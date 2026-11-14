@@ -1,0 +1,4799 @@
+[
+ {
+  "tool": "project_open",
+  "args": {
+   "path": "demo-a-guerreiro/guerreiro.psmproj"
+  }
+ },
+ {
+  "tool": "animation_create",
+  "args": {
+   "name": "walk",
+   "directions": [
+    "E"
+   ],
+   "frames": 8,
+   "copy_from": 3,
+   "duration_ms": 100,
+   "loop_mode": "loop",
+   "tags": [
+    "locomocao"
+   ]
+  }
+ },
+ {
+  "tool": "animation_update",
+  "args": {
+   "animation": "walk",
+   "cycle": {
+    "ground_y": 59,
+    "notes": "Caminhada no lugar, 8 frames, 10 fps. Contatos nos frames 0 e 4, passagens em 2 e 6. Corpo sobe na passagem e desce após o contato; escudo e espada balançam em oposição às pernas."
+   }
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 0: contato: perna da frente esticada à frente",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      21,
+      50
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      21,
+      50
+     ],
+     "to": [
+      19,
+      55
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      21,
+      45
+     ],
+     "to": [
+      19,
+      50
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      19,
+      50
+     ],
+     "to": [
+      17,
+      55
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      23,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      23,
+      50
+     ],
+     "to": [
+      21,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "rect",
+     "x": 20,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "pixel",
+     "x": 20,
+     "y": 49,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "polygon",
+     "points": [
+      [
+       16,
+       55
+      ],
+      [
+       21,
+       55
+      ],
+      [
+       24,
+       57
+      ],
+      [
+       24,
+       59
+      ],
+      [
+       16,
+       59
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      16,
+      55
+     ],
+     "to": [
+      20,
+      55
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      16,
+      59
+     ],
+     "to": [
+      24,
+      59
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      27,
+      50
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      27,
+      50
+     ],
+     "to": [
+      29,
+      55
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      25,
+      50
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      25,
+      50
+     ],
+     "to": [
+      27,
+      55
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      27,
+      45
+     ],
+     "to": [
+      29,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      29,
+      50
+     ],
+     "to": [
+      31,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "rect",
+     "x": 26,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "pixel",
+     "x": 26,
+     "y": 49,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "polygon",
+     "points": [
+      [
+       26,
+       55
+      ],
+      [
+       31,
+       55
+      ],
+      [
+       34,
+       57
+      ],
+      [
+       34,
+       59
+      ],
+      [
+       26,
+       59
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      26,
+      55
+     ],
+     "to": [
+      30,
+      55
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "line",
+     "from": [
+      26,
+      59
+     ],
+     "to": [
+      34,
+      59
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": -1,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 1,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "position": [
+      30,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "position": [
+      20,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 0
+     },
+     "position": [
+      24,
+      44
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 1: descida: peso na perna da frente",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      23,
+      46
+     ],
+     "to": [
+      21,
+      51
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      21,
+      51
+     ],
+     "to": [
+      18,
+      53
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      21,
+      46
+     ],
+     "to": [
+      19,
+      51
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      19,
+      51
+     ],
+     "to": [
+      16,
+      53
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      25,
+      46
+     ],
+     "to": [
+      23,
+      51
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      23,
+      51
+     ],
+     "to": [
+      20,
+      53
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "rect",
+     "x": 20,
+     "y": 50,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "pixel",
+     "x": 20,
+     "y": 50,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "polygon",
+     "points": [
+      [
+       15,
+       52
+      ],
+      [
+       19,
+       53
+      ],
+      [
+       22,
+       56
+      ],
+      [
+       21,
+       57
+      ],
+      [
+       17,
+       56
+      ],
+      [
+       15,
+       54
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      15,
+      52
+     ],
+     "to": [
+      18,
+      53
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      25,
+      46
+     ],
+     "to": [
+      27,
+      50
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      27,
+      50
+     ],
+     "to": [
+      27,
+      55
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      23,
+      46
+     ],
+     "to": [
+      25,
+      50
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      25,
+      50
+     ],
+     "to": [
+      25,
+      55
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      27,
+      46
+     ],
+     "to": [
+      29,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      29,
+      50
+     ],
+     "to": [
+      29,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "rect",
+     "x": 26,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "pixel",
+     "x": 26,
+     "y": 49,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "polygon",
+     "points": [
+      [
+       24,
+       55
+      ],
+      [
+       29,
+       55
+      ],
+      [
+       32,
+       57
+      ],
+      [
+       32,
+       59
+      ],
+      [
+       24,
+       59
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      24,
+      55
+     ],
+     "to": [
+      28,
+      55
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "line",
+     "from": [
+      24,
+      59
+     ],
+     "to": [
+      32,
+      59
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": -1,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 1,
+      "dy": 1
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "position": [
+      28,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "position": [
+      19,
+      56
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 1
+     },
+     "position": [
+      24,
+      45
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 2: passagem: perna de trás cruzando com o joelho alto",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      23,
+      44
+     ],
+     "to": [
+      26,
+      48
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      26,
+      48
+     ],
+     "to": [
+      23,
+      52
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      21,
+      44
+     ],
+     "to": [
+      24,
+      48
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      24,
+      48
+     ],
+     "to": [
+      21,
+      52
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      25,
+      44
+     ],
+     "to": [
+      28,
+      48
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      28,
+      48
+     ],
+     "to": [
+      25,
+      52
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "rect",
+     "x": 25,
+     "y": 47,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "pixel",
+     "x": 25,
+     "y": 47,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "polygon",
+     "points": [
+      [
+       20,
+       52
+      ],
+      [
+       25,
+       52
+      ],
+      [
+       28,
+       54
+      ],
+      [
+       28,
+       56
+      ],
+      [
+       20,
+       56
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      20,
+      52
+     ],
+     "to": [
+      24,
+      52
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      20,
+      56
+     ],
+     "to": [
+      28,
+      56
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      25,
+      44
+     ],
+     "to": [
+      25,
+      49
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      25,
+      49
+     ],
+     "to": [
+      25,
+      55
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      23,
+      44
+     ],
+     "to": [
+      23,
+      49
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      23,
+      49
+     ],
+     "to": [
+      23,
+      55
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      27,
+      44
+     ],
+     "to": [
+      27,
+      49
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      27,
+      49
+     ],
+     "to": [
+      27,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "rect",
+     "x": 24,
+     "y": 48,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "pixel",
+     "x": 24,
+     "y": 48,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "polygon",
+     "points": [
+      [
+       22,
+       55
+      ],
+      [
+       27,
+       55
+      ],
+      [
+       30,
+       57
+      ],
+      [
+       30,
+       59
+      ],
+      [
+       22,
+       59
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      22,
+      55
+     ],
+     "to": [
+      26,
+      55
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "line",
+     "from": [
+      22,
+      59
+     ],
+     "to": [
+      30,
+      59
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "position": [
+      26,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "position": [
+      24,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 2
+     },
+     "position": [
+      24,
+      43
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 3: subida: perna de trás alcançando a frente",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      26,
+      49
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      26,
+      49
+     ],
+     "to": [
+      28,
+      53
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      21,
+      45
+     ],
+     "to": [
+      24,
+      49
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      24,
+      49
+     ],
+     "to": [
+      26,
+      53
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      28,
+      49
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      28,
+      49
+     ],
+     "to": [
+      30,
+      53
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "rect",
+     "x": 25,
+     "y": 48,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "pixel",
+     "x": 25,
+     "y": 48,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "polygon",
+     "points": [
+      [
+       25,
+       53
+      ],
+      [
+       30,
+       53
+      ],
+      [
+       33,
+       55
+      ],
+      [
+       33,
+       57
+      ],
+      [
+       25,
+       57
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      25,
+      53
+     ],
+     "to": [
+      29,
+      53
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      25,
+      57
+     ],
+     "to": [
+      33,
+      57
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      24,
+      50
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      24,
+      50
+     ],
+     "to": [
+      22,
+      55
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      22,
+      50
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      22,
+      50
+     ],
+     "to": [
+      20,
+      55
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      27,
+      45
+     ],
+     "to": [
+      26,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      26,
+      50
+     ],
+     "to": [
+      24,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "rect",
+     "x": 23,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "pixel",
+     "x": 23,
+     "y": 49,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "polygon",
+     "points": [
+      [
+       19,
+       55
+      ],
+      [
+       24,
+       55
+      ],
+      [
+       27,
+       57
+      ],
+      [
+       27,
+       59
+      ],
+      [
+       19,
+       59
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      19,
+      55
+     ],
+     "to": [
+      23,
+      55
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "line",
+     "from": [
+      19,
+      59
+     ],
+     "to": [
+      27,
+      59
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 1,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": -1,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "position": [
+      23,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "position": [
+      29,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 3
+     },
+     "position": [
+      24,
+      44
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 4: contato oposto",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      25,
+      50
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      25,
+      50
+     ],
+     "to": [
+      27,
+      55
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      21,
+      45
+     ],
+     "to": [
+      23,
+      50
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      23,
+      50
+     ],
+     "to": [
+      25,
+      55
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      27,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      27,
+      50
+     ],
+     "to": [
+      29,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "rect",
+     "x": 24,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "pixel",
+     "x": 24,
+     "y": 49,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "polygon",
+     "points": [
+      [
+       24,
+       55
+      ],
+      [
+       29,
+       55
+      ],
+      [
+       32,
+       57
+      ],
+      [
+       32,
+       59
+      ],
+      [
+       24,
+       59
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      24,
+      55
+     ],
+     "to": [
+      28,
+      55
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      24,
+      59
+     ],
+     "to": [
+      32,
+      59
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      23,
+      50
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      23,
+      50
+     ],
+     "to": [
+      21,
+      55
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      21,
+      50
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      21,
+      50
+     ],
+     "to": [
+      19,
+      55
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      27,
+      45
+     ],
+     "to": [
+      25,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      25,
+      50
+     ],
+     "to": [
+      23,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "rect",
+     "x": 22,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "pixel",
+     "x": 22,
+     "y": 49,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "polygon",
+     "points": [
+      [
+       18,
+       55
+      ],
+      [
+       23,
+       55
+      ],
+      [
+       26,
+       57
+      ],
+      [
+       26,
+       59
+      ],
+      [
+       18,
+       59
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      18,
+      55
+     ],
+     "to": [
+      22,
+      55
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "line",
+     "from": [
+      18,
+      59
+     ],
+     "to": [
+      26,
+      59
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 1,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": -1,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "position": [
+      22,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "position": [
+      28,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 4
+     },
+     "position": [
+      24,
+      44
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 5: descida oposta",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      23,
+      46
+     ],
+     "to": [
+      25,
+      50
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      25,
+      50
+     ],
+     "to": [
+      25,
+      55
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      21,
+      46
+     ],
+     "to": [
+      23,
+      50
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      23,
+      50
+     ],
+     "to": [
+      23,
+      55
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      25,
+      46
+     ],
+     "to": [
+      27,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      27,
+      50
+     ],
+     "to": [
+      27,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "rect",
+     "x": 24,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "pixel",
+     "x": 24,
+     "y": 49,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "polygon",
+     "points": [
+      [
+       22,
+       55
+      ],
+      [
+       27,
+       55
+      ],
+      [
+       30,
+       57
+      ],
+      [
+       30,
+       59
+      ],
+      [
+       22,
+       59
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      22,
+      55
+     ],
+     "to": [
+      26,
+      55
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      22,
+      59
+     ],
+     "to": [
+      30,
+      59
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      25,
+      46
+     ],
+     "to": [
+      23,
+      51
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      23,
+      51
+     ],
+     "to": [
+      20,
+      53
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      23,
+      46
+     ],
+     "to": [
+      21,
+      51
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      21,
+      51
+     ],
+     "to": [
+      18,
+      53
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      27,
+      46
+     ],
+     "to": [
+      25,
+      51
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      25,
+      51
+     ],
+     "to": [
+      22,
+      53
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "rect",
+     "x": 22,
+     "y": 50,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "pixel",
+     "x": 22,
+     "y": 50,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "polygon",
+     "points": [
+      [
+       17,
+       52
+      ],
+      [
+       21,
+       53
+      ],
+      [
+       24,
+       56
+      ],
+      [
+       23,
+       57
+      ],
+      [
+       19,
+       56
+      ],
+      [
+       17,
+       54
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "line",
+     "from": [
+      17,
+      52
+     ],
+     "to": [
+      20,
+      53
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 1,
+      "dy": 1
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": -1,
+      "dy": 1
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "position": [
+      21,
+      56
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "position": [
+      26,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 5
+     },
+     "position": [
+      24,
+      45
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 6: passagem oposta",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      23,
+      44
+     ],
+     "to": [
+      23,
+      49
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      23,
+      49
+     ],
+     "to": [
+      23,
+      55
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      21,
+      44
+     ],
+     "to": [
+      21,
+      49
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      21,
+      49
+     ],
+     "to": [
+      21,
+      55
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      25,
+      44
+     ],
+     "to": [
+      25,
+      49
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      25,
+      49
+     ],
+     "to": [
+      25,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "rect",
+     "x": 22,
+     "y": 48,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "pixel",
+     "x": 22,
+     "y": 48,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "polygon",
+     "points": [
+      [
+       20,
+       55
+      ],
+      [
+       25,
+       55
+      ],
+      [
+       28,
+       57
+      ],
+      [
+       28,
+       59
+      ],
+      [
+       20,
+       59
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      20,
+      55
+     ],
+     "to": [
+      24,
+      55
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      20,
+      59
+     ],
+     "to": [
+      28,
+      59
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      25,
+      44
+     ],
+     "to": [
+      28,
+      48
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      28,
+      48
+     ],
+     "to": [
+      25,
+      52
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      23,
+      44
+     ],
+     "to": [
+      26,
+      48
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      26,
+      48
+     ],
+     "to": [
+      23,
+      52
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      27,
+      44
+     ],
+     "to": [
+      30,
+      48
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      30,
+      48
+     ],
+     "to": [
+      27,
+      52
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "rect",
+     "x": 27,
+     "y": 47,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "pixel",
+     "x": 27,
+     "y": 47,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "polygon",
+     "points": [
+      [
+       22,
+       52
+      ],
+      [
+       27,
+       52
+      ],
+      [
+       30,
+       54
+      ],
+      [
+       30,
+       56
+      ],
+      [
+       22,
+       56
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      22,
+      52
+     ],
+     "to": [
+      26,
+      52
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "line",
+     "from": [
+      22,
+      56
+     ],
+     "to": [
+      30,
+      56
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": -1
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "position": [
+      26,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "position": [
+      24,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 6
+     },
+     "position": [
+      24,
+      43
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "walk 7: subida oposta",
+   "ops": [
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      22,
+      50
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      22,
+      50
+     ],
+     "to": [
+      20,
+      55
+     ],
+     "color": 1,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      21,
+      45
+     ],
+     "to": [
+      20,
+      50
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      20,
+      50
+     ],
+     "to": [
+      18,
+      55
+     ],
+     "color": 2
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      24,
+      50
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      24,
+      50
+     ],
+     "to": [
+      22,
+      55
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "rect",
+     "x": 21,
+     "y": 49,
+     "w": 3,
+     "h": 2,
+     "color": 5,
+     "fill": true
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "pixel",
+     "x": 21,
+     "y": 49,
+     "color": 6
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "polygon",
+     "points": [
+      [
+       17,
+       55
+      ],
+      [
+       22,
+       55
+      ],
+      [
+       25,
+       57
+      ],
+      [
+       25,
+       59
+      ],
+      [
+       17,
+       59
+      ]
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      17,
+      55
+     ],
+     "to": [
+      21,
+      55
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      17,
+      59
+     ],
+     "to": [
+      25,
+      59
+     ],
+     "color": 0
+    },
+    {
+     "layer": "perna_tras",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "clear"
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      25,
+      45
+     ],
+     "to": [
+      28,
+      49
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      28,
+      49
+     ],
+     "to": [
+      30,
+      53
+     ],
+     "color": 2,
+     "thickness": 5
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      23,
+      45
+     ],
+     "to": [
+      26,
+      49
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      26,
+      49
+     ],
+     "to": [
+      28,
+      53
+     ],
+     "color": 3
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      27,
+      45
+     ],
+     "to": [
+      30,
+      49
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      30,
+      49
+     ],
+     "to": [
+      32,
+      53
+     ],
+     "color": 1
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "rect",
+     "x": 27,
+     "y": 48,
+     "w": 3,
+     "h": 2,
+     "color": 6,
+     "fill": true
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "pixel",
+     "x": 27,
+     "y": 48,
+     "color": 7
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "polygon",
+     "points": [
+      [
+       27,
+       53
+      ],
+      [
+       32,
+       53
+      ],
+      [
+       35,
+       55
+      ],
+      [
+       35,
+       57
+      ],
+      [
+       27,
+       57
+      ]
+     ],
+     "color": 11
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      27,
+      53
+     ],
+     "to": [
+      31,
+      53
+     ],
+     "color": 17
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "line",
+     "from": [
+      27,
+      57
+     ],
+     "to": [
+      35,
+      57
+     ],
+     "color": 10
+    },
+    {
+     "layer": "perna_frente",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "outline",
+     "color": 0
+    },
+    {
+     "layer": "corpo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "cabeca",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "pluma",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 0,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "escudo",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": -1,
+      "dy": 0
+     }
+    },
+    {
+     "layer": "espada",
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "op": "transform",
+     "transform": {
+      "kind": "move",
+      "dx": 1,
+      "dy": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_frente",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "position": [
+      31,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "pe_tras",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "position": [
+      21,
+      59
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "anchor_update",
+  "args": {
+   "anchor": "quadril",
+   "positions": [
+    {
+     "frame": {
+      "animation": "walk",
+      "direction": "E",
+      "index": 7
+     },
+     "position": [
+      24,
+      44
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "pose_create",
+  "args": {
+   "name": "walk_contato",
+   "kind": "contact",
+   "animation": "walk",
+   "direction": "E",
+   "frame": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 0
+   },
+   "ground_y": 59,
+   "notes": "Perna da frente à frente, calcanhar no chão; braço do escudo para trás."
+  }
+ },
+ {
+  "tool": "pose_create",
+  "args": {
+   "name": "walk_passagem",
+   "kind": "passing",
+   "animation": "walk",
+   "direction": "E",
+   "frame": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 2
+   },
+   "ground_y": 59,
+   "notes": "Pernas cruzando; corpo no ponto mais alto."
+  }
+ },
+ {
+  "tool": "pose_create",
+  "args": {
+   "name": "walk_contato_oposto",
+   "kind": "contact",
+   "animation": "walk",
+   "direction": "E",
+   "frame": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 4
+   },
+   "ground_y": 59
+  }
+ },
+ {
+  "tool": "pose_create",
+  "args": {
+   "name": "walk_passagem_oposta",
+   "kind": "passing",
+   "animation": "walk",
+   "direction": "E",
+   "frame": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 6
+   },
+   "ground_y": 59
+  }
+ },
+ {
+  "tool": "animation_preview",
+  "args": {
+   "animation": "walk",
+   "direction": "E",
+   "scale": 4
+  },
+  "save_as": "b1-walk-strip"
+ },
+ {
+  "tool": "animation_preview",
+  "args": {
+   "animation": "walk",
+   "direction": "E",
+   "mode": "gif",
+   "scale": 4
+  },
+  "save_as": "b2-walk"
+ },
+ {
+  "tool": "frame_compare",
+  "args": {
+   "a": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 0
+   },
+   "b": {
+    "animation": "walk",
+    "direction": "E",
+    "index": 2
+   },
+   "scale": 4
+  },
+  "save_as": "b3-compare-0-2"
+ },
+ {
+  "tool": "project_validate",
+  "args": {}
+ },
+ {
+  "tool": "project_save",
+  "args": {}
+ },
+ {
+  "tool": "export_spritesheet",
+  "args": {
+   "path": "demo-b-caminhada/guerreiro_walk_E.png",
+   "selection": {
+    "animations": [
+     "walk"
+    ]
+   },
+   "sheet": {
+    "layout": "horizontal"
+   }
+  }
+ },
+ {
+  "tool": "export_gif",
+  "args": {
+   "path": "demo-b-caminhada/guerreiro_walk_E.gif",
+   "animation": "walk",
+   "direction": "E",
+   "scale": 4
+  }
+ }
+]

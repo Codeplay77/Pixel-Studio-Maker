@@ -1,0 +1,253 @@
+{
+  "animations": [
+    {
+      "direction": "E",
+      "durations": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loop": "loop",
+      "name": "voar"
+    }
+  ],
+  "app": "Pixel Studio Maker",
+  "cell": {
+    "h": 64,
+    "w": 80
+  },
+  "format": "psm-sheet",
+  "frames": [
+    {
+      "animation": "voar",
+      "dest": [
+        0,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 6,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        40,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        80,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 7,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        120,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 80,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        160,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 8,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        200,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 160,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        240,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 9,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        280,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 240,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        320,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 10,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        360,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 320,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        400,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 11,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        440,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 400,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        480,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 12,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        520,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 480,
+      "y": 0
+    },
+    {
+      "animation": "voar",
+      "dest": [
+        560,
+        0
+      ],
+      "direction": "E",
+      "duration": 80,
+      "frame": 13,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        600,
+        63
+      ],
+      "source": {
+        "h": 64,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 560,
+      "y": 0
+    }
+  ],
+  "image": "gaivota_voar.png",
+  "scale": 1,
+  "size": {
+    "h": 64,
+    "w": 640
+  },
+  "sprite": {
+    "h": 64,
+    "name": "gaivota",
+    "origin": [
+      40,
+      63
+    ],
+    "w": 80
+  },
+  "version": 1
+}

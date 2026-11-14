@@ -1,0 +1,199 @@
+{
+  "animations": [
+    {
+      "direction": null,
+      "durations": [
+        220,
+        110,
+        160,
+        110,
+        140,
+        120
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "loop": "loop",
+      "name": "idle"
+    }
+  ],
+  "app": "Pixel Studio Maker",
+  "cell": {
+    "h": 32,
+    "w": 32
+  },
+  "format": "psm-sheet",
+  "frames": [
+    {
+      "animation": "idle",
+      "dest": [
+        0,
+        0
+      ],
+      "direction": null,
+      "duration": 220,
+      "frame": 8,
+      "h": 32,
+      "index": 0,
+      "pivot": [
+        16,
+        31
+      ],
+      "source": {
+        "h": 32,
+        "w": 32,
+        "x": 0,
+        "y": 0
+      },
+      "w": 32,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "animation": "idle",
+      "dest": [
+        32,
+        0
+      ],
+      "direction": null,
+      "duration": 110,
+      "frame": 10,
+      "h": 32,
+      "index": 1,
+      "pivot": [
+        48,
+        31
+      ],
+      "source": {
+        "h": 32,
+        "w": 32,
+        "x": 0,
+        "y": 0
+      },
+      "w": 32,
+      "x": 32,
+      "y": 0
+    },
+    {
+      "animation": "idle",
+      "dest": [
+        64,
+        0
+      ],
+      "direction": null,
+      "duration": 160,
+      "frame": 12,
+      "h": 32,
+      "index": 2,
+      "pivot": [
+        80,
+        31
+      ],
+      "source": {
+        "h": 32,
+        "w": 32,
+        "x": 0,
+        "y": 0
+      },
+      "w": 32,
+      "x": 64,
+      "y": 0
+    },
+    {
+      "animation": "idle",
+      "dest": [
+        96,
+        0
+      ],
+      "direction": null,
+      "duration": 110,
+      "frame": 14,
+      "h": 32,
+      "index": 3,
+      "pivot": [
+        112,
+        31
+      ],
+      "source": {
+        "h": 32,
+        "w": 32,
+        "x": 0,
+        "y": 0
+      },
+      "w": 32,
+      "x": 96,
+      "y": 0
+    },
+    {
+      "animation": "idle",
+      "dest": [
+        128,
+        0
+      ],
+      "direction": null,
+      "duration": 140,
+      "frame": 16,
+      "h": 32,
+      "index": 4,
+      "pivot": [
+        144,
+        31
+      ],
+      "source": {
+        "h": 32,
+        "w": 32,
+        "x": 0,
+        "y": 0
+      },
+      "w": 32,
+      "x": 128,
+      "y": 0
+    },
+    {
+      "animation": "idle",
+      "dest": [
+        160,
+        0
+      ],
+      "direction": null,
+      "duration": 120,
+      "frame": 18,
+      "h": 32,
+      "index": 5,
+      "pivot": [
+        176,
+        31
+      ],
+      "source": {
+        "h": 32,
+        "w": 32,
+        "x": 0,
+        "y": 0
+      },
+      "w": 32,
+      "x": 160,
+      "y": 0
+    }
+  ],
+  "image": "slime_idle.png",
+  "scale": 1,
+  "size": {
+    "h": 32,
+    "w": 192
+  },
+  "sprite": {
+    "h": 32,
+    "name": "slime",
+    "origin": [
+      16,
+      31
+    ],
+    "w": 32
+  },
+  "version": 1
+}

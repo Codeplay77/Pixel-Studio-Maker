@@ -1,0 +1,1828 @@
+{
+  "animations": [
+    {
+      "direction": "E",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "S",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "N",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "SE",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "NE",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "W",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "SW",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "loop": "loop",
+      "name": "walk"
+    },
+    {
+      "direction": "NW",
+      "durations": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frames": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "loop": "loop",
+      "name": "walk"
+    }
+  ],
+  "app": "Pixel Studio Maker",
+  "cell": {
+    "h": 64,
+    "w": 64
+  },
+  "format": "psm-sheet",
+  "frames": [
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 203,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 204,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 205,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 206,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 207,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 208,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 209,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        0
+      ],
+      "direction": "N",
+      "duration": 100,
+      "frame": 210,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        59
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 0
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 379,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 380,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 381,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 382,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 383,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 384,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 385,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        65
+      ],
+      "direction": "NE",
+      "duration": 100,
+      "frame": 386,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        124
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 65
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 36,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 45,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 54,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 63,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 72,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 81,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 90,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        130
+      ],
+      "direction": "E",
+      "duration": 100,
+      "frame": 99,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        189
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 130
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 291,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 292,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 293,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 294,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 295,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 296,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 297,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        195
+      ],
+      "direction": "SE",
+      "duration": 100,
+      "frame": 298,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        254
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 195
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 115,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 116,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 117,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 118,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 119,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 120,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 121,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        260
+      ],
+      "direction": "S",
+      "duration": 100,
+      "frame": 122,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        319
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 260
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 555,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 566,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 577,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 588,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 599,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 610,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 621,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        325
+      ],
+      "direction": "SW",
+      "duration": 100,
+      "frame": 632,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        384
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 325
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 467,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 476,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 485,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 494,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 503,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 512,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 521,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        390
+      ],
+      "direction": "W",
+      "duration": 100,
+      "frame": 530,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        449
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 390
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        0,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 643,
+      "h": 64,
+      "index": 0,
+      "pivot": [
+        26,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 0,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        65,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 654,
+      "h": 64,
+      "index": 1,
+      "pivot": [
+        91,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 65,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        130,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 665,
+      "h": 64,
+      "index": 2,
+      "pivot": [
+        156,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 130,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        195,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 676,
+      "h": 64,
+      "index": 3,
+      "pivot": [
+        221,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 195,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        260,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 687,
+      "h": 64,
+      "index": 4,
+      "pivot": [
+        286,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 260,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        325,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 698,
+      "h": 64,
+      "index": 5,
+      "pivot": [
+        351,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 325,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        390,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 709,
+      "h": 64,
+      "index": 6,
+      "pivot": [
+        416,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 390,
+      "y": 455
+    },
+    {
+      "animation": "walk",
+      "dest": [
+        455,
+        455
+      ],
+      "direction": "NW",
+      "duration": 100,
+      "frame": 720,
+      "h": 64,
+      "index": 7,
+      "pivot": [
+        481,
+        514
+      ],
+      "source": {
+        "h": 64,
+        "w": 64,
+        "x": 0,
+        "y": 0
+      },
+      "w": 64,
+      "x": 455,
+      "y": 455
+    }
+  ],
+  "image": "guerreiro_walk_8dir.png",
+  "scale": 1,
+  "size": {
+    "h": 519,
+    "w": 519
+  },
+  "sprite": {
+    "h": 64,
+    "name": "guerreiro",
+    "origin": [
+      26,
+      59
+    ],
+    "w": 64
+  },
+  "version": 1
+}

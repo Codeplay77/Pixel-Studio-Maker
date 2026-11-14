@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Pixel Studio Maker",
+  "version": "0.1.0",
+  "identifier": "br.com.codeplay.pixelstudiomaker",
+  "build": {
+    "beforeDevCommand": "cargo build -p sprite-cli && pnpm dev",
+    "devUrl": "http://localhost:1430",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Pixel Studio Maker",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1100,
+        "minHeight": 680,
+        "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection,CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows --disable-renderer-backgrounding"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' ipc: http://ipc.localhost; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' ipc: http://ipc.localhost data: blob:",
+      "devCsp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "category": "GraphicsAndDesign",
+    "shortDescription": "Editor de pixel art e sprite sheets com controle via MCP",
+    "longDescription": "Pixel Studio Maker cria, edita e anima pixel art. Um servidor MCP nativo permite que agentes como o Claude Code desenhem pixel por pixel no mesmo projeto aberto no editor.",
+    "copyright": "© 2026 CodePlay77 — Licença MIT",
+    "icon": ["icons/icon.ico", "icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png"],
+    "fileAssociations": [
+      { "ext": ["psmproj"], "name": "Projeto Pixel Studio Maker", "description": "Projeto do Pixel Studio Maker", "role": "Editor" }
+    ],
+    "windows": {
+      "nsis": {
+        "languages": ["PortugueseBR", "English"],
+        "displayLanguageSelector": false,
+        "installMode": "currentUser"
+      }
+    }
+  }
+}

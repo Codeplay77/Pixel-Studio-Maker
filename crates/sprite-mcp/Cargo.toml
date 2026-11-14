@@ -1,0 +1,17 @@
+[package]
+name = "sprite-mcp"
+description = "Servidor MCP nativo (SDK oficial rmcp, transporte stdio) que expõe todas as operações do editor para agentes de IA."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+sprite-commands.workspace = true
+sprite-runtime.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+schemars.workspace = true
+rmcp.workspace = true
+tokio.workspace = true
+base64.workspace = true

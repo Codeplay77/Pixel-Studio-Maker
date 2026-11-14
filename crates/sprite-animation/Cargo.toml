@@ -1,0 +1,15 @@
+[package]
+name = "sprite-animation"
+description = "Modelo de sprites: layers, cels, frames, animações, direções, anchors, regiões e poses; composição, sprite sheets e validação."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+sprite-core.workspace = true
+sprite-drawing.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+schemars.workspace = true
+thiserror.workspace = true

@@ -1,0 +1,6 @@
+[
+  { "tool": "project_open", "args": { "path": "guerreiro.psmproj" } },
+  { "tool": "pixel_read_region", "args": { "layer": "espada", "rect": { "x": 40, "y": 27, "w": 9, "h": 9 } } },
+  { "tool": "pixel_read_region", "args": { "layer": "pluma", "trim": true } },
+  { "tool": "pixel_read_region", "args": { "layer": "cabeca", "rect": { "x": 25, "y": 9, "w": 10, "h": 5 } } }
+]

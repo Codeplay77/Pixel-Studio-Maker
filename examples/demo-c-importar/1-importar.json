@@ -1,0 +1,9 @@
+[
+  { "tool": "project_create", "args": { "name": "Slime Importado", "width": 32, "height": 32, "sprite_name": "slime" } },
+  { "tool": "import_image", "args": { "path": "demo-c-importar/slime.png", "mode": "new_layer", "name": "slime" } },
+  { "tool": "layer_delete", "args": { "layer": "Layer 1" } },
+  { "tool": "frame_preview", "args": { "scale": 12 }, "save_as": "c1-importado" },
+  { "tool": "frame_inspect", "args": {} },
+  { "tool": "pixel_read_region", "args": { "layer": "slime" } },
+  { "tool": "project_save", "args": { "path": "demo-c-importar/slime.psmproj" } }
+]

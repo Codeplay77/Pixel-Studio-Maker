@@ -1,0 +1,32 @@
+[
+  { "tool": "project_open", "args": { "path": "guerreiro.psmproj" } },
+  { "tool": "draw_batch", "args": { "label": "corrige penacho e mão da espada", "ops": [
+    { "layer": "pluma", "op": "clear" },
+    { "layer": "pluma", "op": "matrix", "at": [14, 4],
+      "legend": { "o": 0, "R": 15, "r": 14, "G": 13 },
+      "rows": [
+        "........oooooo......",
+        "......ooRRRRRRoo....",
+        "....ooRRRRRRRRRRo...",
+        "...oRRRRRRRRRRRRRo..",
+        "..oRRRrrrrrrrRRRRRo.",
+        ".orrrooooooorrRRRRo.",
+        "oro.........orRRRo..",
+        ".o..........oGGGGo.."
+      ] },
+    { "layer": "espada", "op": "matrix", "at": [40, 28],
+      "legend": { "a": 0, "W": 7, "S": 6, "s": 5, "G": 13, "x": "clear" },
+      "rows": [
+        "xxaxxxaWS",
+        "xaGaxaWSa",
+        "xxaGaWSax",
+        "xxaaGaaxx",
+        "xaWSSGaxx",
+        "xaSSsaGax",
+        "xassaxaxx",
+        "xxaaxxxxx"
+      ] }
+  ] } },
+  { "tool": "frame_preview", "args": { "scale": 8 }, "save_as": "a2-corrigido" },
+  { "tool": "project_save", "args": {} }
+]

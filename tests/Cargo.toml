@@ -1,0 +1,12 @@
+[package]
+name = "psm-integration-tests"
+description = "Testes de ponta a ponta: reexecuta os roteiros das demonstrações e compara com imagens de referência."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+sprite-core.workspace = true
+sprite-commands.workspace = true
+serde_json.workspace = true

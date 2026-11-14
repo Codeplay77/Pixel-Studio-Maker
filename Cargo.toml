@@ -1,0 +1,38 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "apps/desktop/src-tauri", "tools/sprite-cli", "tests"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["CodePlay77"]
+license = "MIT"
+repository = "https://github.com/Codeplay77/Pixel-Studio-Maker"
+
+# Crates internos. As dependências só descem:
+#   desktop, psm (cli) -> mcp -> runtime -> commands -> project -> animation -> drawing -> core
+[workspace.dependencies]
+sprite-core = { path = "crates/sprite-core" }
+sprite-drawing = { path = "crates/sprite-drawing" }
+sprite-animation = { path = "crates/sprite-animation" }
+sprite-project = { path = "crates/sprite-project" }
+sprite-commands = { path = "crates/sprite-commands" }
+sprite-runtime = { path = "crates/sprite-runtime" }
+sprite-mcp = { path = "crates/sprite-mcp" }
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+schemars = "1"
+thiserror = "2"
+base64 = "0.23"
+png = "0.18"
+gif = "0.14"
+zune-jpeg = "0.5"
+zip = { version = "9", default-features = false, features = ["deflate"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "io-util", "io-std", "net", "sync", "time", "process", "signal"] }
+rmcp = { version = "3", features = ["server", "client", "transport-io", "transport-child-process"] }
+dirs = "7"
+
+[profile.dev.package."*"]
+# Dependências otimizadas mesmo em debug: PNG/zip/GIF ficam lentos demais sem isso.
+opt-level = 2

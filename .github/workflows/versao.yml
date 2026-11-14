@@ -1,0 +1,41 @@
+# Gera o instalador do Windows quando uma tag de versão (v0.2.0, por exemplo) é enviada, e o coloca
+# num rascunho de versão no GitHub. O rascunho só fica público quando alguém o publica.
+name: Versão
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  instalador:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: pnpm install --frozen-lockfile
+      - name: Testes
+        run: cargo test --workspace
+      - name: Psm (servidor MCP + runtime) para o instalador
+        run: node apps/desktop/scripts/prepare-sidecar.mjs
+      - name: Gerar o instalador
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: apps/desktop
+          args: --config src-tauri/tauri.bundle.json
+          tagName: ${{ github.ref_name }}
+          releaseName: Pixel Studio Maker ${{ github.ref_name }}
+          releaseBody: Instalador para Windows. O servidor MCP (psm.exe) vem junto; veja o README para conectar o Claude Code.
+          releaseDraft: true

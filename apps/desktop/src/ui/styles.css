@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* Tema escuro do editor. Cada --color-x vira classes como bg-x, text-x e border-x. */
+@theme {
+  --color-canvas: #101119;
+  --color-shell: #161825;
+  --color-panel: #1c1f2e;
+  --color-raised: #252940;
+  --color-hover: #2e3350;
+  --color-line: #2b2f45;
+  --color-ink: #eceef8;
+  --color-muted: #9aa0bd;
+  --color-faint: #6b7192;
+  --color-accent: #ff6fa8;
+  --color-accent-2: #5fe3ff;
+  --color-ok: #5ee39a;
+  --color-warn: #ffc65a;
+  --color-danger: #ff6b73;
+
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", Consolas, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-[13px] text-ink antialiased select-none;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply rounded-md border border-line bg-canvas px-2 py-1 text-ink outline-none focus:border-accent-2;
+  }
+
+  input[type="range"] {
+    @apply border-0 bg-transparent p-0 accent-accent;
+  }
+
+  input[type="color"] {
+    @apply h-7 w-9 cursor-pointer p-0.5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2e3350;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-ink transition-colors hover:bg-hover disabled:pointer-events-none disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply bg-accent font-semibold text-[#2a0d1b] hover:bg-[#ff8bb9];
+  }
+  .btn-icon {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-muted transition-colors hover:bg-hover hover:text-ink disabled:pointer-events-none disabled:opacity-40;
+  }
+  .btn-icon-active {
+    @apply bg-raised text-accent ring-1 ring-accent/60;
+  }
+  .panel-title {
+    @apply text-[11px] font-semibold tracking-wider text-faint uppercase;
+  }
+  .chip {
+    @apply rounded px-1.5 py-0.5 text-[11px];
+  }
+  .checker {
+    background-color: #c9cad6;
+    background-image:
+      linear-gradient(45deg, #9c9eb1 25%, transparent 25%),
+      linear-gradient(-45deg, #9c9eb1 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #9c9eb1 75%),
+      linear-gradient(-45deg, transparent 75%, #9c9eb1 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+  }
+  .pixelated {
+    image-rendering: pixelated;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "pixel-studio-maker": {
+      "type": "stdio",
+      "command": "C:\\Users\\SEU_USUARIO\\AppData\\Local\\Pixel Studio Maker\\psm.exe",
+      "args": ["mcp"],
+      "env": {}
+    }
+  }
+}

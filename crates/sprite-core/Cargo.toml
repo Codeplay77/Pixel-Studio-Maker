@@ -1,0 +1,14 @@
+[package]
+name = "sprite-core"
+description = "Motor de pixels: cores, imagens RGBA, paletas, máscaras, composição e diferenças."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+schemars.workspace = true
+thiserror.workspace = true
+png.workspace = true

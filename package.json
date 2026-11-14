@@ -1,0 +1,15 @@
+{
+  "name": "pixel-studio-maker-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pixel Studio Maker: editor de pixel art e sprite sheets com controle completo via MCP.",
+  "author": "CodePlay77",
+  "license": "MIT",
+  "scripts": {
+    "tauri": "pnpm --dir apps/desktop tauri",
+    "dev": "pnpm --dir apps/desktop tauri dev",
+    "build": "pnpm --dir apps/desktop build:installer",
+    "web": "pnpm --dir apps/desktop dev",
+    "check": "pnpm --dir apps/desktop build"
+  }
+}

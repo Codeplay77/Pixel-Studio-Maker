@@ -1,0 +1,1 @@
+[{"tool":"project_open","args":{"path":"demo-f-gaivota/gaivota.psmproj"}},{"tool":"frame_compare","args":{"a":{"animation":"voar","direction":"E","index":0},"b":{"animation":"voar","direction":"E","index":4},"scale":5,"output":"full"},"save_as":"f4-frames-0-4"}]

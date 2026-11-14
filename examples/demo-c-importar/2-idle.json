@@ -1,0 +1,519 @@
+[
+ {
+  "tool": "project_open",
+  "args": {
+   "path": "demo-c-importar/slime.psmproj"
+  }
+ },
+ {
+  "tool": "palette_create",
+  "args": {
+   "name": "Slime (do PNG)",
+   "colors": [
+    "#14241a",
+    "#8be37a",
+    "#4cbb52",
+    "#f2fff0",
+    "#2f7a3c",
+    "#10161a",
+    "#0b120e55"
+   ]
+  }
+ },
+ {
+  "tool": "region_create",
+  "args": {
+   "name": "corpo",
+   "part": "torso",
+   "layer": "slime",
+   "from_frame": 3
+  }
+ },
+ {
+  "tool": "anchor_create",
+  "args": {
+   "name": "chao",
+   "kind": "ground",
+   "position": [
+    16,
+    29
+   ]
+  }
+ },
+ {
+  "tool": "animation_create",
+  "args": {
+   "name": "idle",
+   "frames": 6,
+   "copy_from": 3,
+   "loop_mode": "loop"
+  }
+ },
+ {
+  "tool": "animation_update",
+  "args": {
+   "animation": "idle",
+   "cycle": {
+    "ground_y": 29,
+    "notes": "Respiração: achata (mais largo), volta, pisca, estica. A base fica sempre na mesma linha."
+   }
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "idle 0: repouso (o sprite importado, intacto)",
+   "frame": {
+    "animation": "idle",
+    "index": 0
+   },
+   "layer": "slime",
+   "ops": [
+    {
+     "op": "matrix",
+     "at": [
+      0,
+      0
+     ],
+     "legend": {
+      "G": "#14241a",
+      "H": "#8be37a",
+      "I": "#4cbb52",
+      "J": "#f2fff0",
+      "K": "#2f7a3c",
+      "L": "#10161a",
+      "M": "#0b120e55",
+      "x": "clear"
+     },
+     "rows": [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxGGGGGGGGxxxxxxxxxxxx",
+      "xxxxxxxxxxGGHHHHIIIIGGxxxxxxxxxx",
+      "xxxxxxxxGGJHHHHHIIIIIIGGxxxxxxxx",
+      "xxxxxxxGHJJHHHHHIIIIIIIKGxxxxxxx",
+      "xxxxxxGHHJHHHHHHIIIIIIIKKGxxxxxx",
+      "xxxxxxGIIIIIIIIIIIIIIIIKKGxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIJLIIIIJLIIIKKKGxxxxx",
+      "xxxxxGIIIIIILLIIIILLIIIKKKGxxxxx",
+      "xxxxxGIIIIIILLIIIILLIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIGGGIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxxGKKKKKKKKKKKKKKKKGxxxxxxx",
+      "xxxxxxxxGGGGGGGGGGGGGGGGxxxxxxxx",
+      "xxxxxxMMMMMMMMMMMMMMMMMMMMMxxxxx",
+      "xxxxxxxxMMMMMMMMMMMMMMMMxxxxxxxx"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "idle 1: começa a achatar",
+   "frame": {
+    "animation": "idle",
+    "index": 1
+   },
+   "layer": "slime",
+   "ops": [
+    {
+     "op": "matrix",
+     "at": [
+      0,
+      0
+     ],
+     "legend": {
+      "G": "#14241a",
+      "H": "#8be37a",
+      "I": "#4cbb52",
+      "J": "#f2fff0",
+      "K": "#2f7a3c",
+      "L": "#10161a",
+      "M": "#0b120e55",
+      "x": "clear"
+     },
+     "rows": [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxGGGGGGGGGxxxxxxxxxxx",
+      "xxxxxxxxxxGGHHHHIIIIIGGxxxxxxxxx",
+      "xxxxxxxxGGJHHHHHIIIIIIIGGxxxxxxx",
+      "xxxxxxxGHJJHHHHHIIIIIIIIKGxxxxxx",
+      "xxxxxxGHHJHHHHHHIIIIIIIIKKGxxxxx",
+      "xxxxxxGIIIIIIIIIIIIIIIIIKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxxGIIIIIIJLIIIIIJLIIIKKKGxxxx",
+      "xxxxxGIIIIIILLIIIIILLIIIKKKGxxxx",
+      "xxxxxGIIIIIILLIIIIILLIIIKKKGxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxxGIIIIIIIIGGGGIIIIIIKKKGxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKKGxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKKGxxxxx",
+      "xxxxxxxGKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxxxGGGGGGGGGGGGGGGGGxxxxxxx",
+      "xxxxxxMMMMMMMMMMMMMMMMMMMMMMxxxx",
+      "xxxxxxxxMMMMMMMMMMMMMMMMMxxxxxxx"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "idle 2: achatado: mais largo e mais baixo",
+   "frame": {
+    "animation": "idle",
+    "index": 2
+   },
+   "layer": "slime",
+   "ops": [
+    {
+     "op": "matrix",
+     "at": [
+      0,
+      0
+     ],
+     "legend": {
+      "G": "#14241a",
+      "H": "#8be37a",
+      "I": "#4cbb52",
+      "J": "#f2fff0",
+      "K": "#2f7a3c",
+      "L": "#10161a",
+      "M": "#0b120e55",
+      "x": "clear"
+     },
+     "rows": [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxGGGGGGGGGGxxxxxxxxxxx",
+      "xxxxxxxxxGGHHHHIIIIIIGGxxxxxxxxx",
+      "xxxxxxxGGJHHHHHIIIIIIIIGGxxxxxxx",
+      "xxxxxxGHJJHHHHHIIIIIIIIIKGxxxxxx",
+      "xxxxxGHHJHHHHHHIIIIIIIIIKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKGxxxxx",
+      "xxxxGIIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxGIIIIIIJLIIIIIIJLIIIKKKGxxxx",
+      "xxxxGIIIIIILLIIIIIILLIIIKKKGxxxx",
+      "xxxxGIIIIIILLIIIIIILLIIIKKKGxxxx",
+      "xxxxGIIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxGIIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxGIIIIIIIIGGGGGIIIIIIKKKGxxxx",
+      "xxxxxGKKKKKKKKKKKKKKKKKKKKGxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxxGGGGGGGGGGGGGGGGGGxxxxxxx",
+      "xxxxxMMMMMMMMMMMMMMMMMMMMMMMxxxx",
+      "xxxxxxxMMMMMMMMMMMMMMMMMMxxxxxxx"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "idle 3: volta",
+   "frame": {
+    "animation": "idle",
+    "index": 3
+   },
+   "layer": "slime",
+   "ops": [
+    {
+     "op": "matrix",
+     "at": [
+      0,
+      0
+     ],
+     "legend": {
+      "G": "#14241a",
+      "H": "#8be37a",
+      "I": "#4cbb52",
+      "J": "#f2fff0",
+      "K": "#2f7a3c",
+      "L": "#10161a",
+      "M": "#0b120e55",
+      "x": "clear"
+     },
+     "rows": [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxGGGGGGGGGxxxxxxxxxxx",
+      "xxxxxxxxxxGGHHHHIIIIIGGxxxxxxxxx",
+      "xxxxxxxxGGJHHHHHIIIIIIIGGxxxxxxx",
+      "xxxxxxxGHJJHHHHHIIIIIIIIKGxxxxxx",
+      "xxxxxxGHHJHHHHHHIIIIIIIIKKGxxxxx",
+      "xxxxxxGIIIIIIIIIIIIIIIIIKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxxGIIIIIIJLIIIIIJLIIIKKKGxxxx",
+      "xxxxxGIIIIIILLIIIIILLIIIKKKGxxxx",
+      "xxxxxGIIIIIILLIIIIILLIIIKKKGxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIIKKKGxxxx",
+      "xxxxxGIIIIIIIIGGGGIIIIIIKKKGxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKKGxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKKGxxxxx",
+      "xxxxxxxGKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxxxGGGGGGGGGGGGGGGGGxxxxxxx",
+      "xxxxxxMMMMMMMMMMMMMMMMMMMMMMxxxx",
+      "xxxxxxxxMMMMMMMMMMMMMMMMMxxxxxxx"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "idle 4: pisca",
+   "frame": {
+    "animation": "idle",
+    "index": 4
+   },
+   "layer": "slime",
+   "ops": [
+    {
+     "op": "matrix",
+     "at": [
+      0,
+      0
+     ],
+     "legend": {
+      "G": "#14241a",
+      "H": "#8be37a",
+      "I": "#4cbb52",
+      "J": "#f2fff0",
+      "K": "#2f7a3c",
+      "L": "#10161a",
+      "M": "#0b120e55",
+      "x": "clear"
+     },
+     "rows": [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxGGGGGGGGxxxxxxxxxxxx",
+      "xxxxxxxxxxGGHHHHIIIIGGxxxxxxxxxx",
+      "xxxxxxxxGGJHHHHHIIIIIIGGxxxxxxxx",
+      "xxxxxxxGHJJHHHHHIIIIIIIKGxxxxxxx",
+      "xxxxxxGHHJHHHHHHIIIIIIIKKGxxxxxx",
+      "xxxxxxGIIIIIIIIIIIIIIIIKKGxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIILLIIIILLIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIGGGIIIIIIKKKGxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIIKKKGxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKKGxxxxxx",
+      "xxxxxxxGKKKKKKKKKKKKKKKKGxxxxxxx",
+      "xxxxxxxxGGGGGGGGGGGGGGGGxxxxxxxx",
+      "xxxxxxMMMMMMMMMMMMMMMMMMMMMxxxxx",
+      "xxxxxxxxMMMMMMMMMMMMMMMMxxxxxxxx"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "draw_batch",
+  "args": {
+   "label": "idle 5: estica: mais alto e mais estreito",
+   "frame": {
+    "animation": "idle",
+    "index": 5
+   },
+   "layer": "slime",
+   "ops": [
+    {
+     "op": "matrix",
+     "at": [
+      0,
+      0
+     ],
+     "legend": {
+      "G": "#14241a",
+      "H": "#8be37a",
+      "I": "#4cbb52",
+      "J": "#f2fff0",
+      "K": "#2f7a3c",
+      "L": "#10161a",
+      "M": "#0b120e55",
+      "x": "clear"
+     },
+     "rows": [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "xxxxxxxxxxxxGGGGGGGxxxxxxxxxxxxx",
+      "xxxxxxxxxxGGHHHIIIIGGxxxxxxxxxxx",
+      "xxxxxxxxGGJHHHHIIIIIIGGxxxxxxxxx",
+      "xxxxxxxGHJJHHHHIIIIIIIKGxxxxxxxx",
+      "xxxxxxGHHJHHHHHIIIIIIIKKGxxxxxxx",
+      "xxxxxxGIIIIIIIIIIIIIIIKKGxxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIKKKGxxxxxx",
+      "xxxxxGIIIIIIJLIIIJLIIIKKKGxxxxxx",
+      "xxxxxGIIIIIILLIIILLIIIKKKGxxxxxx",
+      "xxxxxGIIIIIILLIIILLIIIKKKGxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIKKKGxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIKKKGxxxxxx",
+      "xxxxxGIIIIIIIIGGIIIIIIKKKGxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIKKKGxxxxxx",
+      "xxxxxGIIIIIIIIIIIIIIIIKKKGxxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKGxxxxxxx",
+      "xxxxxxGKKKKKKKKKKKKKKKKKGxxxxxxx",
+      "xxxxxxxGKKKKKKKKKKKKKKKGxxxxxxxx",
+      "xxxxxxxxGGGGGGGGGGGGGGGxxxxxxxxx",
+      "xxxxxxMMMMMMMMMMMMMMMMMMMMMxxxxx",
+      "xxxxxxxxMMMMMMMMMMMMMMMMxxxxxxxx"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tool": "animation_set_timing",
+  "args": {
+   "animation": "idle",
+   "durations": [
+    220,
+    110,
+    160,
+    110,
+    140,
+    120
+   ]
+  }
+ },
+ {
+  "tool": "animation_preview",
+  "args": {
+   "animation": "idle",
+   "scale": 6
+  },
+  "save_as": "c2-idle-strip"
+ },
+ {
+  "tool": "animation_preview",
+  "args": {
+   "animation": "idle",
+   "mode": "gif",
+   "scale": 6
+  },
+  "save_as": "c3-idle"
+ },
+ {
+  "tool": "frame_compare",
+  "args": {
+   "a": 3,
+   "b": {
+    "animation": "idle",
+    "index": 2
+   },
+   "scale": 6
+  },
+  "save_as": "c4-original-vs-achatado"
+ },
+ {
+  "tool": "project_validate",
+  "args": {}
+ },
+ {
+  "tool": "project_save",
+  "args": {}
+ },
+ {
+  "tool": "export_spritesheet",
+  "args": {
+   "path": "demo-c-importar/slime_idle.png",
+   "selection": {
+    "animations": [
+     "idle"
+    ]
+   },
+   "sheet": {
+    "layout": "horizontal"
+   }
+  }
+ },
+ {
+  "tool": "export_gif",
+  "args": {
+   "path": "demo-c-importar/slime_idle.gif",
+   "animation": "idle",
+   "scale": 4
+  }
+ }
+]
