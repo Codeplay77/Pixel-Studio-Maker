@@ -109,6 +109,23 @@ em oposição às pernas.
 - Para uma animação idle de um sprite importado: `animation_create` com `copy_from` no frame importado e redesenhe
   pequenas mudanças (respiração: tronco e cabeça descendo 1 px, piscar, cabelo/capa balançando).
 
+### Converter uma foto ou ilustração em pixel art
+
+`image_pixelate` transforma um PNG, JPG ou GIF (de qualquer tamanho; acima de 4096 px a imagem é reduzida na
+leitura) em pixel art estática. É processamento de imagem determinístico: nada é gerado.
+
+- Comece com `preview: true` (devolve a imagem, não cria projeto) e ajuste: `max_side` (ou `width`/`height`),
+  `colors`, `dither` (`none`, `ordered`, `floyd_steinberg`), `sampling` (`dominant` para cores limpas,
+  `average` para detalhes finos, `nearest` para pixel art já pronta).
+- Fundo: `background: "auto"` remove quando as bordas são de uma cor só; `"remove"` força (com
+  `background_color` e `background_tolerance`); `"keep"` mantém. `crop` recorta ao conteúdo e `region`
+  ({x, y, w, h}, em pixels da imagem original) escolhe só uma parte.
+- Pixel art ampliada (cada "pixel" com N px): use `cell: N` para recuperar os pixels exatos.
+- `outline: true` adiciona contorno de 1 px; `palette` (lista de cores) prende o resultado a uma paleta.
+- Sem `preview`, cria um projeto novo (sprite, layer "pixel art", paleta ativa). Para pôr num projeto aberto,
+  use `import_image` com `pixelate: { ... }` (em layer, o resultado cabe no sprite).
+- Depois, trate como qualquer sprite: inspecione, corrija pixels, crie frames.
+
 ## 9. Corrigir problemas comuns
 
 | Problema | Correção |

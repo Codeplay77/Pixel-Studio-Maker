@@ -1,99 +1,128 @@
 @import "tailwindcss";
 
-/* Tema escuro do editor. Cada --color-x vira classes como bg-x, text-x e border-x. */
 @theme {
-  --color-canvas: #101119;
-  --color-shell: #161825;
-  --color-panel: #1c1f2e;
-  --color-raised: #252940;
-  --color-hover: #2e3350;
-  --color-line: #2b2f45;
-  --color-ink: #eceef8;
-  --color-muted: #9aa0bd;
-  --color-faint: #6b7192;
-  --color-accent: #ff6fa8;
-  --color-accent-2: #5fe3ff;
-  --color-ok: #5ee39a;
-  --color-warn: #ffc65a;
-  --color-danger: #ff6b73;
-
+  --color-canvas: #111315;
+  --color-shell: #191c1f;
+  --color-panel: #202427;
+  --color-raised: #2a3033;
+  --color-hover: #343c3e;
+  --color-line: #30373a;
+  --color-ink: #edf1ef;
+  --color-muted: #adb7b5;
+  --color-faint: #899592;
+  --color-accent: #a3e6bd;
+  --color-accent-2: #a3e6bd;
+  --color-ok: #a3e6bd;
+  --color-warn: #edc483;
+  --color-danger: #ff939a;
   --font-sans: "Segoe UI", system-ui, sans-serif;
   --font-mono: "Cascadia Code", Consolas, monospace;
 }
 
 @layer base {
-  :root {
-    color-scheme: dark;
-  }
-
-  html,
-  body,
-  #root {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  body {
-    @apply bg-canvas font-sans text-[13px] text-ink antialiased select-none;
-  }
-
-  input,
-  select,
-  textarea {
-    @apply rounded-md border border-line bg-canvas px-2 py-1 text-ink outline-none focus:border-accent-2;
-  }
-
-  input[type="range"] {
-    @apply border-0 bg-transparent p-0 accent-accent;
-  }
-
-  input[type="color"] {
-    @apply h-7 w-9 cursor-pointer p-0.5;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2e3350;
-    border-radius: 6px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
+  :root { color-scheme: dark; }
+  html, body, #root { height: 100%; margin: 0; overflow: hidden; }
+  body { @apply bg-canvas font-sans text-[13px] text-ink antialiased select-none; }
+  button { cursor: pointer; }
+  button:disabled { cursor: default; }
+  button, input, select, textarea, summary { touch-action: manipulation; }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  input, select, textarea { @apply rounded-md border border-line bg-canvas px-2.5 py-1.5 text-ink; min-width: 0; }
+  input[type="range"] { @apply border-0 bg-transparent p-0 accent-accent; }
+  input[type="checkbox"] { @apply accent-accent; }
+  input[type="color"] { @apply h-8 w-9 cursor-pointer p-0.5; }
+  kbd { @apply rounded border border-line bg-canvas px-1.5 py-0.5 font-mono text-[10px] text-muted; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb { background: #414a4c; border-radius: 8px; border: 2px solid transparent; background-clip: content-box; }
+  ::selection { background: #a3e6bd33; }
 }
 
 @layer components {
-  .btn {
-    @apply inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-ink transition-colors hover:bg-hover disabled:pointer-events-none disabled:opacity-40;
-  }
-  .btn-primary {
-    @apply bg-accent font-semibold text-[#2a0d1b] hover:bg-[#ff8bb9];
-  }
-  .btn-icon {
-    @apply inline-flex h-8 w-8 items-center justify-center rounded-md text-muted transition-colors hover:bg-hover hover:text-ink disabled:pointer-events-none disabled:opacity-40;
-  }
-  .btn-icon-active {
-    @apply bg-raised text-accent ring-1 ring-accent/60;
-  }
-  .panel-title {
-    @apply text-[11px] font-semibold tracking-wider text-faint uppercase;
-  }
-  .chip {
-    @apply rounded px-1.5 py-0.5 text-[11px];
-  }
-  .checker {
-    background-color: #c9cad6;
-    background-image:
-      linear-gradient(45deg, #9c9eb1 25%, transparent 25%),
-      linear-gradient(-45deg, #9c9eb1 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #9c9eb1 75%),
-      linear-gradient(-45deg, transparent 75%, #9c9eb1 75%);
-    background-size: 8px 8px;
-    background-position: 0 0, 0 4px, 4px -4px, -4px 0;
-  }
-  .pixelated {
-    image-rendering: pixelated;
-  }
+  .btn { @apply inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg px-3 text-[12px] font-medium text-ink transition-colors hover:bg-hover disabled:pointer-events-none disabled:opacity-40; }
+  .btn-primary { @apply bg-accent font-semibold text-[#17261d] hover:bg-[#baf1ce]; }
+  .btn-icon { @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-hover hover:text-ink disabled:pointer-events-none disabled:opacity-35; }
+  .btn-icon-active { @apply bg-accent/12 text-accent ring-1 ring-accent/30; }
+  .panel-title { @apply text-[11px] font-semibold tracking-wider text-muted uppercase; }
+  .chip { @apply rounded px-1.5 py-0.5 text-[11px]; }
+  .checker { background-color: #343a3d; background-image: conic-gradient(#41484b 25%, transparent 0 50%, #41484b 0 75%, transparent 0); background-size: 12px 12px; }
+  .pixelated { image-rendering: pixelated; }
+  .status-dot { @apply inline-block h-1.5 w-1.5 shrink-0 rounded-full; }
+  .app-header { @apply z-10 shrink-0 border-b border-line bg-shell; }
+  .main-header { @apply flex h-16 items-center gap-3 px-5; }
+  .brand-lockup { @apply flex shrink-0 items-center gap-2.5; }
+  .brand-lockup strong { @apply block text-[14px] font-semibold tracking-tight; }
+  .brand-lockup strong span { @apply font-normal text-muted; }
+  .brand-lockup small { @apply mt-0.5 block text-[8px] tracking-[0.18em] text-faint; }
+  .header-divider { @apply mx-2 h-6 w-px bg-line; }
+  .connection-button { @apply border border-line text-muted; }
+  .document-bar { @apply flex h-11 items-center gap-3 border-t border-line/70 bg-canvas/40 px-4; }
+  .project-tabs { @apply flex min-w-0 flex-1 self-stretch overflow-x-auto; }
+  .project-tab { @apply flex max-w-64 shrink-0 items-center gap-2 border-b-2 border-transparent px-4 text-[12px] text-muted hover:bg-panel; }
+  .project-tab.is-active { @apply border-accent bg-panel text-ink; }
+  .tool-rail { @apply flex w-[60px] shrink-0 flex-col items-center gap-1 overflow-y-auto border-r border-line bg-shell px-2 py-3; }
+  .tool-rail > .btn-icon { @apply relative h-9 w-10; }
+  .tool-key { @apply absolute right-1 bottom-0.5 text-[8px] text-faint; }
+  .tool-rail .btn-icon-active .tool-key { @apply text-accent; }
+  .tool-options { @apply flex min-h-12 shrink-0 flex-wrap items-center gap-3 border-b border-line bg-shell/60 px-4 py-1.5 text-[12px]; }
+  .inspector { @apply flex w-[300px] shrink-0 flex-col border-l border-line bg-shell; }
+  .inspector-tabs { @apply grid shrink-0 grid-cols-3 gap-1 border-b border-line p-2; }
+  .inspector-tab { @apply flex items-center justify-center gap-1.5 rounded-md px-1 py-2 text-[11px] text-muted hover:bg-hover; }
+  .inspector-tab.is-active { @apply bg-accent/10 text-accent; }
+  .timeline { @apply flex h-[178px] shrink-0 flex-col border-t border-line bg-shell; }
+  .timeline-controls { @apply flex min-h-12 shrink-0 flex-wrap items-center gap-1 border-b border-line px-3 py-1; }
+  .canvas-controls { @apply absolute right-4 bottom-4 flex items-center gap-1 rounded-lg border border-line bg-shell p-1 shadow-lg; }
+  .welcome-page { @apply relative flex min-h-0 flex-1 flex-col overflow-y-auto; background-image: radial-gradient(ellipse at 50% 0%, #a3e6bd05, transparent 65%); }
+  .welcome-content { width: min(920px, calc(100% - 80px)); margin: auto; padding: 52px 0 32px; }
+  .eyebrow { @apply flex items-center gap-2 text-[10px] font-semibold tracking-[0.18em] text-muted; }
+  .welcome-heading h1 { @apply mt-5 text-[46px] leading-[1.12] font-semibold tracking-[-0.045em]; }
+  .welcome-heading h1 span { @apply text-accent; }
+  .welcome-heading p { @apply mt-4 text-[14px] leading-6 text-muted; }
+  .start-grid { @apply mt-9 grid grid-cols-3 gap-4; }
+  .start-card { @apply flex min-h-[200px] flex-col items-start rounded-xl border border-line bg-shell p-5 text-left transition-colors hover:border-faint hover:bg-panel disabled:opacity-55; }
+  .start-card-primary { @apply border-accent/40 bg-[#202c25] hover:border-accent hover:bg-[#25372c]; }
+  .start-icon { @apply mb-5 text-muted; }
+  .start-card-primary .start-icon { @apply text-accent; }
+  .start-card-title { @apply flex w-full items-center justify-between gap-2 text-[14px] font-semibold; }
+  .start-card-title svg { @apply text-faint; }
+  .start-card-description { @apply mt-2 max-w-56 text-[12px] leading-5 text-muted; }
+  .start-card kbd, .file-types { @apply mt-5 text-[10px] text-faint; }
+  .assistant-card { @apply mt-5 flex w-full items-center gap-4 rounded-xl border border-line bg-shell/60 p-4 text-left transition-colors hover:bg-panel; }
+  .assistant-icon { @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-raised text-accent; }
+  .assistant-card strong { @apply block text-[12px] font-medium; }
+  .assistant-card small { @apply mt-1 block text-[12px] text-muted; }
+  .assistant-link { @apply ml-auto flex shrink-0 items-center gap-2 text-[12px] text-accent; }
+  .welcome-tips { @apply mt-7 flex flex-wrap items-center justify-center gap-4 text-[11px] text-faint; }
+  .welcome-tips > span { @apply flex items-center gap-1.5; }
+  .connection-notice { @apply mt-5 text-center text-[12px] text-muted; }
+  .welcome-footer { @apply flex shrink-0 items-center justify-between border-t border-line/60 px-6 py-4 text-[11px] text-faint; }
+  .recovery-card { @apply mt-5 rounded-xl border border-warn/30 bg-panel p-4; }
+  .editor-dialog { @apply m-auto max-h-[85vh] w-[460px] max-w-[calc(100vw-32px)] overflow-y-auto rounded-2xl border border-line bg-panel p-6 text-ink shadow-2xl; }
+  .editor-dialog::backdrop { background: #080a0dcc; backdrop-filter: blur(5px); }
+}
+
+@media (max-width: 1150px) {
+  .main-header { gap: 8px; padding-inline: 14px; }
+  .inspector { width: 280px; }
+  .tool-options { gap: 8px; }
+  .timeline { height: 204px; }
+}
+@media (max-height: 760px) {
+  .tool-rail { gap: 2px; padding-block: 6px; }
+  .tool-rail > .btn-icon { height: 30px; }
+}
+@media (max-width: 760px) {
+  .welcome-content { width: calc(100% - 36px); padding-top: 32px; }
+  .welcome-heading h1 { font-size: 36px; }
+  .start-grid { grid-template-columns: 1fr; }
+  .start-card { min-height: 160px; }
+  .assistant-card { flex-wrap: wrap; }
+  .assistant-link { margin-left: 56px; }
+  .welcome-footer > span:last-child, .brand-lockup small, .header-divider { display: none; }
+  .brand-lockup strong { max-width: 110px; }
+  .connection-button > span:not(.status-dot) { display: none; }
+  .main-header { gap: 4px; padding-inline: 8px; }
+  .main-header .btn { padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }

@@ -4,11 +4,11 @@ import { useFrameCanvas } from "../core/hooks";
 import { currentPalette, currentSprite, useEditor } from "../core/store";
 
 const TABS = [
-  { id: "layers", icon: <Layers size={15} />, label: "Layers" },
+  { id: "layers", icon: <Layers size={15} />, label: "Camadas" },
   { id: "palette", icon: <PaletteIcon size={15} />, label: "Paleta" },
-  { id: "props", icon: <SlidersHorizontal size={15} />, label: "Propriedades" },
+  { id: "props", icon: <SlidersHorizontal size={15} />, label: "Ajustes" },
   { id: "regions", icon: <Shapes size={15} />, label: "Regiões" },
-  { id: "anchors", icon: <Target size={15} />, label: "Anchors" },
+  { id: "anchors", icon: <Target size={15} />, label: "Pontos" },
   { id: "inspect", icon: <ScanSearch size={15} />, label: "Inspeção" },
 ] as const;
 
@@ -16,21 +16,22 @@ export function RightPanel() {
   const panel = useEditor((s) => s.panel);
   const set = useEditor((s) => s.set);
   return (
-    <aside className="flex w-[300px] shrink-0 flex-col border-l border-line bg-shell">
-      <nav className="flex shrink-0 border-b border-line">
+    <aside className="inspector" aria-label="Propriedades do projeto">
+      <nav className="inspector-tabs" aria-label="Painéis de edição">
         {TABS.map((t) => (
           <button
             key={t.id}
             title={t.label}
+            aria-pressed={panel === t.id}
             onClick={() => set({ panel: t.id })}
-            className={`flex h-10 flex-1 items-center justify-center border-b-2 ${panel === t.id ? "border-accent text-ink" : "border-transparent text-faint hover:text-muted"}`}
+            className={`inspector-tab ${panel === t.id ? "is-active" : ""}`}
           >
-            {t.icon}
+            {t.icon}<span>{t.label}</span>
           </button>
         ))}
       </nav>
       <div className="min-h-0 flex-1 overflow-y-auto p-3">
-        {panel === "layers" && <LayersPanel />}
+        {panel === "layers" && <><LayersPanel /><div className="mt-6 border-t border-line pt-4"><PalettePanel compact /></div></>}
         {panel === "palette" && <PalettePanel />}
         {panel === "props" && <PropsPanel />}
         {panel === "regions" && <RegionsPanel />}
@@ -71,8 +72,8 @@ function LayersPanel() {
   const t = { sprite: sprite.id };
   return (
     <div>
-      <Header title="Layers">
-        <button className="btn-icon h-7 w-7" title="Nova layer" onClick={() => void s.run("layer_create", { ...t, name: uniqueName("Layer", sprite.layers.map((l) => l.name)), above: s.layerId })}>
+      <Header title="Camadas">
+        <button className="btn-icon h-7 w-7" title="Nova camada" onClick={() => void s.run("layer_create", { ...t, name: uniqueName("Layer", sprite.layers.map((l) => l.name)), above: s.layerId })}>
           <Plus size={15} />
         </button>
         <button className="btn-icon h-7 w-7" title="Duplicar" disabled={!sel} onClick={() => void s.run("layer_duplicate", { ...t, layer: s.layerId })}>
@@ -87,7 +88,7 @@ function LayersPanel() {
         <button className="btn-icon h-7 w-7" title="Descer" disabled={idx <= 0} onClick={() => void s.run("layer_reorder", { ...t, layer: s.layerId, index: idx - 1 })}>
           <ArrowDown size={15} />
         </button>
-        <button className="btn-icon h-7 w-7" title="Apagar layer" disabled={sprite.layers.length <= 1} onClick={() => void s.run("layer_delete", { ...t, layer: s.layerId })}>
+        <button className="btn-icon h-7 w-7" title="Apagar camada" disabled={sprite.layers.length <= 1} onClick={() => void s.run("layer_delete", { ...t, layer: s.layerId })}>
           <Trash2 size={15} />
         </button>
       </Header>
@@ -96,6 +97,9 @@ function LayersPanel() {
           <li
             key={l.id}
             onClick={() => s.set({ layerId: l.id })}
+            tabIndex={0}
+            aria-label={`Camada ${l.name}${l.id === s.layerId ? ", selecionada" : ""}`}
+            onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); s.set({ layerId: l.id }); } }}
             className={`flex cursor-pointer items-center gap-2 rounded-md px-1.5 py-1 ${l.id === s.layerId ? "bg-raised ring-1 ring-accent/50" : "hover:bg-panel"}`}
           >
             <LayerThumb layer={l.id} />
@@ -142,7 +146,7 @@ function LayersPanel() {
           </label>
           <label className="flex items-center gap-2 text-muted">
             <input type="checkbox" checked={sel.reference} onChange={(e) => void s.run("layer_properties", { ...t, layer: sel.id, reference: e.target.checked })} />
-            Layer de referência (não exporta)
+            Camada de referência (não exporta)
           </label>
         </div>
       )}
@@ -156,7 +160,7 @@ function uniqueName(base: string, names: string[]) {
   return `${base} ${i}`;
 }
 
-function PalettePanel() {
+function PalettePanel({ compact = false }: { compact?: boolean }) {
   const s = useEditor();
   const pal = currentPalette(s);
   const palettes = s.doc?.model.palettes ?? [];
@@ -193,7 +197,7 @@ function PalettePanel() {
           Nova paleta
         </button>
       </div>
-      <div className="mt-3 flex flex-col gap-1.5 rounded-md bg-panel p-2 text-muted">
+      {!compact && <div className="mt-3 flex flex-col gap-1.5 rounded-md bg-panel p-2 text-muted">
         <span className="panel-title">Ajustes no sprite</span>
         <button className="btn h-7 justify-start text-[12px]" onClick={() => void s.run("palette_replace", { sprite: s.spriteId, from: s.secondary, to: s.primary })}>
           Trocar secundária → principal (todos os frames)
@@ -201,7 +205,7 @@ function PalettePanel() {
         <button className="btn h-7 justify-start text-[12px]" disabled={!pal} onClick={() => pal && void s.run("palette_quantize", { sprite: s.spriteId, palette: pal.name })}>
           Levar todas as cores para esta paleta
         </button>
-      </div>
+      </div>}
     </div>
   );
 }

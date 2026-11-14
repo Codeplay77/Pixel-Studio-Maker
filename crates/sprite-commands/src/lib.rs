@@ -363,7 +363,7 @@ commands! {
     "palette_quantize" => PaletteQuantize(args::PaletteQuantize), Write, "Reduz as cores do sprite (median cut) ou as leva para uma paleta.";
     // importação e exportação
     "import_image" => ImportImage(args::ImportImage), Write, "Importa PNG/GIF como sprite novo, layer, frames ou referência; corta sprite sheets e cria animação com os frames. Com `pixelate`, converte a imagem em pixel art antes (como image_pixelate).";
-    "image_pixelate" => ImagePixelate(args::ImagePixelate), Runtime, "Converte uma imagem PNG (foto, ilustração, pixel art ampliada) em pixel art estática: remove o fundo, recorta, reduz por blocos, calcula a paleta (ou usa uma fixa), com dithering, limpeza e contorno opcionais. Cria um projeto novo com o resultado; com `preview`, só devolve a imagem. Processamento determinístico, nada é gerado por IA.";
+    "image_pixelate" => ImagePixelate(args::ImagePixelate), Runtime, "Converte uma imagem PNG, JPG ou GIF de qualquer tamanho (foto, ilustração, pixel art ampliada) em pixel art estática, no tamanho pedido: remove o fundo, recorta (ao conteúdo ou numa região), reduz por blocos, calcula a paleta (ou usa uma fixa), com dithering, limpeza e contorno opcionais. Cria um projeto novo com o resultado; com `preview`, só devolve a imagem. Processamento determinístico, nada é gerado por IA.";
     "export_png" => ExportPng(args::ExportPng), Read, "Exporta um frame como PNG (com escala).";
     "export_spritesheet" => ExportSpritesheet(args::ExportSpritesheet), Read, "Exporta uma sprite sheet PNG (horizontal, vertical, grade, uma linha por trilha ou atlas compactado), com JSON de metadados.";
     "export_frames" => ExportFrames(args::ExportFrames), Read, "Exporta cada frame como um PNG numerado.";

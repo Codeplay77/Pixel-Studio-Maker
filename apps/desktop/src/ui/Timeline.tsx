@@ -21,7 +21,7 @@ function Thumb({ frame, active, index, duration, onClick }: { frame: number; act
     g.drawImage(canvas, (c.width - w) / 2, (c.height - h) / 2, w, h);
   }, [canvas]);
   return (
-    <button onClick={onClick} className={`group flex shrink-0 flex-col items-center gap-1 rounded-md p-1 ${active ? "bg-raised ring-2 ring-accent" : "hover:bg-panel"}`} title={`frame ${frame}`}>
+    <button onClick={onClick} className={`group flex shrink-0 flex-col items-center gap-1 rounded-md p-1 ${active ? "bg-raised ring-2 ring-accent" : "hover:bg-panel"}`} aria-pressed={active} aria-label={`Frame ${index}, ${duration} milissegundos`} title={`Frame ${index}`}>
       <canvas ref={ref} width={64} height={64} className="checker h-16 w-16 rounded" />
       <span className="flex w-full justify-between px-0.5 font-mono text-[10px] text-faint">
         <span className={active ? "text-ink" : ""}>{index}</span>
@@ -79,9 +79,9 @@ export function Timeline() {
   const go = (d: number) => frames.length && s.set({ frameId: frames[(Math.max(0, pos) + d + frames.length) % frames.length] });
 
   return (
-    <footer className="flex h-[150px] shrink-0 flex-col border-t border-line bg-shell">
-      <div className="flex h-10 shrink-0 items-center gap-1 border-b border-line px-2">
-        <select className="h-7 max-w-44" value={anim?.id ?? ""} onChange={(e) => s.set({ animationId: e.target.value ? Number(e.target.value) : undefined, direction: e.target.value ? (sprite.animations.find((a) => a.id === Number(e.target.value))?.tracks[0]?.direction ?? null) : undefined, playing: false })}>
+    <footer className="timeline" aria-label="Linha do tempo">
+      <div className="timeline-controls">
+        <select aria-label="Animação" className="h-8 max-w-44" value={anim?.id ?? ""} onChange={(e) => s.set({ animationId: e.target.value ? Number(e.target.value) : undefined, direction: e.target.value ? (sprite.animations.find((a) => a.id === Number(e.target.value))?.tracks[0]?.direction ?? null) : undefined, playing: false })}>
           <option value="">Todos os frames ({sprite.frames.length})</option>
           {sprite.animations.map((a) => (
             <option key={a.id} value={a.id}>
@@ -116,7 +116,7 @@ export function Timeline() {
         <button className="btn-icon h-7 w-7" title="Anterior (,)" onClick={() => go(-1)}>
           <ChevronLeft size={16} />
         </button>
-        <button className={`btn-icon h-7 w-7 ${s.playing ? "text-accent" : ""}`} title="Reproduzir (Enter)" onClick={() => s.set({ playing: !s.playing })}>
+        <button className={`btn-icon h-7 w-7 ${s.playing ? "text-accent" : ""}`} aria-pressed={s.playing} title={s.playing ? "Pausar (Enter)" : "Reproduzir (Enter)"} onClick={() => s.set({ playing: !s.playing })}>
           {s.playing ? <Pause size={16} /> : <Play size={16} />}
         </button>
         <button className="btn-icon h-7 w-7" title="Próximo (.)" onClick={() => go(1)}>
@@ -127,7 +127,7 @@ export function Timeline() {
         </button>
         <div className="mx-1 h-5 w-px bg-line" />
         <button className={`btn h-7 text-[12px] ${s.onion.enabled ? "text-accent-2" : ""}`} title="Onion skin: frames vizinhos como fantasma" onClick={() => s.set({ onion: { ...s.onion, enabled: !s.onion.enabled } })}>
-          <Ghost size={15} /> Onion
+          <Ghost size={15} /> Fantasma
         </button>
         {s.onion.enabled && (
           <span className="flex items-center gap-1 text-[11px] text-muted">
@@ -158,9 +158,9 @@ export function Timeline() {
           </button>
         </div>
       </div>
-      <div className="flex min-h-0 flex-1 items-center gap-1 overflow-x-auto px-2">
+      <div className="flex min-h-0 flex-1 items-center gap-3 overflow-x-auto px-4 py-3">
         {frames.map((f, i) => (
-          <Thumb key={`${f}-${i}`} frame={f} index={i} active={f === s.frameId} duration={sprite.frames.find((x) => x.id === f)?.duration_ms ?? 0} onClick={() => s.set({ frameId: f, playing: false })} />
+          <Thumb key={`${f}-${i}`} frame={f} index={i + 1} active={f === s.frameId} duration={sprite.frames.find((x) => x.id === f)?.duration_ms ?? 0} onClick={() => s.set({ frameId: f, playing: false })} />
         ))}
         {frames.length === 0 && <span className="text-faint">Esta trilha não tem frames.</span>}
         {anim && <Repeat size={14} className="ml-2 shrink-0 text-faint" />}

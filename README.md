@@ -7,7 +7,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/licen%C3%A7a-MIT-ff6fa8" alt="Licença MIT" /></a>
   <img src="https://img.shields.io/badge/plataforma-Windows-5fe3ff" alt="Plataforma: Windows" />
-  <img src="https://img.shields.io/badge/MCP-84%20ferramentas-ffd25f" alt="84 ferramentas MCP" />
+  <img src="https://img.shields.io/badge/MCP-85%20ferramentas-ffd25f" alt="85 ferramentas MCP" />
 </p>
 
 <p align="center"><img src="docs/editor.png" alt="O editor com o guerreiro de armadura verde aberto, as layers à direita e os 65 frames da caminhada na linha do tempo" /></p>
@@ -37,7 +37,10 @@ Tudo abaixo foi desenhado pelo Claude usando só as ferramentas MCP do editor
   opacidade, modos de mistura, bloqueio e layers de referência; paletas; linha do tempo com animações,
   direções, durações, repetição (loop, uma vez, ping-pong, reverso) e reprodução; regiões semânticas,
   anchors, pivô; inspeção e validação; undo/redo e snapshots.
-- **MCP**: 84 ferramentas com schema tipado, imagens de inspeção devolvidas como conteúdo do MCP,
+- **Converter imagem em pixel art**: PNG, JPG ou GIF de qualquer tamanho viram pixel art estática, com
+  tamanho de saída configurável, remoção de fundo, recorte automático ou manual, paleta calculada ou fixa,
+  dithering, limpeza e contorno. Prévia ao vivo no editor; o mesmo comando (`image_pixelate`) no MCP.
+- **MCP**: 85 ferramentas com schema tipado, imagens de inspeção devolvidas como conteúdo do MCP,
   recursos (guia do agente, estado do projeto, prévias) e prompts com fluxos de trabalho.
 - **Desenho em lote (SDC)**: dezenas de operações numa chamada, atômicas; matrizes de texto com legenda,
   RLE, patches de diferença, polígonos, curvas, contornos, dithering, degradês, sombreamento por direção
@@ -48,7 +51,7 @@ Tudo abaixo foi desenhado pelo Claude usando só as ferramentas MCP do editor
   Pipe, com revisões, transações, eventos em tempo real, recuperação automática e funcionamento sem
   janela.
 - **Formatos**: projeto `.psmproj` versionado (ZIP com manifesto JSON e PNGs, gravação atômica);
-  importa PNG, GIF e sprite sheets; exporta PNG, sequência de PNGs, GIF, sprite sheet (5 layouts, com
+  importa PNG, JPG (para conversão), GIF e sprite sheets; exporta PNG, sequência de PNGs, GIF, sprite sheet (5 layouts, com
   alinhamento por pivô) com JSON e `SpriteFrames` do Godot 4.
 
 ## Usar com o Claude Code

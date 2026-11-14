@@ -34,12 +34,12 @@ export function McpPanel() {
   if (!s.mcpOpen) return null;
   const project = s.projects.find((p) => p.id === s.projectId);
   return (
-    <div className="absolute top-11 right-0 bottom-0 z-30 flex w-[380px] flex-col border-l border-line bg-panel shadow-2xl">
+    <div className="absolute top-16 right-0 bottom-0 z-30 flex w-[380px] flex-col border-l border-line bg-panel shadow-2xl">
       <div className="flex h-11 shrink-0 items-center justify-between border-b border-line px-3">
         <span className="flex items-center gap-2 font-semibold">
           <Bot size={17} className="text-accent-2" /> Claude e MCP
         </span>
-        <button className="btn-icon" onClick={() => s.set({ mcpOpen: false })}>
+        <button className="btn-icon" aria-label="Fechar painel MCP" onClick={() => s.set({ mcpOpen: false })}>
           <X size={16} />
         </button>
       </div>

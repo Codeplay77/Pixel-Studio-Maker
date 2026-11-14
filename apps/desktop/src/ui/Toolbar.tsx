@@ -2,7 +2,7 @@ import { ArrowLeftRight, Brush, PictureInPicture2, Ruler, Circle, Copy, Crosshai
 import type { ReactNode } from "react";
 import { currentSprite, useEditor, type Tool } from "../core/store";
 
-const TOOLS: { id: Tool; icon: ReactNode; label: string; key: string }[] = [
+export const TOOLS: { id: Tool; icon: ReactNode; label: string; key: string }[] = [
   { id: "pencil", icon: <Brush size={17} />, label: "Lápis", key: "B" },
   { id: "eraser", icon: <Eraser size={17} />, label: "Borracha", key: "E" },
   { id: "fill", icon: <PaintBucket size={17} />, label: "Balde (Shift: global)", key: "G" },
@@ -45,7 +45,7 @@ function Swatch({ color, title, onChange }: { color: string; title: string; onCh
   return (
     <label className="checker relative block h-7 w-7 cursor-pointer overflow-hidden rounded-md ring-1 ring-line" title={title}>
       <span className="absolute inset-0" style={{ background: color }} />
-      <input type="color" className="absolute inset-0 opacity-0" value={color.slice(0, 7)} onChange={(e) => onChange(e.target.value)} />
+      <input type="color" aria-label={title} className="absolute inset-0 opacity-0" value={color.slice(0, 7)} onChange={(e) => onChange(e.target.value)} />
     </label>
   );
 }
@@ -55,10 +55,10 @@ export function Toolbar() {
   const sprite = currentSprite(s);
   const a = selectionActions();
   return (
-    <aside className="flex w-12 shrink-0 flex-col items-center gap-1 overflow-y-auto border-r border-line bg-shell py-2">
+    <aside className="tool-rail" aria-label="Ferramentas de desenho">
       {TOOLS.map((t) => (
-        <button key={t.id} className={`btn-icon ${s.tool === t.id ? "btn-icon-active" : ""}`} title={`${t.label} (${t.key})`} onClick={() => s.set({ tool: t.id })} disabled={!sprite}>
-          {t.icon}
+        <button key={t.id} className={`btn-icon ${s.tool === t.id ? "btn-icon-active" : ""}`} aria-label={`${t.label} (${t.key})`} aria-pressed={s.tool === t.id} title={`${t.label} (${t.key})`} onClick={() => s.set({ tool: t.id })} disabled={!sprite}>
+          {t.icon}<span className="tool-key" aria-hidden="true">{t.key}</span>
         </button>
       ))}
       <div className="my-1 h-px w-7 bg-line" />
@@ -93,14 +93,8 @@ export function Toolbar() {
         </button>
       )}
       <div className="my-1 h-px w-7 bg-line" />
-      <button className={`btn-icon ${s.grid ? "text-accent-2" : ""}`} title="Grade (#)" onClick={() => s.set({ grid: !s.grid })}>
-        <Grid3x3 size={17} />
-      </button>
       <button className={`btn-icon ${s.guides ? "text-accent-2" : ""}`} title="Guias: centro e linha do chão" onClick={() => s.set({ guides: !s.guides })}>
         <Ruler size={17} />
-      </button>
-      <button className={`btn-icon ${s.showPreview ? "text-accent-2" : ""}`} title="Prévia em tamanho real" onClick={() => s.set({ showPreview: !s.showPreview })}>
-        <PictureInPicture2 size={17} />
       </button>
       <div className="mt-auto flex flex-col items-center gap-1.5 pt-2">
         <div className="relative h-11 w-11">
@@ -114,15 +108,31 @@ export function Toolbar() {
         <button className="btn-icon h-6" title="Trocar cores (X)" onClick={() => s.set({ primary: s.secondary, secondary: s.primary })}>
           <ArrowLeftRight size={14} />
         </button>
-        <div className="flex flex-col items-center text-[10px] text-faint" title="Espessura do pincel ([ e ])">
-          <span>{s.brush}px</span>
-          <input type="range" min={1} max={8} value={s.brush} onChange={(e) => s.set({ brush: Number(e.target.value) })} className="h-16 w-4" style={{ writingMode: "vertical-lr", direction: "rtl" }} />
-        </div>
-        <label className="flex items-center text-[10px] text-faint" title="Formas cheias">
-          <input type="checkbox" checked={s.filledShapes} onChange={(e) => s.set({ filledShapes: e.target.checked })} className="mr-1 h-3 w-3" />
-          cheio
-        </label>
+
       </div>
     </aside>
   );
+}
+
+
+/** Keep settings beside the canvas, where their effect is visible. */
+export function ToolOptions() {
+  const s = useEditor();
+  const tool = TOOLS.find((t) => t.id === s.tool)!;
+  const brushTool = ["pencil", "eraser", "line"].includes(s.tool);
+  return <div className="tool-options" aria-label="Opções da ferramenta">
+    <span className="flex min-w-24 items-center gap-2 font-medium text-ink">{tool.icon}{tool.label.split(" (")[0]}</span>
+    <span className="h-5 w-px bg-line" />
+    {brushTool && <label className="flex items-center gap-2 text-muted">Espessura <select aria-label="Espessura do pincel" value={s.brush} onChange={(e) => s.set({ brush: Number(e.target.value) })}>{Array.from({ length: 8 }, (_, i) => <option key={i} value={i + 1}>{i + 1} px</option>)}</select></label>}
+    {["rect", "ellipse"].includes(s.tool) && <label className="flex items-center gap-2 text-muted"><input type="checkbox" checked={s.filledShapes} onChange={(e) => s.set({ filledShapes: e.target.checked })} /> Preencher forma</label>}
+    {s.tool === "fill" && <span className="text-muted">Shift + clique para substituir a cor em toda a camada</span>}
+    {s.tool === "select" && <span className="text-muted">Arraste para selecionar · Esc para limpar</span>}
+    {s.tool === "move" && <span className="text-muted">Arraste a camada ou a seleção</span>}
+    {s.tool === "eyedropper" && <span className="text-muted">Clique no canvas para capturar uma cor</span>}
+    {s.tool === "anchor" && <span className="text-muted">{s.anchorTarget ? `Ponto: ${s.anchorTarget}` : "Escolha um ponto no painel Pontos"}</span>}
+    <div className="ml-auto flex items-center gap-1">
+      <button className={`btn h-8 ${s.grid ? "text-accent bg-accent/10" : "text-muted"}`} aria-pressed={s.grid} title="Mostrar grade (#)" onClick={() => s.set({ grid: !s.grid })}><Grid3x3 size={14} /> Grade</button>
+      <button className={`btn h-8 ${s.showPreview ? "text-accent bg-accent/10" : "text-muted"}`} aria-pressed={s.showPreview} onClick={() => s.set({ showPreview: !s.showPreview })}><PictureInPicture2 size={14} /> Prévia</button>
+    </div>
+  </div>;
 }

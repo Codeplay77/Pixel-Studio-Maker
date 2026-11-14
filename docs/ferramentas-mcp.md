@@ -1,7 +1,7 @@
 # Ferramentas MCP
 
 Gerado por `psm tools` a partir da tabela de comandos (`crates/sprite-commands/src/lib.rs`).
-São 84 ferramentas. Todas as que agem num projeto aceitam também `project` (id) e, se escrevem, `expected_revision`.
+São 85 ferramentas. Todas as que agem num projeto aceitam também `project` (id) e, se escrevem, `expected_revision`.
 
 Tipos: **leitura** não muda nada; **escrita** vira um passo do histórico (pode ser desfeita); **runtime** cuida de projetos, transações e histórico.
 
@@ -78,7 +78,8 @@ Tipos: **leitura** não muda nada; **escrita** vira um passo do histórico (pode
 | `palette_update` | escrita | Altera uma paleta: renomeia, troca/adiciona/remove cores, ativa ou apaga (não mexe nos pixels). |
 | `palette_replace` | escrita | Troca uma cor por outra em todos os pixels do sprite (todas as layers e frames) e na paleta. |
 | `palette_quantize` | escrita | Reduz as cores do sprite (median cut) ou as leva para uma paleta. |
-| `import_image` | escrita | Importa PNG/GIF como sprite novo, layer, frames ou referência; corta sprite sheets e cria animação com os frames. |
+| `import_image` | escrita | Importa PNG/GIF como sprite novo, layer, frames ou referência; corta sprite sheets e cria animação com os frames. Com `pixelate`, converte a imagem em pixel art antes (como image_pixelate). |
+| `image_pixelate` | runtime | Converte uma imagem PNG, JPG ou GIF de qualquer tamanho (foto, ilustração, pixel art ampliada) em pixel art estática, no tamanho pedido: remove o fundo, recorta (ao conteúdo ou numa região), reduz por blocos, calcula a paleta (ou usa uma fixa), com dithering, limpeza e contorno opcionais. Cria um projeto novo com o resultado; com `preview`, só devolve a imagem. Processamento determinístico, nada é gerado por IA. |
 | `export_png` | leitura | Exporta um frame como PNG (com escala). |
 | `export_spritesheet` | leitura | Exporta uma sprite sheet PNG (horizontal, vertical, grade, uma linha por trilha ou atlas compactado), com JSON de metadados. |
 | `export_frames` | leitura | Exporta cada frame como um PNG numerado. |

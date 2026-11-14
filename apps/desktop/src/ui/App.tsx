@@ -1,5 +1,5 @@
 import { listen } from "@tauri-apps/api/event";
-import { Bot, FilePlus2, FolderOpen } from "lucide-react";
+import { ArrowRight, Bot, FilePlus2, FolderOpen, Grid3x3, Keyboard, Sparkles } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import * as api from "../core/api";
 import { useKey } from "../core/hooks";
@@ -9,47 +9,50 @@ import { BrandMark } from "./Brand";
 import { CanvasView } from "./CanvasView";
 import { ExportDialog, ImportDialog, NewProjectDialog } from "./Dialogs";
 import { McpPanel } from "./McpPanel";
+import { PixelateDialog } from "./PixelateDialog";
 import { RightPanel } from "./RightPanel";
 import { Timeline } from "./Timeline";
-import { selectionActions, Toolbar } from "./Toolbar";
+import { selectionActions, ToolOptions, Toolbar } from "./Toolbar";
 import { openProjectDialog, saveProject, TopBar } from "./TopBar";
 
 function Welcome() {
   const s = useEditor();
   const [recover, setRecover] = useRecoverable();
   return (
-    <div className="flex flex-1 items-center justify-center">
-      <div className="flex w-[460px] flex-col items-center gap-5 text-center">
-        <BrandMark size={72} />
-        <div>
-          <h1 className="bg-linear-to-r from-accent to-accent-2 bg-clip-text text-3xl font-bold tracking-tight text-transparent">Pixel Studio Maker</h1>
-          <p className="mt-1 text-muted">Pixel art e sprite sheets, à mão ou pelo Claude.</p>
+    <main className="welcome-page">
+      <div className="welcome-content">
+        <div className="welcome-heading">
+          <span className="eyebrow"><span className="status-dot bg-accent" /> UM PIXEL. INFINITAS POSSIBILIDADES.</span>
+          <h1>Pequenos pixels.<br /><span>Grandes ideias.</span></h1>
+          <p>Um espaço para desenhar, animar e dar vida aos seus sprites.<br />Comece do zero ou continue de onde a inspiração parou.</p>
         </div>
-        <div className="flex gap-2">
-          <button className="btn btn-primary h-10 px-4" onClick={() => s.set({ dialog: "new" })} disabled={!s.connected}>
-            <FilePlus2 size={17} /> Novo projeto
+        <div className="start-grid">
+          <button className="start-card start-card-primary" disabled={!s.connected} onClick={() => s.set({ dialog: "new" })}>
+            <span className="start-icon"><FilePlus2 size={23} /></span><span className="start-card-title">Criar um projeto <ArrowRight size={18} /></span><span className="start-card-description">Uma tela em branco para a sua próxima ideia.</span><kbd>Ctrl + N</kbd>
           </button>
-          <button className="btn h-10 bg-raised px-4" onClick={() => void openProjectDialog()} disabled={!s.connected}>
-            <FolderOpen size={17} /> Abrir
+          <button className="start-card" disabled={!s.connected} onClick={() => void openProjectDialog()}>
+            <span className="start-icon"><FolderOpen size={23} /></span><span className="start-card-title">Abrir projeto <ArrowRight size={18} /></span><span className="start-card-description">Continue seus desenhos e animações.</span><kbd>Ctrl + O</kbd>
+          </button>
+          <button className="start-card" disabled={!s.connected} onClick={() => s.set({ dialog: "pixelate" })}>
+            <span className="start-icon"><Grid3x3 size={23} /></span><span className="start-card-title">Converter imagem <ArrowRight size={18} /></span><span className="start-card-description">Transforme uma foto ou ilustração em pixel art.</span><span className="file-types">PNG · JPG</span>
           </button>
         </div>
-        {recover.length > 0 && (
-          <div className="w-full rounded-lg bg-panel p-3 text-left">
-            <span className="panel-title">Recuperar trabalho não salvo</span>
-            {recover.map((r) => (
-              <button key={r.autosave} className="btn mt-1 w-full justify-between" onClick={() => void s.run("project_open", { path: r.autosave, recover: true }).then(() => setRecover([]))}>
-                <span>{r.name ?? "sem nome"}</span>
-                <span className="text-[11px] text-faint">{r.saved_at}</span>
-              </button>
-            ))}
-          </div>
-        )}
-        <button className="btn text-accent-2" onClick={() => s.set({ mcpOpen: true })}>
-          <Bot size={16} /> Conectar o Claude Code
+        {recover.length > 0 && <section className="recovery-card">
+          <h2 className="panel-title">Recuperar trabalho não salvo</h2>
+          {recover.map((r) => <button key={r.autosave} className="btn mt-1 w-full justify-between" onClick={() => void s.run("project_open", { path: r.autosave, recover: true }).then(() => setRecover([]))}>
+            <span>{r.name ?? "Sem nome"}</span><span className="text-xs text-muted">{r.saved_at}</span>
+          </button>)}
+        </section>}
+        <button className="assistant-card" onClick={() => s.set({ mcpOpen: true })}>
+          <span className="assistant-icon"><Bot size={22} /></span>
+          <span><strong>Crie também com o seu assistente</strong><small>Conecte o Claude Code e acompanhe cada pixel no editor.</small></span>
+          <span className="assistant-link">Configurar MCP <ArrowRight size={16} /></span>
         </button>
-        {!s.connected && <p className="text-[12px] text-warn">Iniciando o runtime…</p>}
+        <div className="welcome-tips"><Keyboard size={16} /><span>Seu próximo desenho começa com um atalho.</span><span><kbd>B</kbd> Lápis</span><span><kbd>E</kbd> Borracha</span><span><kbd>Espaço</kbd> Mover tela</span></div>
+        {!s.connected && <p className="connection-notice" role="status">{api.isTauri() ? (s.runtimeError ? "Não foi possível conectar ao motor de edição. Consulte o painel MCP." : "Conectando ao motor de edição…") : "Prévia da interface. Abra o aplicativo desktop para criar e editar projetos."}</p>}
       </div>
-    </div>
+      <footer className="welcome-footer"><span className="flex items-center gap-2"><BrandMark size={20} /> Pixel Studio Maker</span><span className="flex items-center gap-2"><Sparkles size={13} /> Feito para criar, pixel por pixel.</span></footer>
+    </main>
   );
 }
 
@@ -70,7 +73,7 @@ function useRecoverable(): [Recoverable[], (r: Recoverable[]) => void] {
 function Toasts() {
   const toasts = useEditor((s) => s.toasts);
   return (
-    <div className="pointer-events-none fixed right-4 bottom-40 z-50 flex flex-col items-end gap-2">
+    <div role="status" aria-live="polite" className="pointer-events-none fixed right-4 bottom-40 z-50 flex flex-col items-end gap-2">
       {toasts.map((t) => (
         <div key={t.id} className={`max-w-md rounded-lg px-3 py-2 shadow-xl ring-1 ${t.kind === "error" ? "bg-[#3a1620] text-danger ring-danger/40" : "bg-raised text-ink ring-line"}`}>
           {t.text}
@@ -114,6 +117,12 @@ export function App() {
 
   const onKey = useCallback((e: KeyboardEvent) => {
     const st = useEditor.getState();
+    if (e.defaultPrevented || document.querySelector("dialog[open]")) return;
+    if (st.dialog) {
+      if (e.key === "Escape") st.set({ dialog: null });
+      return;
+    }
+    if ((e.key === "Enter" || e.key === " ") && (e.target as HTMLElement)?.closest("button")) return;
     const ctrl = e.ctrlKey || e.metaKey;
     const k = e.key.toLowerCase();
     if (ctrl && k === "z" && !e.shiftKey) return e.preventDefault(), void st.run("history_undo", { steps: 1 }).catch(() => {});
@@ -154,6 +163,7 @@ export function App() {
         <div className="flex min-h-0 flex-1">
           <Toolbar />
           <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+            <ToolOptions />
             <CanvasView />
             <Timeline />
           </div>
@@ -166,6 +176,7 @@ export function App() {
       {s.dialog === "new" && <NewProjectDialog />}
       {s.dialog === "import" && <ImportDialog />}
       {s.dialog === "export" && <ExportDialog />}
+      {s.dialog === "pixelate" && <PixelateDialog />}
       <Toasts />
     </div>
   );

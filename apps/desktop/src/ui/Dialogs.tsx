@@ -1,15 +1,25 @@
 import { open, save } from "@tauri-apps/plugin-dialog";
-import { useState } from "react";
+import { X } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 import { currentAnimation, currentSprite, useEditor } from "../core/store";
 
 function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  useEffect(() => {
+    const dialog = ref.current;
+    dialog?.showModal();
+    return () => dialog?.close();
+  }, []);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/55" onClick={onClose}>
-      <div className="w-[440px] rounded-xl bg-panel p-5 shadow-2xl ring-1 ring-line" onClick={(e) => e.stopPropagation()}>
-        <h2 className="mb-4 text-[15px] font-semibold">{title}</h2>
-        {children}
-      </div>
-    </div>
+    <dialog ref={ref} className="editor-dialog" aria-labelledby={titleId} onCancel={(e) => { e.preventDefault(); onClose(); }} onClick={(e) => {
+      if (e.target !== e.currentTarget) return;
+      const bounds = e.currentTarget.getBoundingClientRect();
+      if (e.clientX < bounds.left || e.clientX > bounds.right || e.clientY < bounds.top || e.clientY > bounds.bottom) onClose();
+    }}>
+      <div className="mb-5 flex items-center justify-between"><h2 id={titleId} className="text-lg font-semibold tracking-tight">{title}</h2><button className="btn-icon" aria-label="Fechar diálogo" onClick={onClose}><X size={18} /></button></div>
+      {children}
+    </dialog>
   );
 }
 
@@ -33,6 +43,7 @@ export function NewProjectDialog() {
   const close = () => s.set({ dialog: null });
   return (
     <Modal title="Novo projeto" onClose={close}>
+      <p className="mb-4 leading-5 text-muted">Escolha o tamanho da sua tela. Cada pixel é uma possibilidade.</p>
       <Row label="Nome">
         <input autoFocus value={name} onChange={(e) => setName(e.target.value)} className="w-56" />
       </Row>
@@ -49,15 +60,15 @@ export function NewProjectDialog() {
           </button>
         ))}
       </div>
-      <Row label="Fundo branco na primeira layer">
+      <Row label="Fundo branco na primeira camada">
         <input type="checkbox" checked={bg} onChange={(e) => setBg(e.target.checked)} />
       </Row>
       <div className="mt-4 flex justify-end gap-2">
         <button className="btn" onClick={close}>
           Cancelar
         </button>
-        <button className="btn btn-primary" disabled={!name} onClick={() => void s.run("project_create", { name, width: w, height: h, background: bg ? "#ffffff" : undefined }).then(close)}>
-          Criar
+        <button className="btn btn-primary" disabled={!name.trim() || !Number.isInteger(w) || !Number.isInteger(h) || w < 1 || h < 1 || w > 1024 || h > 1024} onClick={() => void s.run("project_create", { name, width: w, height: h, background: bg ? "#ffffff" : undefined }).then(close)}>
+          Criar projeto
         </button>
       </div>
     </Modal>

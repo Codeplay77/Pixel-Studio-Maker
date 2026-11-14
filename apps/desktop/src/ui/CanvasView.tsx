@@ -1,3 +1,4 @@
+import { Maximize, Minus, Plus } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as api from "../core/api";
 import { useFrameCanvas, useReferenceCanvases } from "../core/hooks";
@@ -120,7 +121,7 @@ export function CanvasView() {
     const g = c.getContext("2d")!;
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.imageSmoothingEnabled = false;
-    g.fillStyle = "#101119";
+    g.fillStyle = "#111315";
     g.fillRect(0, 0, size.w, size.h);
     if (!sprite) return;
     const W = sprite.width * z;
@@ -133,7 +134,7 @@ export function CanvasView() {
     g.clip();
     for (let y = 0; y < H; y += cell) {
       for (let x = 0; x < W; x += cell) {
-        g.fillStyle = ((x / cell + y / cell) & 1) === 0 ? "#c9cad6" : "#9c9eb1";
+        g.fillStyle = ((x / cell + y / cell) & 1) === 0 ? "#343a3d" : "#41484b";
         g.fillRect(ox + x, oy + y, cell, cell);
       }
     }
@@ -295,15 +296,17 @@ export function CanvasView() {
   useEffect(() => {
     const c = previewRef.current;
     if (!c || !sprite) return;
-    const k = Math.max(1, Math.min(2, Math.floor(128 / Math.max(sprite.width, sprite.height))));
-    c.width = sprite.width * (1 + k) + 12;
-    c.height = sprite.height * k + 8;
+    // Sprites grandes (uma imagem convertida, por exemplo): só a cópia 1x, reduzida para caber no canto.
+    const big = Math.max(sprite.width, sprite.height) > 128;
+    const k = big ? 1 : Math.max(1, Math.min(2, Math.floor(128 / Math.max(sprite.width, sprite.height))));
+    c.width = big ? sprite.width + 8 : sprite.width * (1 + k) + 12;
+    c.height = big ? sprite.height + 8 : sprite.height * k + 8;
     const g = c.getContext("2d")!;
     g.imageSmoothingEnabled = false;
     g.clearRect(0, 0, c.width, c.height);
     if (!frameCanvas) return;
     g.drawImage(frameCanvas, 4, 4 + sprite.height * (k - 1), sprite.width, sprite.height);
-    g.drawImage(frameCanvas, sprite.width + 8, 4, sprite.width * k, sprite.height * k);
+    if (!big) g.drawImage(frameCanvas, sprite.width + 8, 4, sprite.width * k, sprite.height * k);
   }, [frameCanvas, sprite, s.showPreview]);
 
   // ---- input --------------------------------------------------------------------------------
@@ -443,6 +446,7 @@ export function CanvasView() {
         ref={canvasRef}
         style={{ width: size.w, height: size.h, cursor }}
         className="block"
+        aria-label="Canvas de edição de pixel art"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -451,17 +455,29 @@ export function CanvasView() {
       />
       {sprite && s.showPreview && (
         <div className="pointer-events-none absolute top-3 right-3 rounded-md bg-shell/85 p-1 ring-1 ring-line" title="Prévia em tamanho real">
-          <canvas ref={previewRef} className="checker block rounded-sm" />
+          <span className="mb-1 block px-1 text-[9px] tracking-wider text-muted uppercase">Prévia do sprite</span>
+          <canvas ref={previewRef} className="checker pixelated block max-h-[160px] max-w-[260px] rounded-sm" />
         </div>
       )}
       {sprite && (
-        <div className="pointer-events-none absolute bottom-2 left-3 flex gap-3 rounded-md bg-shell/80 px-2 py-1 font-mono text-[11px] text-muted">
+        <div className="pointer-events-none absolute bottom-5 left-4 flex gap-3 rounded-md bg-shell/80 px-2 py-1 font-mono text-[11px] text-muted">
           <span>{sprite.width}×{sprite.height}</span>
           <span>{z}x</span>
           {hover && hover[0] >= 0 && hover[1] >= 0 && hover[0] < sprite.width && hover[1] < sprite.height && <span>[{hover[0]}, {hover[1]}]</span>}
           {s.selection && <span>seleção {s.selection.w}×{s.selection.h}</span>}
         </div>
       )}
+      {sprite && <div className="canvas-controls" aria-label="Zoom do canvas">
+        <button className="btn-icon h-7 w-7" aria-label="Diminuir zoom" disabled={z <= 1} onClick={() => s.set({ zoom: Math.max(1, z - 1) })}><Minus size={14} /></button>
+        <span className="w-12 text-center font-mono text-[11px] text-muted">{z * 100}%</span>
+        <button className="btn-icon h-7 w-7" aria-label="Aumentar zoom" disabled={z >= 64} onClick={() => s.set({ zoom: Math.min(64, z + 1) })}><Plus size={14} /></button>
+        <span className="mx-1 h-4 w-px bg-line" />
+        <button className="btn h-7 text-[11px]" title="Centralizar e ajustar à área disponível" onClick={() => {
+          s.set({ zoom: Math.max(1, Math.min(32, Math.floor(Math.min((size.w - 80) / sprite.width, (size.h - 100) / sprite.height)))) });
+          setPan({ x: 0, y: 0 });
+        }}><Maximize size={13} /> Ajustar</button>
+      </div>}
+
     </div>
   );
 }

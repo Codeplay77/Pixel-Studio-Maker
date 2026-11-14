@@ -1,5 +1,15 @@
 # Mudanças
 
+## Não publicado
+
+- Converter imagem em pixel art (`image_pixelate` no MCP, e no editor pelo botão de grade na barra de cima ou
+  na tela inicial): PNG, JPG ou GIF de qualquer tamanho (acima de 4096 px a imagem é reduzida na leitura,
+  linha a linha), tamanho de saída por lado maior, largura × altura ou tamanho do pixel (pixel art ampliada),
+  remoção de fundo pelas bordas com tolerância, recorte automático ao conteúdo e recorte manual (`region`,
+  arrastando sobre a original), paleta calculada (k-means em OKLab) ou fixa, amostragem por cor dominante, média
+  ou pixel central, dithering ordenado ou Floyd-Steinberg, saturação, contraste e brilho, limpeza de pixels
+  soltos e contorno. Cria um projeto novo, ou entra como layer/sprite pelo `import_image` com `pixelate`.
+
 ## 0.1.0 — 2026-11-14
 
 Primeira versão.

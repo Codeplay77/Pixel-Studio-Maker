@@ -1,0 +1,950 @@
+{
+  "infos": 85,
+  "issues": [
+    {
+      "code": "holes",
+      "frame": 11,
+      "message": "9 pixels transparentes cercados pela forma (região 65,66 10x37)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 12,
+      "message": "10 pixels transparentes cercados pela forma (região 65,65 10x38)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 13,
+      "message": "9 pixels transparentes cercados pela forma (região 65,65 10x38)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 14,
+      "message": "9 pixels transparentes cercados pela forma (região 65,65 10x38)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 15,
+      "message": "9 pixels transparentes cercados pela forma (região 65,65 10x38)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 16,
+      "message": "11 pixels transparentes cercados pela forma (região 65,66 11x37)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 17,
+      "message": "15 pixels transparentes cercados pela forma (região 57,47 17x42)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 18,
+      "message": "5 pixels transparentes cercados pela forma (região 58,76 1x5)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 21,
+      "message": "13 pixels transparentes cercados pela forma (região 57,46 17x42)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 23,
+      "message": "2 pixels transparentes cercados pela forma (região 75,57 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 25,
+      "message": "4 pixels transparentes cercados pela forma (região 54,56 22x34)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 26,
+      "message": "2 pixels transparentes cercados pela forma (região 54,88 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 28,
+      "message": "2 pixels transparentes cercados pela forma (região 75,57 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 43,
+      "message": "2 pixels transparentes cercados pela forma (região 71,78 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 47,
+      "message": "6 pixels transparentes cercados pela forma (região 63,97 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 48,
+      "message": "6 pixels transparentes cercados pela forma (região 63,97 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 49,
+      "message": "6 pixels transparentes cercados pela forma (região 63,97 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 50,
+      "message": "6 pixels transparentes cercados pela forma (região 63,97 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 51,
+      "message": "6 pixels transparentes cercados pela forma (região 63,97 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 52,
+      "message": "6 pixels transparentes cercados pela forma (região 63,97 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 102,
+      "message": "2 pixels transparentes cercados pela forma (região 64,89 2x1)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 103,
+      "message": "2 pixels transparentes cercados pela forma (região 64,87 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 104,
+      "message": "2 pixels transparentes cercados pela forma (região 64,86 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 112,
+      "message": "12 pixels transparentes cercados pela forma (região 64,89 3x12)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 119,
+      "message": "59 pixels transparentes cercados pela forma (região 63,47 12x60)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 121,
+      "message": "16 pixels transparentes cercados pela forma (região 63,98 4x8)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 125,
+      "message": "5 pixels transparentes cercados pela forma (região 64,47 11x53)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 126,
+      "message": "2 pixels transparentes cercados pela forma (região 75,54 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 127,
+      "message": "2 pixels transparentes cercados pela forma (região 75,53 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 129,
+      "message": "6 pixels transparentes cercados pela forma (região 80,40 2x5)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 131,
+      "message": "6 pixels transparentes cercados pela forma (região 80,40 2x5)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 132,
+      "message": "7 pixels transparentes cercados pela forma (região 65,86 2x9)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 133,
+      "message": "2 pixels transparentes cercados pela forma (região 75,53 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 134,
+      "message": "4 pixels transparentes cercados pela forma (região 64,87 2x3)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 135,
+      "message": "5 pixels transparentes cercados pela forma (região 64,82 1x5)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 136,
+      "message": "9 pixels transparentes cercados pela forma (região 64,41 21x46)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 137,
+      "message": "7 pixels transparentes cercados pela forma (região 64,81 1x8)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 138,
+      "message": "8 pixels transparentes cercados pela forma (região 63,44 22x46)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 139,
+      "message": "4 pixels transparentes cercados pela forma (região 64,83 1x4)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 140,
+      "message": "7 pixels transparentes cercados pela forma (região 64,41 21x46)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 141,
+      "message": "5 pixels transparentes cercados pela forma (região 64,83 1x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 144,
+      "message": "7 pixels transparentes cercados pela forma (região 62,86 2x9)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 145,
+      "message": "2 pixels transparentes cercados pela forma (região 53,53 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 146,
+      "message": "2 pixels transparentes cercados pela forma (região 53,54 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 147,
+      "message": "2 pixels transparentes cercados pela forma (região 53,53 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 153,
+      "message": "9 pixels transparentes cercados pela forma (região 64,75 8x25)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 155,
+      "message": "57 pixels transparentes cercados pela forma (região 61,90 5x17)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 157,
+      "message": "18 pixels transparentes cercados pela forma (região 62,86 9x20)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 160,
+      "message": "14 pixels transparentes cercados pela forma (região 52,61 3x8)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 162,
+      "message": "3 pixels transparentes cercados pela forma (região 48,47 1x3)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 164,
+      "message": "26 pixels transparentes cercados pela forma (região 52,61 13x40)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 231,
+      "message": "2 pixels transparentes cercados pela forma (região 44,42 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 235,
+      "message": "20 pixels transparentes cercados pela forma (região 55,31 5x6)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 239,
+      "message": "10 pixels transparentes cercados pela forma (região 65,54 11x49)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 242,
+      "message": "22 pixels transparentes cercados pela forma (região 64,54 12x51)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 245,
+      "message": "6 pixels transparentes cercados pela forma (região 74,63 3x4)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 246,
+      "message": "7 pixels transparentes cercados pela forma (região 65,54 11x46)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 247,
+      "message": "13 pixels transparentes cercados pela forma (região 57,76 2x13)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 249,
+      "message": "4 pixels transparentes cercados pela forma (região 55,85 1x4)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 251,
+      "message": "18 pixels transparentes cercados pela forma (região 71,98 3x10)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 256,
+      "message": "6 pixels transparentes cercados pela forma (região 54,28 16x62)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 257,
+      "message": "6 pixels transparentes cercados pela forma (região 54,33 16x57)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 260,
+      "message": "70 pixels transparentes cercados pela forma (região 74,54 6x24)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 262,
+      "message": "4 pixels transparentes cercados pela forma (região 74,52 2x7)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 272,
+      "message": "2 pixels transparentes cercados pela forma (região 64,88 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 273,
+      "message": "2 pixels transparentes cercados pela forma (região 64,88 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 276,
+      "message": "8 pixels transparentes cercados pela forma (região 50,54 2x7)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 277,
+      "message": "5 pixels transparentes cercados pela forma (região 51,52 2x4)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 279,
+      "message": "7 pixels transparentes cercados pela forma (região 55,56 2x5)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 284,
+      "message": "3 pixels transparentes cercados pela forma (região 57,100 1x3)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 286,
+      "message": "3 pixels transparentes cercados pela forma (região 53,57 2x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 287,
+      "message": "29 pixels transparentes cercados pela forma (região 61,90 3x14)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 290,
+      "message": "19 pixels transparentes cercados pela forma (região 62,89 2x15)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 294,
+      "message": "42 pixels transparentes cercados pela forma (região 60,91 4x14)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 360,
+      "message": "25 pixels transparentes cercados pela forma (região 48,53 3x17)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 361,
+      "message": "17 pixels transparentes cercados pela forma (região 48,61 2x12)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 362,
+      "message": "19 pixels transparentes cercados pela forma (região 48,58 3x13)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 363,
+      "message": "22 pixels transparentes cercados pela forma (região 48,54 3x15)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 368,
+      "message": "4 pixels transparentes cercados pela forma (região 55,34 1x4)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 372,
+      "message": "2 pixels transparentes cercados pela forma (região 64,85 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 375,
+      "message": "2 pixels transparentes cercados pela forma (região 64,85 1x2)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 376,
+      "message": "22 pixels transparentes cercados pela forma (região 78,51 3x15)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 377,
+      "message": "16 pixels transparentes cercados pela forma (região 79,58 2x12)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 378,
+      "message": "16 pixels transparentes cercados pela forma (região 79,56 2x12)",
+      "severity": "info"
+    },
+    {
+      "code": "holes",
+      "frame": 379,
+      "message": "19 pixels transparentes cercados pela forma (região 78,51 3x13)",
+      "severity": "info"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 120,
+      "message": "69% dos pixels visíveis mudam de 119 para 120 (mesmo descontando o deslocamento de 0, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 124,
+      "message": "68% dos pixels visíveis mudam de 123 para 124 (mesmo descontando o deslocamento de 0, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 125,
+      "message": "64% dos pixels visíveis mudam de 124 para 125 (mesmo descontando o deslocamento de 0, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "SW",
+      "frame": 149,
+      "message": "60% dos pixels visíveis mudam de 148 para 149 (mesmo descontando o deslocamento de 0, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 152,
+      "message": "72% dos pixels visíveis mudam de 151 para 152 (mesmo descontando o deslocamento de 0, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 153,
+      "message": "65% dos pixels visíveis mudam de 152 para 153 (mesmo descontando o deslocamento de 0, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "walk",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 156,
+      "message": "68% dos pixels visíveis mudam de 155 para 156 (mesmo descontando o deslocamento de 0, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "N",
+      "frame": 235,
+      "message": "62% dos pixels visíveis mudam de 234 para 235 (mesmo descontando o deslocamento de 1, 0 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NE",
+      "frame": 240,
+      "message": "61% dos pixels visíveis mudam de 239 para 240 (mesmo descontando o deslocamento de -1, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NE",
+      "frame": 242,
+      "message": "72% dos pixels visíveis mudam de 241 para 242 (mesmo descontando o deslocamento de 2, -2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NE",
+      "frame": 243,
+      "message": "79% dos pixels visíveis mudam de 242 para 243 (mesmo descontando o deslocamento de 2, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NE",
+      "frame": 245,
+      "message": "60% dos pixels visíveis mudam de 244 para 245 (mesmo descontando o deslocamento de -2, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "jump",
+      "direction": "NE",
+      "frame": 242,
+      "message": "o centro se desloca 17.7px de 241 para 242",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 248,
+      "message": "70% dos pixels visíveis mudam de 247 para 248 (mesmo descontando o deslocamento de -2, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 250,
+      "message": "82% dos pixels visíveis mudam de 249 para 250 (mesmo descontando o deslocamento de 2, -2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 251,
+      "message": "88% dos pixels visíveis mudam de 250 para 251",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 252,
+      "message": "66% dos pixels visíveis mudam de 251 para 252 (mesmo descontando o deslocamento de 1, 0 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 253,
+      "message": "82% dos pixels visíveis mudam de 252 para 253 (mesmo descontando o deslocamento de -2, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 254,
+      "message": "75% dos pixels visíveis mudam de 253 para 254 (mesmo descontando o deslocamento de -2, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "jump",
+      "direction": "E",
+      "frame": 250,
+      "message": "o centro se desloca 18.5px de 249 para 250",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "jump",
+      "direction": "E",
+      "frame": 251,
+      "message": "o centro se desloca 16.8px de 250 para 251",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SE",
+      "frame": 256,
+      "message": "64% dos pixels visíveis mudam de 255 para 256",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SE",
+      "frame": 258,
+      "message": "71% dos pixels visíveis mudam de 257 para 258",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SE",
+      "frame": 259,
+      "message": "91% dos pixels visíveis mudam de 258 para 259 (mesmo descontando o deslocamento de 2, 2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SE",
+      "frame": 260,
+      "message": "67% dos pixels visíveis mudam de 259 para 260 (mesmo descontando o deslocamento de 1, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SE",
+      "frame": 261,
+      "message": "80% dos pixels visíveis mudam de 260 para 261 (mesmo descontando o deslocamento de -2, -2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SE",
+      "frame": 262,
+      "message": "71% dos pixels visíveis mudam de 261 para 262 (mesmo descontando o deslocamento de -1, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "S",
+      "frame": 267,
+      "message": "80% dos pixels visíveis mudam de 266 para 267 (mesmo descontando o deslocamento de 0, 2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "S",
+      "frame": 269,
+      "message": "69% dos pixels visíveis mudam de 268 para 269 (mesmo descontando o deslocamento de 0, -2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "S",
+      "frame": 270,
+      "message": "63% dos pixels visíveis mudam de 269 para 270 (mesmo descontando o deslocamento de 0, -2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SW",
+      "frame": 274,
+      "message": "73% dos pixels visíveis mudam de 273 para 274",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SW",
+      "frame": 275,
+      "message": "88% dos pixels visíveis mudam de 274 para 275 (mesmo descontando o deslocamento de 0, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SW",
+      "frame": 277,
+      "message": "79% dos pixels visíveis mudam de 276 para 277 (mesmo descontando o deslocamento de 1, -2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "SW",
+      "frame": 278,
+      "message": "75% dos pixels visíveis mudam de 277 para 278 (mesmo descontando o deslocamento de 1, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "jump",
+      "direction": "SW",
+      "frame": 274,
+      "message": "o centro se desloca 16.0px de 273 para 274",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 280,
+      "message": "72% dos pixels visíveis mudam de 279 para 280 (mesmo descontando o deslocamento de 2, 1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 282,
+      "message": "81% dos pixels visíveis mudam de 281 para 282 (mesmo descontando o deslocamento de -1, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 283,
+      "message": "96% dos pixels visíveis mudam de 282 para 283 (mesmo descontando o deslocamento de -2, 2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 284,
+      "message": "66% dos pixels visíveis mudam de 283 para 284",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 285,
+      "message": "84% dos pixels visíveis mudam de 284 para 285",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 286,
+      "message": "83% dos pixels visíveis mudam de 285 para 286 (mesmo descontando o deslocamento de 2, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "jump",
+      "direction": "W",
+      "frame": 282,
+      "message": "o centro se desloca 19.0px de 281 para 282",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "jump",
+      "direction": "W",
+      "frame": 283,
+      "message": "o centro se desloca 16.6px de 282 para 283",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NW",
+      "frame": 291,
+      "message": "88% dos pixels visíveis mudam de 290 para 291 (mesmo descontando o deslocamento de -1, 2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NW",
+      "frame": 293,
+      "message": "74% dos pixels visíveis mudam de 292 para 293 (mesmo descontando o deslocamento de 1, -1 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "attack",
+      "code": "big_change",
+      "direction": "NW",
+      "frame": 294,
+      "message": "64% dos pixels visíveis mudam de 293 para 294 (mesmo descontando o deslocamento de 1, 0 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "NE",
+      "frame": 365,
+      "message": "67% dos pixels visíveis mudam de 364 para 365",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "NE",
+      "frame": 367,
+      "message": "60% dos pixels visíveis mudam de 366 para 367",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 369,
+      "message": "69% dos pixels visíveis mudam de 368 para 369",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "E",
+      "frame": 371,
+      "message": "63% dos pixels visíveis mudam de 370 para 371",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "SW",
+      "frame": 381,
+      "message": "68% dos pixels visíveis mudam de 380 para 381 (mesmo descontando o deslocamento de 0, 2 px)",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 385,
+      "message": "69% dos pixels visíveis mudam de 384 para 385",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "W",
+      "frame": 387,
+      "message": "64% dos pixels visíveis mudam de 386 para 387",
+      "severity": "warning"
+    },
+    {
+      "animation": "hurt",
+      "code": "big_change",
+      "direction": "NW",
+      "frame": 389,
+      "message": "64% dos pixels visíveis mudam de 388 para 389",
+      "severity": "warning"
+    }
+  ],
+  "note": "verificações automáticas não garantem qualidade estética; inspecione as imagens",
+  "sprite": "Aren",
+  "warnings": 54
+}

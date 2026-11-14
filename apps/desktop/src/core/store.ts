@@ -46,7 +46,7 @@ type EditorState = {
   toasts: Toast[];
   panel: "layers" | "palette" | "props" | "regions" | "anchors" | "inspect";
   mcpOpen: boolean;
-  dialog?: "new" | "export" | "import" | null;
+  dialog?: "new" | "export" | "import" | "pixelate" | null;
   lastAgentActivity?: string;
   /** Anchor que a ferramenta "anchor" posiciona ao clicar no canvas. */
   anchorTarget?: string;
