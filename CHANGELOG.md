@@ -2,6 +2,8 @@
 
 ## Não publicado
 
+## 0.2.0 — 2026-11-15
+
 - **RPG Maker MZ/MV/VX Ace**:
   - `rpgmaker_template` cria modelos com regiões nomeadas (tilesets A1–E, personagens, faces, battler lateral, Window.png com as cores do texto).
   - Novas exportações: `export_rpgmaker_character`, `export_rpgmaker_faces` e `export_rpgmaker_battler`.
