@@ -1,0 +1,23 @@
+; Projeto mínimo para ver o cenário em parallax (gerado pelo Pixel Studio Maker).
+config_version=5
+
+[application]
+
+config/name="Cenário parallax"
+run/main_scene="res://demo_parallax.tscn"
+config/features=PackedStringArray("4.3")
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+environment/defaults/default_clear_color=Color(0.105882, 0.105882, 0.227451, 1)

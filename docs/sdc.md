@@ -50,7 +50,7 @@ A SDC é a linguagem de desenho em lote do Pixel Studio Maker. Uma operação é
 | `outline` | `color`, `mode=outside/inside`, `connectivity`, `thickness`, `rect?` | contorno das formas visíveis |
 | `dither` | `color`, `background?`, `density`, `pattern`, `rect?`, `only_opaque` | dithering ordenado |
 | `gradient` | `colors`, `shape`, `dither?`, `rect?`, `only_opaque` | degradê em faixas |
-| `shade` | `light`, `highlight?`, `shadow?`, `*_amount`, `*_depth`, `hue_shift`, `rect?` | luz e sombra pela direção da luz |
+| `shade` | `light`, `highlight?`, `shadow?`, `*_amount`, `*_depth`, `hue_shift`, `rect?`, `wrap` | luz e sombra pela direção da luz; com `wrap: true` a imagem é tratada como repetida (tiles, parallax) e as bordas não viram linhas |
 | `drop_shadow` | `dx`, `dy`, `color`, `rect?` | sombra projetada atrás da silhueta |
 | `pattern` | `rows`, `legend`, `offset`, `rect?`, `only_opaque` | padrão ladrilhado |
 | `transform` | `transform`, `rect?` | `flip_h`, `flip_v`, `rotate` (`quarter_turns` ou `degrees`), `move` (`dx`,`dy`,`wrap`), `scale` (`sx`,`sy`,`origin`) |

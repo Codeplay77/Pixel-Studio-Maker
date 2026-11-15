@@ -20,6 +20,9 @@ psm mcp-run demo-a-guerreiro/1-desenhar.json --images demo-a-guerreiro/saida
 | [demo-c-importar](demo-c-importar) | C — importação e animação | Um slime 32x32 feito fora do editor é importado sem perder nenhum pixel; o idle de 6 frames é criado editando linhas e colunas da matriz lida pelo MCP (achatar, esticar, piscar) |
 | [demo-d-direcoes](demo-d-direcoes) | D — oito direções | A caminhada nas 8 direções: S, N, SE e NE desenhadas, W/SW/NW a partir de espelhos com o equipamento refeito (o escudo continua no braço esquerdo); sheet com uma linha por direção e `SpriteFrames` do Godot |
 | [demo-e-sincronizacao](demo-e-sincronizacao) | E — sincronização | Com o editor aberto, o agente muda a cor da armadura, aumenta o escudo e corrige os três primeiros frames; o editor atualiza sem recarregar e uma edição feita à mão no editor é lida pelo MCP |
+| [demo-f-gaivota](demo-f-gaivota) | — | Gaivota voando: batida de asas em 8 frames com a ponta da asa atrasada e o corpo subindo quando as asas descem |
+| [demo-g-jacare](demo-g-jacare) | — | Jacaré nadando na superfície: patas remando em pares diagonais, cauda ondulando, parte submersa recolorida |
+| [demo-h-parallax](demo-h-parallax) | — | Cenário de entardecer em 7 camadas que se emendam, pronto para parallax, com projeto Godot 4 (`Parallax2D`) e gravação do Godot rodando |
 
 Os scripts `gerar*.mjs` só expandem as decisões de pose (tabelas escritas à mão) em operações SDC; quem
 desenha é o motor, e as decisões artísticas estão nas tabelas e matrizes dos próprios arquivos.

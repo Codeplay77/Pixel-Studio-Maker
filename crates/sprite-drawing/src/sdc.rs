@@ -246,6 +246,10 @@ pub enum DrawOp {
         hue_shift: bool,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         rect: Option<Rect>,
+        /// Imagem que se repete (tile, camada de parallax): nas bordas do canvas o vizinho é o pixel
+        /// do lado oposto, não o vazio. Sem isso a borda vira uma linha de luz/sombra em cada emenda.
+        #[serde(default)]
+        wrap: bool,
     },
     /// Sombra projetada: a silhueta deslocada (dx,dy), pintada só onde está transparente.
     DropShadow {
@@ -667,7 +671,18 @@ pub fn apply(canvas: &mut Canvas, op: &DrawOp, ctx: &DrawContext) -> Result<(), 
             let area = canvas.area(*rect);
             effects::gradient(canvas, &area, &cs, *shape, *dither, *only_opaque);
         }
-        DrawOp::Shade { light, highlight, shadow, highlight_amount, shadow_amount, highlight_depth, shadow_depth, hue_shift, rect } => {
+        DrawOp::Shade {
+            light,
+            highlight,
+            shadow,
+            highlight_amount,
+            shadow_amount,
+            highlight_depth,
+            shadow_depth,
+            hue_shift,
+            rect,
+            wrap,
+        } => {
             let hl = match highlight {
                 Some(c) => ShadeColor::Fixed(c.resolve(pal)?),
                 None => ShadeColor::Relative(highlight_amount.abs(), *hue_shift),
@@ -677,7 +692,7 @@ pub fn apply(canvas: &mut Canvas, op: &DrawOp, ctx: &DrawContext) -> Result<(), 
                 None => ShadeColor::Relative(-shadow_amount.abs(), *hue_shift),
             };
             let area = canvas.area(*rect);
-            effects::shade(canvas, &area, *light, Some(hl), Some(sh), (*highlight_depth).min(64), (*shadow_depth).min(64));
+            effects::shade(canvas, &area, *light, Some(hl), Some(sh), ((*highlight_depth).min(64), (*shadow_depth).min(64)), *wrap);
         }
         DrawOp::DropShadow { dx, dy, color, rect } => {
             let c = color.resolve(pal)?;

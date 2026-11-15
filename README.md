@@ -29,6 +29,8 @@ Tudo abaixo foi desenhado pelo Claude usando só as ferramentas MCP do editor
 | Guerreiro 64x64 do zero, com 8 layers, paleta de 18 cores, regiões e anchors | Caminhada de 8 frames com poses de verdade |
 | <img src="examples/demo-d-direcoes/guerreiro_walk_8dir.png" width="256" alt="Sprite sheet com a caminhada nas 8 direções, uma linha por direção" /> | <img src="examples/demo-c-importar/slime_idle.gif" width="160" alt="Um slime verde importado de um PNG, respirando: achata, estica e pisca" /> |
 | As 8 direções, exportadas para o Godot | Um PNG de fora, importado e animado (idle de 6 frames) |
+| <img src="examples/demo-h-parallax/cenario_x3.png" width="256" alt="Cenário de entardecer em pixel art: céu roxo e laranja com sol baixo, nuvens, duas faixas de montanhas, duas de pinheiros e grama" /> | <img src="examples/demo-h-parallax/previa_godot.gif" width="256" alt="O mesmo cenário rolando no Godot, cada camada numa velocidade" /> |
+| Cenário em 7 camadas que se emendam, para parallax | Rodando no Godot 4 com `Parallax2D` (projeto pronto em `examples/demo-h-parallax/godot`) |
 
 ## Recursos
 

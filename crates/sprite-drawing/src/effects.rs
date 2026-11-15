@@ -274,20 +274,25 @@ impl ShadeColor {
 
 /// Rim shading from a light direction: pixels of the shape whose neighbor toward the light is
 /// outside the shape become highlights; those whose neighbor away from the light is outside
-/// become shadows. `depth` widens each band. Works on the visible pixels inside `area`.
+/// become shadows. `depth` (highlight, shadow) widens each band. Works on the visible pixels
+/// inside `area`. With `wrap`, the image is treated as repeating (tiles, parallax layers): a
+/// neighbor past an edge is the pixel on the opposite side, not empty space.
 pub fn shade(
     canvas: &mut Canvas,
     area: &Mask,
     light: LightDirection,
     highlight: Option<ShadeColor>,
     shadow: Option<ShadeColor>,
-    highlight_depth: u32,
-    shadow_depth: u32,
+    depth: (u32, u32),
+    wrap: bool,
 ) {
+    let (highlight_depth, shadow_depth) = depth;
     let shape = Mask::from_opaque(canvas.image()).intersect(area);
     let (lx, ly) = light.toward_light();
     let snapshot = canvas.image().clone();
-    let edge_within = |p: Point, dx: i32, dy: i32, depth: u32| (1..=depth.max(1) as i32).any(|k| !shape.get(p.x + dx * k, p.y + dy * k));
+    let (w, h) = (canvas.width() as i32, canvas.height() as i32);
+    let inside = |x: i32, y: i32| if wrap { shape.get(x.rem_euclid(w), y.rem_euclid(h)) } else { shape.get(x, y) };
+    let edge_within = |p: Point, dx: i32, dy: i32, depth: u32| (1..=depth.max(1) as i32).any(|k| !inside(p.x + dx * k, p.y + dy * k));
     let mut writes = Vec::new();
     for p in shape.points() {
         let base = snapshot.get_or_clear(p.x, p.y);
@@ -486,10 +491,47 @@ mod tests {
         let mut img = square();
         let area = Mask::full(6, 6);
         let mut c = Canvas::new(&mut img, None);
-        shade(&mut c, &area, LightDirection::Top, Some(ShadeColor::Fixed(Color::WHITE)), Some(ShadeColor::Fixed(Color::BLACK)), 1, 1);
+        shade(
+            &mut c,
+            &area,
+            LightDirection::Top,
+            Some(ShadeColor::Fixed(Color::WHITE)),
+            Some(ShadeColor::Fixed(Color::BLACK)),
+            (1, 1),
+            false,
+        );
         assert_eq!(img.get(2, 1), Some(Color::WHITE));
         assert_eq!(img.get(2, 4), Some(Color::BLACK));
         assert_eq!(img.get(2, 2), Some(Color::rgb(100, 100, 200)));
+    }
+
+    #[test]
+    fn wrapped_shading_has_no_seam_at_the_edges() {
+        // A band crossing the whole width, like a mountain range on a parallax layer.
+        let band = || {
+            let mut img = Image::new(8, 6);
+            for p in Rect::new(0, 2, 8, 4).points() {
+                img.set(p.x, p.y, Color::rgb(100, 100, 200));
+            }
+            img
+        };
+        let lit = Some(ShadeColor::Fixed(Color::WHITE));
+        let base = Some(Color::rgb(100, 100, 200));
+        // Without wrap, the right column sees empty space past the edge and lights up all the way down.
+        let mut plain = band();
+        shade(&mut Canvas::new(&mut plain, None), &Mask::full(8, 6), LightDirection::TopRight, lit, None, (1, 0), false);
+        assert_eq!(plain.get(7, 4), Some(Color::WHITE));
+        // With wrap, its neighbor is column 0 (filled): only the real top edge is lit, as everywhere else.
+        let mut wrapped = band();
+        shade(&mut Canvas::new(&mut wrapped, None), &Mask::full(8, 6), LightDirection::TopRight, lit, None, (1, 0), true);
+        for x in 0..8 {
+            assert_eq!(wrapped.get(x, 2), Some(Color::WHITE), "top edge at x={x}");
+            assert_eq!(wrapped.get(x, 4), base, "no seam at x={x}");
+        }
+        // Vertically too: the bottom row wraps to the empty top rows, so a light from below lights it.
+        let mut below = band();
+        shade(&mut Canvas::new(&mut below, None), &Mask::full(8, 6), LightDirection::Bottom, lit, None, (1, 0), true);
+        assert_eq!(below.get(3, 5), Some(Color::WHITE));
     }
 
     #[test]

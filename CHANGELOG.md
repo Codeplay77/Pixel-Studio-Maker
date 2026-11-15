@@ -37,6 +37,11 @@
   - importação de `.aseprite` com layers, cels vinculados, tags, paleta e slices;
   - normal map para o Godot (`export_normal_map`).
 - O modelo ganhou `extras` por sprite e por projeto para os dados acima; projetos antigos abrem normalmente.
+- `shade` (e `draw_shade`) ganhou `wrap`: em imagens que se repetem, o vizinho além da borda é o pixel do lado
+  oposto, e a borda deixa de virar uma linha de luz em cada emenda.
+- Abas de projeto com botão de fechar, clique do meio e Ctrl+W, com confirmação quando há alterações não salvas.
+- Exemplo `demo-h-parallax`: cenário de entardecer em 7 camadas que se emendam, com projeto Godot 4 pronto
+  (`Parallax2D`) e gravação do Godot rodando a cena.
 - Converter imagem em pixel art (`image_pixelate` no MCP, e no editor pelo botão de grade na barra de cima ou
   na tela inicial): PNG, JPG ou GIF de qualquer tamanho (acima de 4096 px a imagem é reduzida na leitura,
   linha a linha), tamanho de saída por lado maior, largura × altura ou tamanho do pixel (pixel art ampliada),

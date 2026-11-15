@@ -496,6 +496,9 @@ pub struct DrawShade {
     /// Limitar a uma região semântica.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub clip: Option<ItemRef>,
+    /// Imagem que se repete (tile, parallax): nas bordas, o vizinho é o pixel do lado oposto.
+    #[serde(default)]
+    pub wrap: bool,
 }
 
 fn default_amount() -> f64 {

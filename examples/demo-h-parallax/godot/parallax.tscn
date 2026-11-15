@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Texture2D" path="res://camadas/01_ceu.png" id="1_ceu"]
+[ext_resource type="Texture2D" path="res://camadas/02_nuvens.png" id="2_nuvens"]
+[ext_resource type="Texture2D" path="res://camadas/03_montanhas_longe.png" id="3_montanhas_longe"]
+[ext_resource type="Texture2D" path="res://camadas/04_montanhas_perto.png" id="4_montanhas_perto"]
+[ext_resource type="Texture2D" path="res://camadas/05_floresta_longe.png" id="5_floresta_longe"]
+[ext_resource type="Texture2D" path="res://camadas/06_floresta_perto.png" id="6_floresta_perto"]
+[ext_resource type="Texture2D" path="res://camadas/07_chao.png" id="7_chao"]
+
+[node name="CenarioParallax" type="Node2D"]
+texture_filter = 1
+
+[node name="Ceu" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Ceu"]
+texture = ExtResource("1_ceu")
+centered = false
+
+[node name="Nuvens" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Nuvens"]
+texture = ExtResource("2_nuvens")
+centered = false
+
+[node name="MontanhasLonge" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="MontanhasLonge"]
+texture = ExtResource("3_montanhas_longe")
+centered = false
+
+[node name="MontanhasPerto" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.35, 0.35)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="MontanhasPerto"]
+texture = ExtResource("4_montanhas_perto")
+centered = false
+
+[node name="FlorestaLonge" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.55, 0.55)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="FlorestaLonge"]
+texture = ExtResource("5_floresta_longe")
+centered = false
+
+[node name="FlorestaPerto" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.75, 0.75)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="FlorestaPerto"]
+texture = ExtResource("6_floresta_perto")
+centered = false
+
+[node name="Chao" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Chao"]
+texture = ExtResource("7_chao")
+centered = false

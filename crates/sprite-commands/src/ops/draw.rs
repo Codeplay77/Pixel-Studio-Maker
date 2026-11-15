@@ -446,6 +446,7 @@ pub(crate) fn draw_shade(s: &mut Session, a: DrawShade) -> Result<Outcome, Comma
         shadow_depth: a.shadow_depth,
         hue_shift: a.hue_shift,
         rect: a.rect,
+        wrap: a.wrap,
     };
     single(s, &a.target, op, a.clip.as_ref())
 }
