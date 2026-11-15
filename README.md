@@ -119,7 +119,7 @@ crates/
 apps/desktop/         o editor (Tauri 2 + React + TypeScript + Tailwind)
 tools/sprite-cli/     o executável psm (MCP, runtime, linha de comando)
 tests/                regressão: reexecuta as demonstrações e compara pixel a pixel
-examples/             as demonstrações A a E
+examples/             as demonstrações (A a E da especificação e outras)
 docs/                 documentação
 ```
 
