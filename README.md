@@ -123,6 +123,22 @@ examples/             as demonstrações A a E
 docs/                 documentação
 ```
 
+### Publicar uma versão
+
+No GitHub, em **Actions → Versão → Run workflow**, escreva a versão (`v1.2.3`) ou deixe vazio para a próxima
+depois da última tag (patch, minor ou major). O workflow grava a versão nos arquivos, fecha a seção "Não
+publicado" do CHANGELOG, testa, gera o instalador, faz o commit e a tag e publica a versão como a mais recente.
+Também dá para enviar uma tag feita à mão (`git tag v1.2.3 && git push origin v1.2.3`).
+
+Cada versão traz arquivos de nome fixo, então estes links sempre levam à última:
+
+- `https://github.com/Codeplay77/Pixel-Studio-Maker/releases/latest/download/lastversion.json`: versão, data,
+  link e SHA-256 do instalador
+- `https://github.com/Codeplay77/Pixel-Studio-Maker/releases/latest/download/PixelStudioMaker-setup.exe`
+- `https://github.com/Codeplay77/Pixel-Studio-Maker/releases/latest/download/psm-windows-x64.exe` (só o servidor MCP)
+
+Para mexer na versão à mão: `node scripts/versao.mjs atual | proxima minor | definir 1.2.3 | conferir 1.2.3`.
+
 ## Licença
 
 [MIT](LICENSE). © 2026 CodePlay77.

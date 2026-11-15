@@ -1,17 +1,104 @@
-# Gera o instalador do Windows quando uma tag de versão (v0.2.0, por exemplo) é enviada, e o coloca
-# num rascunho de versão no GitHub. O rascunho só fica público quando alguém o publica.
+# Compila e publica uma versão do Pixel Studio Maker para Windows.
+#
+# Como disparar:
+# - Actions → "Versão" → Run workflow: escreva a versão (v1.2.3) ou deixe vazio para usar a próxima depois
+#   da última tag (patch, minor ou major). O workflow grava a versão nos arquivos (Cargo, Tauri,
+#   package.json e CHANGELOG), testa, compila, faz o commit "Versão vX.Y.Z" com a tag e publica.
+# - Enviando uma tag feita à mão: git tag v1.2.3 && git push origin v1.2.3. Os arquivos já devem estar
+#   nessa versão; se não estiverem, o instalador sai com a versão da tag e o workflow avisa.
+#
+# A versão publicada vira a "Latest" do GitHub e leva, além do instalador com a versão no nome, arquivos
+# de nome fixo para links que sempre apontam para a última versão:
+#   https://github.com/<dono>/<repo>/releases/latest/download/lastversion.json
+#   https://github.com/<dono>/<repo>/releases/latest/download/PixelStudioMaker-setup.exe
+#   https://github.com/<dono>/<repo>/releases/latest/download/psm-windows-x64.exe
 name: Versão
 
 on:
   push:
-    tags: ["v*"]
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      versao:
+        description: "Versão (vX.Y.Z). Vazio = a próxima depois da última tag"
+        required: false
+        default: ""
+      incremento:
+        description: "Com a versão vazia, qual parte aumenta"
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+      rascunho:
+        description: "Só rascunho (não publica nem vira a Latest)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
+# Uma versão por vez.
+concurrency:
+  group: versao
+  cancel-in-progress: false
+
 jobs:
-  instalador:
+  versao:
+    name: Definir a versão
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.v.outputs.tag }}
+      numero: ${{ steps.v.outputs.numero }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - id: v
+        name: Calcular
+        env:
+          ENTRADA: ${{ inputs.versao }}
+          INCREMENTO: ${{ inputs.incremento }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            numero="${GITHUB_REF_NAME#v}"
+          elif [ -n "$ENTRADA" ]; then
+            numero="${ENTRADA#v}"
+          else
+            ultima="$(git tag --list 'v*.*.*' --sort=-v:refname | head -n 1)"
+            if [ -z "$ultima" ]; then
+              # Primeira versão publicada: a que já está nos arquivos.
+              numero="$(node scripts/versao.mjs atual)"
+            else
+              numero="$(node scripts/versao.mjs proxima "$INCREMENTO" "${ultima#v}")"
+            fi
+          fi
+          if ! [[ "$numero" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Versão \"$numero\" inválida: use vX.Y.Z"
+            exit 1
+          fi
+          if [ "$GITHUB_EVENT_NAME" != "push" ] && git rev-parse -q --verify "refs/tags/v$numero" > /dev/null; then
+            echo "::error::A tag v$numero já existe. Escolha outra versão."
+            exit 1
+          fi
+          echo "tag=v$numero" >> "$GITHUB_OUTPUT"
+          echo "numero=$numero" >> "$GITHUB_OUTPUT"
+          echo "### Versão v$numero" >> "$GITHUB_STEP_SUMMARY"
+
+  compilar:
+    name: Compilar e publicar
+    needs: versao
     runs-on: windows-latest
+    env:
+      TAG: ${{ needs.versao.outputs.tag }}
+      NUMERO: ${{ needs.versao.outputs.numero }}
+      RASCUNHO: ${{ inputs.rascunho }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -23,19 +110,86 @@ jobs:
           cache: pnpm
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+
+      - name: Versão nos arquivos
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "push" ] && ! node scripts/versao.mjs conferir "$NUMERO"; then
+            echo "::warning::Os arquivos do repositório não estão em $NUMERO. O instalador sai com a versão da tag; atualize o repositório com: node scripts/versao.mjs definir $NUMERO"
+          fi
+          node scripts/versao.mjs definir "$NUMERO"
+
       - run: pnpm install --frozen-lockfile
+
       - name: Testes
         run: cargo test --workspace
-      - name: Psm (servidor MCP + runtime) para o instalador
-        run: node apps/desktop/scripts/prepare-sidecar.mjs
-      - name: Gerar o instalador
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          projectPath: apps/desktop
-          args: --config src-tauri/tauri.bundle.json
-          tagName: ${{ github.ref_name }}
-          releaseName: Pixel Studio Maker ${{ github.ref_name }}
-          releaseBody: Instalador para Windows. O servidor MCP (psm.exe) vem junto; veja o README para conectar o Claude Code.
-          releaseDraft: true
+
+      - name: Compilar o instalador
+        run: pnpm build
+
+      - name: Arquivos da versão
+        run: |
+          set -euo pipefail
+          mkdir -p versao
+          instalador="$(ls target/release/bundle/nsis/*-setup.exe | head -n 1)"
+          # Sem espaços: o GitHub troca espaço por ponto no nome dos arquivos da versão.
+          nome="PixelStudioMaker_${NUMERO}_x64-setup.exe"
+          cp "$instalador" "versao/$nome"
+          cp "$instalador" versao/PixelStudioMaker-setup.exe
+          cp target/release/psm.exe versao/psm-windows-x64.exe
+          sha="$(sha256sum versao/PixelStudioMaker-setup.exe | cut -d ' ' -f 1)"
+          base="https://github.com/${GITHUB_REPOSITORY}/releases"
+          node -e '
+            const [numero, tag, base, sha, arquivo] = process.argv.slice(1);
+            console.log(JSON.stringify({
+              version: numero,
+              tag,
+              date: new Date().toISOString(),
+              installer: `${base}/download/${tag}/PixelStudioMaker-setup.exe`,
+              installer_file: arquivo,
+              sha256: sha,
+              mcp_server: `${base}/download/${tag}/psm-windows-x64.exe`,
+              notes: `${base}/tag/${tag}`,
+            }, null, 2));
+          ' "$NUMERO" "$TAG" "$base" "$sha" "$nome" > versao/lastversion.json
+          printf '%s\n' "$TAG" > versao/lastversion.txt
+          (cd versao && sha256sum *.exe > SHA256SUMS.txt)
+          node scripts/versao.mjs notas "$NUMERO" > notas.md
+          {
+            echo
+            echo "---"
+            echo
+            echo "**Windows:** baixe \`$nome\` (ou \`PixelStudioMaker-setup.exe\`, o mesmo instalador). O servidor MCP (\`psm.exe\`) vem junto; para usar só ele, baixe \`psm-windows-x64.exe\`. Veja o README para conectar o Claude Code."
+            echo
+            echo "Link fixo da última versão: ${base}/latest/download/PixelStudioMaker-setup.exe"
+          } >> notas.md
+          ls -la versao
+
+      - name: Commit e tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Cargo.toml Cargo.lock package.json apps/desktop/package.json apps/desktop/src-tauri/tauri.conf.json CHANGELOG.md
+          git diff --cached --quiet || git commit -m "Versão $TAG"
+          git tag -a "$TAG" -m "Pixel Studio Maker $TAG"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin "$TAG"
+
+      - name: Publicar
+        run: |
+          set -euo pipefail
+          if [ "$RASCUNHO" = "true" ]; then modo=(--draft); else modo=(--latest); fi
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" versao/* --clobber
+            gh release edit "$TAG" --title "Pixel Studio Maker $TAG" --notes-file notas.md "${modo[@]}"
+          else
+            gh release create "$TAG" versao/* --title "Pixel Studio Maker $TAG" --notes-file notas.md --verify-tag "${modo[@]}"
+          fi
+          base="https://github.com/${GITHUB_REPOSITORY}/releases"
+          {
+            echo "Publicado: ${base}/tag/${TAG}"
+            echo
+            echo "- Última versão (JSON): ${base}/latest/download/lastversion.json"
+            echo "- Instalador da última versão: ${base}/latest/download/PixelStudioMaker-setup.exe"
+          } >> "$GITHUB_STEP_SUMMARY"

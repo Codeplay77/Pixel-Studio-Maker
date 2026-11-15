@@ -40,6 +40,9 @@
 - `shade` (e `draw_shade`) ganhou `wrap`: em imagens que se repetem, o vizinho além da borda é o pixel do lado
   oposto, e a borda deixa de virar uma linha de luz em cada emenda.
 - Abas de projeto com botão de fechar, clique do meio e Ctrl+W, com confirmação quando há alterações não salvas.
+- Publicação de versões pelo GitHub Actions (`versao.yml`): versão digitada ou a próxima automática, commit e tag,
+  instalador publicado como a mais recente e links fixos para a última versão (`lastversion.json`,
+  `PixelStudioMaker-setup.exe`, `psm-windows-x64.exe`). `scripts/versao.mjs` lê, calcula e grava a versão.
 - Exemplo `demo-h-parallax`: cenário de entardecer em 7 camadas que se emendam, com projeto Godot 4 pronto
   (`Parallax2D`) e gravação do Godot rodando a cena.
 - Converter imagem em pixel art (`image_pixelate` no MCP, e no editor pelo botão de grade na barra de cima ou
