@@ -41,6 +41,7 @@ fn sprite_summary(sp: &Sprite, full: bool) -> serde_json::Value {
         "regions": sp.regions.iter().map(|r| json!({ "id": r.id, "name": r.name, "part": r.part })).collect::<Vec<_>>(),
         "anchors": sp.anchors.iter().map(|a| json!({ "id": a.id, "name": a.name, "kind": a.kind })).collect::<Vec<_>>(),
         "poses": sp.poses.len(),
+        "extras": sp.extras,
     });
     if full {
         v["frames"] =
@@ -422,6 +423,15 @@ pub(crate) fn frame_preview(s: &mut Session, a: FramePreview, ctx: &ExecContext)
                 legend.push(json!({ "anchor": an.name, "at": p, "color": color }));
             }
         }
+    }
+    if a.tiles {
+        super::tiles::preview_overlay(sp, &mut out_img, rect, scale, &mut legend);
+    }
+    if a.hitboxes {
+        super::godot::draw_hitboxes(&mut out_img, sp, frame, rect, scale, &mut legend);
+    }
+    if a.nine_slice {
+        super::texto::nine_slice_overlay(sp, rect, scale, &mut out_img, &mut legend);
     }
     let m = frame_metrics(&img);
     let mut out = Outcome::default();

@@ -2,6 +2,12 @@ import { ArrowDown, ArrowUp, Copy, Eye, EyeOff, Image as ImageIcon, Layers, Lock
 import { useState } from "react";
 import { useFrameCanvas } from "../core/hooks";
 import { currentPalette, currentSprite, useEditor } from "../core/store";
+import { TilesPanel, TilesTabIcon } from "./tiles/TilesPanel";
+import { Swords } from "lucide-react";
+import { HitboxesPanel } from "./godot/HitboxesPanel";
+import { Type as TextIcon } from "lucide-react";
+import { TextPanel } from "./texto/TextPanel";
+import { PaletteFileButtons, PaletteVariantsSection } from "./paletas/PaletteTools";
 
 const TABS = [
   { id: "layers", icon: <Layers size={15} />, label: "Camadas" },
@@ -10,6 +16,9 @@ const TABS = [
   { id: "regions", icon: <Shapes size={15} />, label: "Regiões" },
   { id: "anchors", icon: <Target size={15} />, label: "Pontos" },
   { id: "inspect", icon: <ScanSearch size={15} />, label: "Inspeção" },
+  { id: "tiles", icon: <TilesTabIcon />, label: "Tiles" },
+  { id: "hitboxes", icon: <Swords size={15} />, label: "Hitboxes" },
+  { id: "text", icon: <TextIcon size={15} />, label: "Texto" },
 ] as const;
 
 export function RightPanel() {
@@ -37,6 +46,9 @@ export function RightPanel() {
         {panel === "regions" && <RegionsPanel />}
         {panel === "anchors" && <AnchorsPanel />}
         {panel === "inspect" && <InspectPanel />}
+        {panel === "tiles" && <TilesPanel />}
+        {panel === "hitboxes" && <HitboxesPanel />}
+        {panel === "text" && <TextPanel />}
       </div>
     </aside>
   );
@@ -168,6 +180,7 @@ function PalettePanel({ compact = false }: { compact?: boolean }) {
   return (
     <div>
       <Header title="Paleta">
+        {!compact && <PaletteFileButtons palette={pal?.name} />}
         <button className="btn-icon h-7 w-7" title="Adicionar a cor principal" disabled={!pal} onClick={() => pal && void s.run("palette_update", { palette: pal.name, add: [s.primary] })}>
           <Plus size={15} />
         </button>
@@ -206,6 +219,7 @@ function PalettePanel({ compact = false }: { compact?: boolean }) {
           Levar todas as cores para esta paleta
         </button>
       </div>}
+      {!compact && <PaletteVariantsSection />}
     </div>
   );
 }

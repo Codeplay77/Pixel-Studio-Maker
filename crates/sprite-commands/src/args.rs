@@ -243,6 +243,9 @@ pub struct PixelClear {
     /// ...ou um retângulo. Sem os dois, apaga a cel inteira.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rect: Option<Rect>,
+    /// Só apaga os pixels desta máscara de seleção (`bounds` + `rows`, de select_color/select_polygon).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub mask: Option<sprite_drawing::select::SelectionMask>,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
@@ -345,7 +348,7 @@ pub struct DrawBatch {
     pub target: Target,
     /// Operações SDC em ordem. Cada uma tem "op" (pixel, pixels, matrix, line, polyline, rect,
     /// ellipse, circle, polygon, curve, fill, replace_color, clear, outline, dither, gradient,
-    /// shade, drop_shadow, pattern, transform, copy, cleanup, quantize, adjust).
+    /// shade, drop_shadow, pattern, transform, copy, cleanup, quantize, adjust, stroke, text).
     pub ops: Vec<BatchOp>,
     #[serde(default)]
     pub policy: BatchPolicy,
@@ -510,6 +513,9 @@ pub struct DrawTransform {
     /// Ou uma região semântica.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub region: Option<ItemRef>,
+    /// Só os pixels desta máscara de seleção (`bounds` + `rows`). A resposta traz `selection`: a máscara já transformada.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub mask: Option<sprite_drawing::select::SelectionMask>,
 }
 
 #[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, JsonSchema)]
@@ -1158,6 +1164,15 @@ pub struct FramePreview {
     /// Frames anteriores/seguintes como fantasma (onion skin) dentro de uma animação.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub onion: Option<OnionArgs>,
+    /// Desenhar a grade de tiles e os polígonos de colisão (sprites com grade definida em tile_grid_set).
+    #[serde(default)]
+    pub tiles: bool,
+    /// Desenhar as hitboxes/hurtboxes do frame (contorno na cor de cada caixa).
+    #[serde(default)]
+    pub hitboxes: bool,
+    /// Desenhar as 4 linhas-guia do 9-slice (margens definidas com nine_slice_set).
+    #[serde(default)]
+    pub nine_slice: bool,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
@@ -1278,7 +1293,8 @@ pub enum ImportMode {
 pub struct ImportImage {
     #[serde(flatten)]
     pub target: SpriteTarget,
-    /// Arquivo PNG ou GIF.
+    /// Arquivo PNG, GIF ou Aseprite (.aseprite/.ase: no modo new_sprite mantém layers, frames,
+    /// tags como animações, paleta e slices como regiões; nos outros modos, a imagem composta).
     pub path: String,
     #[serde(default)]
     pub mode: ImportMode,
@@ -1433,3 +1449,17 @@ pub struct ProjectValidate {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub max_jump: Option<f64>,
 }
+
+// Argumentos de cada área ficam em args/<área>.rs, registrados aqui.
+mod rpgmaker;
+pub use rpgmaker::*;
+mod tiles;
+pub use tiles::*;
+mod godot;
+pub use godot::*;
+mod ferramentas;
+pub use ferramentas::*;
+mod texto;
+pub use texto::*;
+mod paletas;
+pub use paletas::*;

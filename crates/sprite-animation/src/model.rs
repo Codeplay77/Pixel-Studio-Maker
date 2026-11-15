@@ -7,6 +7,8 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use sprite_core::{BlendMode, Color, FrameRef, Image, ItemRef, Mask, Point, Rect};
 
+use crate::extras::SpriteExtras;
+
 /// Pixel storage shared by every sprite of a project. Cels point here by id; two cels pointing
 /// at the same id are *linked* (editing one edits both).
 pub type ImageStore = BTreeMap<u32, Image>;
@@ -366,6 +368,9 @@ pub struct Sprite {
     /// Name of this sprite's palette in the project (falls back to the project's active one).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub palette: Option<String>,
+    /// Dados das ferramentas de jogo (tiles, hitboxes, modelos do RPG Maker, fontes, 9-slice).
+    #[serde(default, skip_serializing_if = "SpriteExtras::is_empty")]
+    pub extras: SpriteExtras,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
@@ -408,6 +413,7 @@ impl Sprite {
             regions: Vec::new(),
             poses: Vec::new(),
             palette: None,
+            extras: SpriteExtras::default(),
         }
     }
 

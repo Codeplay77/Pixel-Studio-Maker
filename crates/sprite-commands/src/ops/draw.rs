@@ -106,6 +106,8 @@ pub(crate) fn apply_op(
     changes: &mut ChangeSet,
 ) -> Result<(), CommandError> {
     let Cel { si, layer, frame } = cel;
+    let prepared = super::texto::prepare_op(doc, op)?;
+    let op: &DrawOp = &prepared;
     let source = match op {
         DrawOp::Copy { from, .. } => Some((from.clone(), load_source(doc, si, layer, frame, from)?)),
         _ => None,
@@ -200,6 +202,9 @@ pub(crate) fn pixel_set_batch(s: &mut Session, a: PixelSetBatch) -> Result<Outco
 }
 
 pub(crate) fn pixel_clear(s: &mut Session, a: PixelClear) -> Result<Outcome, CommandError> {
+    if a.mask.is_some() {
+        return super::ferramentas::pixel_clear_masked(s, a);
+    }
     let op = match (a.at, a.rect) {
         (Some(p), _) => DrawOp::Pixel { x: p.x, y: p.y, color: ColorRef::Value("clear".into()) },
         (None, rect) => DrawOp::Clear { rect },
@@ -350,6 +355,7 @@ pub(crate) fn draw_batch(s: &mut Session, a: DrawBatch, ctx: &ExecContext) -> Re
     }
     let (changes, skipped) = run_batch(s, &a.target, &a.ops, a.clip.as_ref(), a.policy, ctx)?;
     let mut out = changes.outcome(json!({ "ops": a.ops.len(), "applied": a.ops.len() - skipped.len(), "skipped": skipped }));
+    out.warnings.extend(super::texto::batch_warnings(&s.doc, &a.ops));
     if !skipped.is_empty() {
         out.warnings.push(format!("{} operações inválidas foram puladas", skipped.len()));
     }
@@ -445,6 +451,9 @@ pub(crate) fn draw_shade(s: &mut Session, a: DrawShade) -> Result<Outcome, Comma
 }
 
 pub(crate) fn draw_transform(s: &mut Session, a: DrawTransform) -> Result<Outcome, CommandError> {
+    if a.mask.is_some() {
+        return super::ferramentas::draw_transform_masked(s, a);
+    }
     let r = resolve(&s.doc, &a.target)?;
     let sp = sprite(&s.doc, r.si);
     let (w, h) = (sp.width, sp.height);

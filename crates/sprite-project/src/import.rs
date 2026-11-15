@@ -1,4 +1,5 @@
-//! Reading images from outside: PNG (one frame), GIF (animated) and sprite sheet slicing.
+//! Reading images from outside: PNG (one frame), GIF (animated), Aseprite (frames composed; the
+//! layered import is in `aseprite`) and sprite sheet slicing.
 
 use std::io::Cursor;
 
@@ -15,7 +16,8 @@ pub struct ImportedFrame {
     pub duration_ms: u32,
 }
 
-/// Decodes PNG or GIF bytes (detected by signature).
+/// Decodes PNG, GIF or Aseprite bytes (detected by signature). Aseprite files come composed,
+/// one image per frame.
 pub fn decode_frames(bytes: &[u8]) -> Result<Vec<ImportedFrame>, ProjectError> {
     if bytes.starts_with(b"\x89PNG") {
         return Ok(vec![ImportedFrame { image: decode_png(bytes)?, duration_ms: 100 }]);
@@ -23,11 +25,14 @@ pub fn decode_frames(bytes: &[u8]) -> Result<Vec<ImportedFrame>, ProjectError> {
     if bytes.starts_with(b"GIF8") {
         return decode_gif(bytes);
     }
-    Err(ProjectError::Image("formato não suportado: use PNG ou GIF".into()))
+    if crate::aseprite::is_aseprite(bytes) {
+        return Ok(crate::aseprite::parse(bytes)?.composites());
+    }
+    Err(ProjectError::Image("formato não suportado: use PNG, GIF ou Aseprite (.aseprite/.ase)".into()))
 }
 
-/// Reads a picture to be converted (PNG, JPG or the first frame of a GIF) of any size, reduced
-/// while reading to at most `max_side` pixels per side.
+/// Reads a picture to be converted (PNG, JPG or the first frame of a GIF or Aseprite file) of
+/// any size, reduced while reading to at most `max_side` pixels per side.
 pub fn decode_picture(bytes: &[u8], max_side: u32) -> Result<Fitted, ProjectError> {
     if bytes.starts_with(b"\x89PNG") {
         return Ok(decode_png_fit(bytes, max_side)?);
@@ -35,14 +40,14 @@ pub fn decode_picture(bytes: &[u8], max_side: u32) -> Result<Fitted, ProjectErro
     if bytes.starts_with(&[0xFF, 0xD8, 0xFF]) {
         return decode_jpeg(bytes, max_side);
     }
-    if bytes.starts_with(b"GIF8") {
-        let first = decode_gif(bytes)?.into_iter().next().ok_or_else(|| ProjectError::Image("GIF sem frames".into()))?;
+    if bytes.starts_with(b"GIF8") || crate::aseprite::is_aseprite(bytes) {
+        let first = decode_frames(bytes)?.into_iter().next().ok_or_else(|| ProjectError::Image("arquivo sem frames".into()))?;
         let (w, h) = (first.image.width(), first.image.height());
         let factor = reduction_factor(w, h, max_side);
         let (rw, rh, rgba) = reduce_rgba(w, h, &first.image.to_rgba(), factor);
         return Ok(Fitted { width: rw, height: rh, rgba, factor, original: (w, h) });
     }
-    Err(ProjectError::Image("formato não suportado: use PNG, JPG ou GIF".into()))
+    Err(ProjectError::Image("formato não suportado: use PNG, JPG, GIF ou Aseprite".into()))
 }
 
 fn decode_jpeg(bytes: &[u8], max_side: u32) -> Result<Fitted, ProjectError> {

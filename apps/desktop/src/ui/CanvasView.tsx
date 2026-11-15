@@ -4,13 +4,22 @@ import * as api from "../core/api";
 import { useFrameCanvas, useReferenceCanvases } from "../core/hooks";
 import { currentSprite, timelineFrames, useEditor } from "../core/store";
 import type { Point, Rect, RegionShape } from "../core/types";
+import { drawTileOverlay, drawTileRepeat } from "./tiles/canvasTiles";
+import { commitHitboxDrag, drawHitboxes } from "./godot/hitboxCanvas";
+import { extendStroke, finishStroke, startStroke, type StrokeDrag } from "./tools/brush";
+import { drawToolsOverlay } from "./tools/overlay";
+import { lassoFinish, marqueeCombine, moveSelection, selectMode, wandAt } from "./tools/selection";
+import type { SelectMode } from "./tools/types";
+import { drawTextOverlays, startTextDraft } from "./texto/canvas";
 
 type Drag =
   | { kind: "pan"; startX: number; startY: number; panX: number; panY: number }
-  | { kind: "stroke"; points: Point[]; color: string }
+  | StrokeDrag
   | { kind: "shape"; tool: "line" | "rect" | "ellipse"; from: Point; to: Point; color: string }
-  | { kind: "select"; from: Point; to: Point }
-  | { kind: "move"; from: Point; to: Point };
+  | { kind: "select"; from: Point; to: Point; mode?: SelectMode }
+  | { kind: "move"; from: Point; to: Point }
+  | { kind: "lasso"; points: Point[]; mode: SelectMode }
+  | { kind: "hitbox"; from: Point; to: Point };
 
 const OVERLAY = ["#ff4081", "#00e5ff", "#ffd600", "#76ff03", "#d500f9", "#ff6d00", "#2979ff", "#1de9b6"];
 
@@ -159,6 +168,7 @@ export function CanvasView() {
     ghost(prev2Canvas, "#ff4d4d", 0.16);
     ghost(prevCanvas, "#ff4d4d", 0.32);
     ghost(nextCanvas, "#4d8dff", 0.32);
+    if (s.tileMode && frameCanvas) drawTileRepeat(g, frameCanvas, ox, oy, W, H);
     if (frameCanvas) g.drawImage(frameCanvas, ox, oy, W, H);
     // Grid.
     if (s.grid && z >= 6) {
@@ -244,7 +254,7 @@ export function CanvasView() {
     }
     // Selection.
     const sel = drag?.kind === "select" ? normRect(drag.from, drag.to) : s.selection;
-    if (sel) {
+    if (sel && !(s.selectionMask && drag?.kind !== "select")) {
       const off = drag?.kind === "move" ? [drag.to[0] - drag.from[0], drag.to[1] - drag.from[1]] : [0, 0];
       g.setLineDash([5, 4]);
       g.lineWidth = 1.5;
@@ -256,6 +266,14 @@ export function CanvasView() {
       g.setLineDash([]);
       g.lineDashOffset = 0;
     }
+    drawTileOverlay(g, sprite, ox, oy, z, s.showTileGrid, s.panel === "tiles" ? s.tileSelected : undefined);
+    drawHitboxes(g, sprite, s, ox, oy, z, drag?.kind === "hitbox" ? drag : undefined);
+    drawTextOverlays(g, sprite, ox, oy, z, s);
+    drawToolsOverlay(g, s, sprite, ox, oy, z, {
+      move: drag?.kind === "move" ? [drag.to[0] - drag.from[0], drag.to[1] - drag.from[1]] : undefined,
+      lasso: drag?.kind === "lasso" ? drag.points : undefined,
+      hover: drag ? undefined : hover,
+    });
     // Shape preview (only a guide; Rust rasterizes the real shape on release).
     if (drag?.kind === "shape") {
       g.strokeStyle = drag.color.startsWith("#") && drag.color.length >= 7 ? drag.color.slice(0, 7) : "#ffffff";
@@ -289,7 +307,13 @@ export function CanvasView() {
       g.lineWidth = 1;
       g.strokeRect(ox + (hover[0] + lo) * z + 0.5, oy + (hover[1] + lo) * z + 0.5, b * z - 1, b * z - 1);
     }
-  }, [size, sprite, z, ox, oy, frameCanvas, prevCanvas, prev2Canvas, nextCanvas, refCanvases, s.grid, s.guides, s.animationId, s.showRegions, s.showAnchors, s.showReferences, s.selection, s.frameId, s.tool, s.brush, drag, hover, s.doc]);
+  }, [
+    size, sprite, z, ox, oy, frameCanvas, prevCanvas, prev2Canvas, nextCanvas, refCanvases, s.grid, s.guides, s.animationId, s.showRegions, s.showAnchors, s.showReferences, s.selection, s.frameId, s.tool, s.brush, drag, hover, s.doc,
+    s.tileMode, s.showTileGrid, s.tileSelected, s.panel,
+    s.showHitboxes, s.hiddenHitboxes, s.hitboxTarget,
+    s.textDraft, s.nineSliceGuides,
+    s.selectionMask, s.symmetry,
+  ]);
 
   // Real-size preview (1x and 2x) in the corner; follows playback.
   const previewRef = useRef<HTMLCanvasElement>(null);
@@ -334,13 +358,9 @@ export function CanvasView() {
     const pid = s.projectId;
     switch (s.tool) {
       case "pencil":
-      case "eraser": {
-        const c = s.tool === "eraser" ? "clear" : color;
-        setDrag({ kind: "stroke", points: [p], color: c });
-        enqueue(() => api.call("transaction_begin", { label: s.tool === "eraser" ? "Borracha" : "Lápis" }, pid));
-        enqueue(() => api.call("draw_batch", { ...target(), ops: [{ op: "line", from: p, to: p, color: c, thickness: s.brush }] }, pid));
+      case "eraser":
+        setDrag(startStroke(s.tool, p, e.button, enqueue, target, pid));
         return;
-      }
       case "fill":
         void s.run("draw_fill", { ...target(), x: p[0], y: p[1], color, contiguous: !e.shiftKey });
         return;
@@ -356,7 +376,7 @@ export function CanvasView() {
         setDrag({ kind: "shape", tool: s.tool, from: p, to: p, color });
         return;
       case "select":
-        setDrag({ kind: "select", from: p, to: p });
+        setDrag({ kind: "select", from: p, to: p, mode: selectMode(e) });
         return;
       case "move":
         setDrag({ kind: "move", from: p, to: p });
@@ -366,6 +386,23 @@ export function CanvasView() {
         if (name && s.frameId !== undefined) void s.run("anchor_update", { sprite: s.spriteId, anchor: name, positions: [{ frame: s.frameId, position: p }] });
         return;
       }
+      case "dither":
+      case "shade":
+        setDrag(startStroke(s.tool, p, e.button, enqueue, target, pid));
+        return;
+      case "wand":
+        wandAt(p, e, target());
+        return;
+      case "lasso":
+        setDrag({ kind: "lasso", points: [p], mode: selectMode(e) });
+        return;
+      case "text":
+        startTextDraft(p, e.clientX, e.clientY);
+        return;
+      case "hitbox":
+        if (s.hitboxTarget && s.frameId !== undefined) setDrag({ kind: "hitbox", from: p, to: p });
+        else s.toast("Escolha uma caixa no painel Hitboxes (ou crie uma)");
+        return;
     }
   };
 
@@ -377,14 +414,15 @@ export function CanvasView() {
     if (drag.kind === "pan") {
       setPan({ x: drag.panX + e.clientX - drag.startX, y: drag.panY + e.clientY - drag.startY });
     } else if (drag.kind === "stroke") {
-      const last = drag.points[drag.points.length - 1];
-      if (last[0] === p[0] && last[1] === p[1]) return;
-      drag.points.push(p);
-      const pid = s.projectId;
-      enqueue(() => api.call("draw_batch", { ...target(), ops: [{ op: "line", from: last, to: p, color: drag.color, thickness: s.brush }] }, pid));
+      extendStroke(drag, p, enqueue, target, s.projectId);
     } else if (drag.kind === "shape" || drag.kind === "select" || drag.kind === "move") {
       if (drag.to[0] !== p[0] || drag.to[1] !== p[1]) setDrag({ ...drag, to: p });
     }
+    if (drag.kind === "lasso") {
+      const last = drag.points[drag.points.length - 1];
+      if (last[0] !== p[0] || last[1] !== p[1]) setDrag({ ...drag, points: [...drag.points, p] });
+    }
+    if (drag.kind === "hitbox" && (drag.to[0] !== p[0] || drag.to[1] !== p[1])) setDrag({ ...drag, to: p });
   };
 
   const onPointerUp = () => {
@@ -394,11 +432,7 @@ export function CanvasView() {
     const pid = s.projectId;
     if (d.kind === "stroke") {
       // Replace the live preview segments with one pixel-perfect stroke (one undo step).
-      const points = d.points;
-      enqueue(async () => {
-        await api.call("transaction_rollback", {}, pid);
-        await api.call("draw_batch", { ...target(), label: d.color === "clear" ? "Borracha" : "Lápis", ops: [{ op: "polyline", points, color: d.color, thickness: s.brush, pixel_perfect: s.brush === 1 }] }, pid);
-      });
+      finishStroke(d, enqueue, target, pid);
     } else if (d.kind === "shape") {
       const r = normRect(d.from, d.to);
       if (d.tool === "line") void s.run("draw_line", { ...target(), from: d.from, to: d.to, color: d.color, thickness: s.brush });
@@ -408,15 +442,17 @@ export function CanvasView() {
       const clipped = { x: Math.max(0, r.x), y: Math.max(0, r.y), w: 0, h: 0 };
       clipped.w = Math.min(sprite.width, r.x + r.w) - clipped.x;
       clipped.h = Math.min(sprite.height, r.y + r.h) - clipped.y;
-      s.set({ selection: clipped.w > 0 && clipped.h > 0 && !(r.w === 1 && r.h === 1) ? clipped : undefined });
+      const valid = clipped.w > 0 && clipped.h > 0 && !(r.w === 1 && r.h === 1);
+      const mode = d.mode ?? "replace";
+      if (mode === "replace" || (mode === "add" && !s.selection)) s.set({ selection: valid ? clipped : undefined });
+      else if (valid && s.selection) marqueeCombine(clipped, mode);
     } else if (d.kind === "move") {
       const dx = d.to[0] - d.from[0];
       const dy = d.to[1] - d.from[1];
-      if (dx || dy) {
-        void s.run("draw_transform", { ...target(), transform: { kind: "move", dx, dy }, rect: s.selection ?? undefined });
-        if (s.selection) s.set({ selection: { ...s.selection, x: s.selection.x + dx, y: s.selection.y + dy } });
-      }
+      if (dx || dy) moveSelection(target(), dx, dy);
     }
+    if (d.kind === "lasso") lassoFinish(d.points, d.mode);
+    if (d.kind === "hitbox") void commitHitboxDrag(d.from, d.to);
   };
 
   const onWheel = (e: React.WheelEvent) => {

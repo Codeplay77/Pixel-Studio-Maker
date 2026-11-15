@@ -522,14 +522,21 @@ impl Runtime {
                 p.session.saved_revision = p.session.doc.revision();
                 self.remove_autosave(&p.session.doc.model.uid.clone());
                 let rev = p.session.doc.revision();
+                let mut data = json!({ "saved": path.display().to_string() });
+                // Export jobs marked `on_save` run now; a failed export is only a warning and
+                // never undoes the save.
+                let (exports, warnings) = on_save_exports(&mut p.session, ctx);
+                if let Some(e) = exports {
+                    data["exports"] = e;
+                }
                 drop(p);
                 self.emit(Event::Projects { projects: self.project_summaries() });
                 return Ok(CallResult {
                     project: Some(pid.into()),
-                    data: json!({ "saved": path.display().to_string() }),
+                    data,
                     images: vec![],
                     changes: vec![],
-                    warnings: vec![],
+                    warnings,
                     revision: rev,
                     transaction: None,
                 });
@@ -863,6 +870,19 @@ fn all_structure(s: &Session) -> Vec<sprite_commands::Change> {
         .collect()
 }
 
+/// Runs the project's `on_save` export jobs (Godot area). Returns the per-job results (when
+/// there are jobs) and warnings for the failures.
+fn on_save_exports(session: &mut Session, ctx: &ExecContext) -> (Option<serde_json::Value>, Vec<String>) {
+    if !session.doc.model.extras.godot.export_jobs.iter().any(|j| j.on_save) {
+        return (None, Vec::new());
+    }
+    let cmd = Command::ExportJobsRun(sprite_commands::ExportJobsRun { jobs: Vec::new(), on_save: true });
+    match session.execute(cmd, ctx) {
+        Ok(out) => (Some(out.data), out.warnings),
+        Err(e) => (None, vec![format!("projeto salvo, mas as exportações automáticas falharam: {}", e.message)]),
+    }
+}
+
 fn short_id(uid: &str) -> String {
     uid.chars().take(8).collect()
 }
@@ -874,13 +894,14 @@ pub fn capabilities(limits: &Limits) -> serde_json::Value {
         "version": env!("CARGO_PKG_VERSION"),
         "sdc_version": sprite_drawing_version(),
         "limits": limits,
-        "sdc_ops": ["pixel", "pixels", "matrix", "line", "polyline", "rect", "ellipse", "circle", "polygon", "curve", "fill", "replace_color", "clear", "outline", "dither", "gradient", "shade", "drop_shadow", "pattern", "transform", "copy", "cleanup", "quantize", "adjust"],
+        "sdc_ops": ["pixel", "pixels", "matrix", "line", "polyline", "rect", "ellipse", "circle", "polygon", "curve", "fill", "replace_color", "clear", "outline", "dither", "gradient", "shade", "drop_shadow", "pattern", "transform", "copy", "cleanup", "quantize", "adjust", "stroke", "text"],
         "colors": "\"#rgb\", \"#rgba\", \"#rrggbb\", \"#rrggbbaa\", \"clear\" ou índice da paleta ativa",
         "matrix_format": { "rows": "linhas de caracteres", "legend": "char → cor | null (manter) | \"clear\"", "dot": "'.' mantém o pixel", "rle": "\"3k2.\" = \"kkk..\"" },
         "directions": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
         "project_format": format!(".{} v{}", format::EXTENSION, format::FORMAT_VERSION),
-        "import": ["png", "gif", "sprite sheet (slice)"],
-        "export": ["png", "png sequence", "gif", "sprite sheet (horizontal, vertical, grid, rows, packed)", "json", "godot SpriteFrames .tres"],
+        "import": ["png", "gif", "aseprite (.aseprite/.ase)", "sprite sheet (slice)", "jpg (só na conversão em pixel art)"],
+        "palette_formats": ["gpl", "hex", "pal (JASC; RIFF só leitura)", "txt (Paint.NET)", "png", "gif"],
+        "export": ["png", "png sequence", "gif", "sprite sheet (horizontal, vertical, grid, rows, packed)", "json", "godot SpriteFrames .tres", "godot cena .tscn (AnimationPlayer, hitboxes, pontos)", "godot TileSet .tres", "godot NinePatchRect .tscn", "BMFont .fnt", "normal map", "variantes de paleta", "rpg maker (personagem, faces, battler lateral)"],
         "tools": tools,
     })
 }

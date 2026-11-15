@@ -308,6 +308,57 @@ pub enum DrawOp {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         rect: Option<Rect>,
     },
+    /// Traço de pincel (lápis, borracha, dithering, sombreado) passando por `points`, com
+    /// simetria (`symmetry`), volta nas bordas (`wrap`) e três modos (`mode`): `paint`, `dither`
+    /// e `shade`. Cada pixel coberto muda uma única vez por operação.
+    Stroke {
+        /// Pontos do traço, ligados por linhas (um ponto só = um carimbo do pincel).
+        points: Vec<Point>,
+        /// Cor (modos `paint` e `dither`; `"clear"` apaga). Ignorada em `shade`.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        color: Option<ColorRef>,
+        /// Lado do pincel quadrado, de 1 a 64 px.
+        #[serde(default = "one")]
+        thickness: u32,
+        /// Remove os cantos em "L" do caminho (traço à mão limpo).
+        #[serde(default)]
+        pixel_perfect: bool,
+        /// Espelhamento: `{"x": true}` espelha esquerda↔direita no centro do sprite, `{"y": 15.5}` espelha cima↔baixo no eixo y = 15.5 (entre os pixels 15 e 16); com os dois, 4 cópias.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        symmetry: Option<crate::stroke::Symmetry>,
+        /// Pixels fora do canvas dão a volta (módulo largura/altura), para texturas que se repetem.
+        #[serde(default)]
+        wrap: bool,
+        /// `paint` (padrão) pinta `color`; `dither` pinta `color` onde o padrão manda e `secondary` no resto; `shade` anda `step` posições na rampa `ramp`.
+        #[serde(default)]
+        mode: crate::stroke::StrokeMode,
+        /// Padrão ordenado do modo `dither`, ancorado no canvas: bayer2, bayer4 (padrão), bayer8, checker (também lines_h, lines_v, diagonal).
+        #[serde(default)]
+        pattern: DitherPattern,
+        /// Densidade de `color` no modo `dither`, de 0 a 1 (padrão 0.5).
+        #[serde(default = "crate::stroke::default_density")]
+        density: f64,
+        /// Modo `dither`: cor dos pixels onde o padrão não pinta `color`. Sem ela, esses pixels ficam como estão.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        secondary: Option<ColorRef>,
+        /// Modo `shade`: quantas posições andar na rampa (+1 clareia, -1 escurece; padrão +1). Para no fim da rampa.
+        #[serde(default = "crate::stroke::default_step")]
+        step: i32,
+        /// Modo `shade`: rampa de cores da mais escura para a mais clara (padrão: a paleta ativa, na ordem). Pixels com cor fora da rampa ou transparentes ficam iguais.
+        #[serde(default, skip_serializing_if = "Vec::is_empty")]
+        ramp: Vec<ColorRef>,
+    },
+    /// Texto com fonte bitmap: `text`, `at` (canto superior esquerdo), `font` ("pixel-5x7", "mini-3x5" ou
+    /// um sprite definido com font_define), `color`, `align`, `max_width` (quebra por palavra),
+    /// `letter_spacing`, `line_spacing`, `scale` (inteiro), `outline` (cor) e `shadow` ({color, offset}).
+    Text {
+        #[serde(flatten)]
+        spec: crate::text::TextSpec,
+        /// Sprite font loaded by the command layer (never part of the JSON).
+        #[serde(skip)]
+        #[schemars(skip)]
+        font_data: Option<std::sync::Arc<crate::text::BitmapFont>>,
+    },
 }
 
 fn default_highlight_amount() -> f64 {
@@ -347,6 +398,8 @@ impl DrawOp {
             DrawOp::Cleanup { .. } => "cleanup",
             DrawOp::Quantize { .. } => "quantize",
             DrawOp::Adjust { .. } => "adjust",
+            DrawOp::Stroke { .. } => "stroke",
+            DrawOp::Text { .. } => "text",
         }
     }
 
@@ -683,6 +736,10 @@ pub fn apply(canvas: &mut Canvas, op: &DrawOp, ctx: &DrawContext) -> Result<(), 
         DrawOp::Adjust { hue, saturation, value, rect } => {
             let area = canvas.area(*rect);
             effects::adjust_hsv(canvas, &area, *hue, *saturation, *value);
+        }
+        DrawOp::Stroke { .. } => crate::stroke::apply_op(canvas, op, pal)?,
+        DrawOp::Text { spec, font_data } => {
+            crate::text::draw(canvas, spec, crate::text::op_font(spec, font_data.as_ref())?, pal)?;
         }
     }
     Ok(())

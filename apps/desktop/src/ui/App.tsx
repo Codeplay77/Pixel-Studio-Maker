@@ -14,6 +14,10 @@ import { RightPanel } from "./RightPanel";
 import { Timeline } from "./Timeline";
 import { selectionActions, ToolOptions, Toolbar } from "./Toolbar";
 import { openProjectDialog, saveProject, TopBar } from "./TopBar";
+import { AutotileDialog, TileMapDialog } from "./tiles/TileDialogs";
+import { ExportJobsDialog } from "./godot/ExportJobs";
+import { FERRAMENTAS_KEYS } from "./tools/ToolsUi";
+import { TextBox } from "./texto/TextBox";
 
 function Welcome() {
   const s = useEditor();
@@ -140,6 +144,9 @@ export function App() {
     if (ctrl) return;
     const tools: Record<string, Parameters<typeof st.set>[0]["tool"]> = { b: "pencil", e: "eraser", g: "fill", l: "line", r: "rect", o: "ellipse", m: "select", v: "move", i: "eyedropper", a: "anchor" };
     if (tools[k]) return st.set({ tool: tools[k] });
+    if (FERRAMENTAS_KEYS[k]) return st.set({ tool: FERRAMENTAS_KEYS[k] });
+    if (k === "t") return st.set({ tool: "text" });
+    if (k === "h") return st.set({ tool: "hitbox" });
     if (k === "delete" || k === "backspace") return selectionActions().remove();
     if (k === "escape") return st.set({ selection: undefined, mcpOpen: false, dialog: null });
     if (k === "x") return st.set({ primary: st.secondary, secondary: st.primary });
@@ -177,6 +184,10 @@ export function App() {
       {s.dialog === "import" && <ImportDialog />}
       {s.dialog === "export" && <ExportDialog />}
       {s.dialog === "pixelate" && <PixelateDialog />}
+      {s.dialog === "autotile" && <AutotileDialog />}
+      {s.dialog === "tilemap" && <TileMapDialog />}
+      {s.dialog === "exportJobs" && <ExportJobsDialog />}
+      <TextBox />
       <Toasts />
     </div>
   );

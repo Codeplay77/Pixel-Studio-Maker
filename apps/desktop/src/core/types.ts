@@ -79,6 +79,7 @@ export type Pose = {
 export type Sprite = {
   id: number;
   name: string;
+  extras?: SpriteExtras;
   width: number;
   height: number;
   origin: Point;
@@ -109,6 +110,7 @@ export type Reference = {
 export type ProjectModel = {
   uid: string;
   name: string;
+  extras?: ProjectExtras;
   sprites: Sprite[];
   palettes: Palette[];
   active_palette?: string;
@@ -173,4 +175,26 @@ export type RuntimeInfo = {
   claude_code_config: unknown;
   claude_code_command: string;
   tools: number;
+};
+
+/** Dados das ferramentas de jogo guardados no sprite (cada área cuida dos seus campos). */
+export type SpriteExtras = {
+  /** Modelo de arquivo do RPG Maker (espelha RpgMakerInfo em crates/sprite-animation/src/rpgmaker.rs). */
+  rpgmaker?: { kind: string; engine: "mz" | "mv" | "vxace"; tile: number; cell?: [number, number]; single?: boolean };
+  tiles?: import("./tiles").TileData;
+  /** Hitboxes/hurtboxes por frame (frame id → retângulo; sem retângulo = caixa desligada). */
+  godot?: { hitboxes?: { id: number; name: string; kind: "hitbox" | "hurtbox" | "collision" | "custom"; color?: string; frames?: Record<string, Rect> }[] };
+  /** Fonte bitmap (font_define) e margens de 9-slice (nine_slice_set). */
+  texto?: {
+    font?: { cell: [number, number]; charset: string; columns: number; baseline: number; letter_spacing: number; space_width: number; line_height: number; frame?: number };
+    nine_slice?: { left: number; top: number; right: number; bottom: number };
+  };
+};
+
+/** Dados das ferramentas de jogo no nível do projeto. */
+export type ProjectExtras = {
+  /** Tarefas de exportação (comando export_* + argumentos; `on_save` roda ao salvar). */
+  godot?: { export_jobs?: { name: string; command: string; args?: Record<string, unknown>; on_save?: boolean }[] };
+  /** Variantes de paleta: a cor i da paleta `base` vira `colors[i]`. */
+  paletas?: { variants?: { name: string; base: string; colors: string[] }[] };
 };

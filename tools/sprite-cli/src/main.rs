@@ -4,6 +4,7 @@
 //! - `psm runtime`  — the runtime process (started automatically by the MCP server and the editor).
 //! - `psm call`, `psm script`, `psm status` — talk to the runtime from scripts, headless.
 //! - `psm render`, `psm info` — read `.psmproj` files directly, without a runtime.
+//! - `psm export` — runs a project's export jobs without a runtime (batch exports for builds).
 //! - `psm mcp-config` — prints the Claude Code configuration for this executable.
 
 use std::path::{Path, PathBuf};
@@ -29,6 +30,12 @@ Uso:
   psm render ARQUIVO.psmproj [--frame ID] [--scale N] -o SAIDA.png
                                                        renderiza um frame sem runtime
   psm info ARQUIVO.psmproj                             resumo de um projeto sem runtime
+  psm export ARQUIVO.psmproj [--job NOME]... [--on-save]
+                                                       roda as tarefas de exportação salvas no projeto
+                                                       (export_job_set), sem runtime: todas, só as
+                                                       nomeadas ou só as marcadas para rodar ao salvar.
+                                                       Caminhos relativos partem da pasta do projeto.
+                                                       Sai com erro se alguma falhar (scripts de build)
   psm mcp-config                                       configuração para o Claude Code
   psm tools                                            lista das ferramentas MCP (Markdown)
   psm --version | --help
@@ -56,6 +63,7 @@ impl Args {
             "-o",
             "--output",
             "--sprite",
+            "--job",
         ];
         let mut a = Args { positional: Vec::new(), flags: Vec::new(), switches: Vec::new() };
         let mut it = raw.into_iter();
@@ -146,6 +154,7 @@ fn main() -> ExitCode {
             "mcp-run" => cmd_mcp_run(&a).await,
             "render" => cmd_render(&a),
             "info" => cmd_info(&a),
+            "export" => cmd_export(&a),
             "tools" => {
                 println!("{}", tools_markdown());
                 Ok(())
@@ -401,5 +410,26 @@ fn cmd_render(a: &Args) -> Result<(), String> {
     }
     let out = s.execute(parse_command("export_png", args).map_err(|e| e.message)?, &ExecContext::local(cwd())).map_err(|e| e.message)?;
     println!("{}", out.data);
+    Ok(())
+}
+
+/// Runs the project's export jobs without a runtime (batch exports for build scripts).
+fn cmd_export(a: &Args) -> Result<(), String> {
+    let mut s = load(a)?;
+    let on_save = a.switches.iter().any(|x| x == "--on-save");
+    let cmd = parse_command("export_jobs_run", json!({ "jobs": a.flags("--job"), "on_save": on_save })).map_err(|e| e.message)?;
+    let out = s.execute(cmd, &ExecContext::local(cwd())).map_err(|e| format!("{:?}: {}", e.code, e.message))?;
+    for w in &out.warnings {
+        eprintln!("aviso: {w}");
+    }
+    println!("{}", serde_json::to_string_pretty(&out.data).unwrap_or_default());
+    let ran = out.data["ran"].as_u64().unwrap_or(0);
+    let failed = out.data["failed"].as_u64().unwrap_or(0);
+    if ran == 0 {
+        return Err("nenhuma tarefa de exportação para rodar (crie com export_job_set)".into());
+    }
+    if failed > 0 {
+        return Err(format!("{failed} de {ran} exportações falharam"));
+    }
     Ok(())
 }

@@ -28,6 +28,7 @@ base64 = "0.23"
 png = "0.18"
 gif = "0.14"
 zune-jpeg = "0.5"
+miniz_oxide = "0.8.9"
 zip = { version = "9", default-features = false, features = ["deflate"] }
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "io-util", "io-std", "net", "sync", "time", "process", "signal"] }
 rmcp = { version = "3", features = ["server", "client", "transport-io", "transport-child-process"] }

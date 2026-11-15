@@ -6,6 +6,7 @@
 //! differences into one undo step; [`Document::rollback`] restores everything. Savepoints give
 //! per-command atomicity inside a longer, explicit transaction.
 
+use crate::extras::ProjectExtras;
 use std::collections::{BTreeMap, BTreeSet};
 
 use schemars::JsonSchema;
@@ -73,6 +74,9 @@ pub struct ProjectModel {
     pub metadata: BTreeMap<String, serde_json::Value>,
     #[serde(default)]
     pub export: ExportDefaults,
+    /// Dados das ferramentas de jogo no nível do projeto.
+    #[serde(default, skip_serializing_if = "ProjectExtras::is_empty")]
+    pub extras: ProjectExtras,
     pub next_id: u32,
 }
 
@@ -207,6 +211,7 @@ impl Document {
             references: Vec::new(),
             metadata: BTreeMap::new(),
             export: ExportDefaults::default(),
+            extras: ProjectExtras::default(),
             next_id: 0,
         };
         Document::from_parts(model, ImageStore::new(), Vec::new())

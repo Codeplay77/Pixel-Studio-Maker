@@ -2,13 +2,22 @@
 //! `.psmproj` file format, import of PNG/GIF/sheets and every export (PNG, frame sequence, GIF,
 //! sprite sheet, atlas, JSON metadata, Godot SpriteFrames).
 
+pub mod aseprite;
 pub mod document;
 pub mod export;
+pub mod extras;
 pub mod format;
+pub mod godot;
 pub mod import;
+pub mod palette_file;
+pub mod rpgmaker;
+pub mod texto;
+pub mod tileset;
 pub mod time;
+pub mod variants;
 
 pub use document::{CommitInfo, Document, ProjectModel, Reference, Snapshot};
+pub use extras::ProjectExtras;
 
 #[derive(Debug, thiserror::Error)]
 pub enum ProjectError {

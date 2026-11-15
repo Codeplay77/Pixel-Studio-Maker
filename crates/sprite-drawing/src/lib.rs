@@ -4,11 +4,18 @@
 //! goes through a [`Canvas`], which respects an optional clip mask and records what changed.
 //! [`sdc`] defines the Sprite Drawing Commands, the JSON language agents batch operations in.
 
+pub mod autotile;
 pub mod effects;
 pub mod fill;
+pub mod nine_slice;
+pub mod normal_map;
 pub mod pixelate;
 pub mod raster;
 pub mod sdc;
+pub mod select;
+pub mod stroke;
+pub mod text;
+pub mod tiles;
 pub mod transform;
 
 use sprite_core::{Color, DirtyRect, Image, Mask, Point, Rect};

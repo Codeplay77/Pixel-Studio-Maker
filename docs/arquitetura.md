@@ -18,7 +18,7 @@ edição existe só na interface.
 | `sprite-drawing` | Rasterizadores pixel-perfect, preenchimento, contorno, dithering, degradês, sombreamento, padrões, transformações e a linguagem SDC | core |
 | `sprite-animation` | Modelo do sprite (layers, cels, frames, animações por direção, anchors, regiões, poses), composição de frames, onion skin, layout de sprite sheets, validação | core, drawing |
 | `sprite-project` | Documento com histórico transacional e snapshots, formato `.psmproj`, importação PNG/GIF, exportações | core, drawing, animation |
-| `sprite-commands` | A camada única de comandos (85), com schemas JSON, códigos de erro, limites e política de pastas | todos acima |
+| `sprite-commands` | A camada única de comandos (126), com schemas JSON, códigos de erro, limites e política de pastas | todos acima |
 | `sprite-runtime` | Processo que guarda o estado oficial; protocolo IPC; cliente | commands, project |
 | `sprite-mcp` | Servidor MCP (`rmcp`, stdio): ferramentas, recursos e prompts | runtime, commands |
 | `apps/desktop/src-tauri` | App Tauri: cliente do runtime para a interface | runtime, commands |

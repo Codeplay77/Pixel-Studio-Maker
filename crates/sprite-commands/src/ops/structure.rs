@@ -113,6 +113,7 @@ pub(crate) fn sprite_update(s: &mut Session, a: SpriteUpdate, ctx: &ExecContext)
                 r.shapes.values_mut().for_each(shift);
             }
         }
+        sp.extras.godot.resize_canvas((ow, oh), (w, h), offset, a.scale_content);
         sp.width = w;
         sp.height = h;
     }
@@ -339,6 +340,8 @@ fn copy_frame_content(doc: &mut Document, si: usize, from: u32, to: u32, mirror:
             r.shapes.insert(to, shape);
         }
     }
+    let width = sp.width;
+    sp.extras.godot.copy_frame(from, to, mirror.then_some(width));
     Ok(())
 }
 
@@ -458,6 +461,7 @@ fn remove_frames(doc: &mut Document, si: usize, ids: &[u32]) -> Result<(), Comma
     for r in &mut sp.regions {
         r.shapes.retain(|f, _| !ids.contains(f));
     }
+    sp.extras.godot.remove_frames(ids);
     for p in &mut sp.poses {
         if p.frame.is_some_and(|f| ids.contains(&f)) {
             p.frame = None;

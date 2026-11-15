@@ -7,7 +7,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/licen%C3%A7a-MIT-ff6fa8" alt="Licença MIT" /></a>
   <img src="https://img.shields.io/badge/plataforma-Windows-5fe3ff" alt="Plataforma: Windows" />
-  <img src="https://img.shields.io/badge/MCP-85%20ferramentas-ffd25f" alt="85 ferramentas MCP" />
+  <img src="https://img.shields.io/badge/MCP-126%20ferramentas-ffd25f" alt="126 ferramentas MCP" />
 </p>
 
 <p align="center"><img src="docs/editor.png" alt="O editor com o guerreiro de armadura verde aberto, as layers à direita e os 65 frames da caminhada na linha do tempo" /></p>
@@ -40,7 +40,17 @@ Tudo abaixo foi desenhado pelo Claude usando só as ferramentas MCP do editor
 - **Converter imagem em pixel art**: PNG, JPG ou GIF de qualquer tamanho viram pixel art estática, com
   tamanho de saída configurável, remoção de fundo, recorte automático ou manual, paleta calculada ou fixa,
   dithering, limpeza e contorno. Prévia ao vivo no editor; o mesmo comando (`image_pixelate`) no MCP.
-- **MCP**: 85 ferramentas com schema tipado, imagens de inspeção devolvidas como conteúdo do MCP,
+- **Para jogos**:
+  - **RPG Maker MZ/MV/VX Ace**: modelos nos tamanhos exatos (tilesets A1–E, personagens, faces, battler lateral, Window.png) e exportação de folha de personagem, faces e battler a partir das animações.
+  - **Tilesets**: grade de tiles, modo tile, colisões e terrenos, gerador de autotile (bloco A2 do RPG Maker ↔ 47 tiles do Godot) e prévia de mapa.
+  - **Godot 4**: TileSet `.tres`, cena `.tscn` com `AnimationPlayer`, hitboxes por frame e pontos (`Marker2D`), fonte BMFont, `NinePatchRect` e normal map.
+  - **Produção**: exportações que rodam sozinhas ao salvar e `psm export` para exportar em lote.
+- **Ferramentas de desenho**: simetria X/Y, traços que dão a volta no modo tile, pincéis de dithering e de
+  sombreado pela rampa da paleta, varinha mágica e laço com seleção por máscara, texto com fontes pixel e
+  9-slice.
+- **Paletas**: importa e exporta `.gpl`, `.hex`, `.pal` e `.txt`; variantes de paleta (o mesmo sprite em
+  outras cores, exportado de uma vez).
+- **MCP**: 126 ferramentas com schema tipado, imagens de inspeção devolvidas como conteúdo do MCP,
   recursos (guia do agente, estado do projeto, prévias) e prompts com fluxos de trabalho.
 - **Desenho em lote (SDC)**: dezenas de operações numa chamada, atômicas; matrizes de texto com legenda,
   RLE, patches de diferença, polígonos, curvas, contornos, dithering, degradês, sombreamento por direção
@@ -51,8 +61,9 @@ Tudo abaixo foi desenhado pelo Claude usando só as ferramentas MCP do editor
   Pipe, com revisões, transações, eventos em tempo real, recuperação automática e funcionamento sem
   janela.
 - **Formatos**: projeto `.psmproj` versionado (ZIP com manifesto JSON e PNGs, gravação atômica);
-  importa PNG, JPG (para conversão), GIF e sprite sheets; exporta PNG, sequência de PNGs, GIF, sprite sheet (5 layouts, com
-  alinhamento por pivô) com JSON e `SpriteFrames` do Godot 4.
+  importa PNG, JPG (para conversão), GIF, Aseprite (`.aseprite`, com layers e tags) e sprite sheets; exporta PNG, sequência de PNGs, GIF, sprite sheet (5 layouts, com
+  alinhamento por pivô) com JSON, `SpriteFrames`, cena e TileSet do Godot 4, BMFont, normal map e os formatos
+  do RPG Maker.
 
 ## Usar com o Claude Code
 
@@ -87,7 +98,7 @@ pnpm install
 pnpm dev                      # abre o editor em modo de desenvolvimento (compila o psm antes)
 pnpm build                    # instalador NSIS em target/release/bundle/nsis
 
-cargo test --workspace        # 105 testes: motor, comandos, runtime, MCP por stdio, regressão por imagem
+cargo test --workspace        # motor, comandos, runtime, MCP por stdio, regressão por imagem
 cargo clippy --workspace --all-targets -- -D warnings
 cargo run -p sprite-cli -- --help
 ```

@@ -1,9 +1,15 @@
 //! Command implementations, grouped by area.
 
 mod draw;
+mod ferramentas;
+pub(crate) mod godot;
 mod inspect;
 mod io;
+pub(crate) mod paletas;
+mod rpgmaker;
 pub(crate) mod structure;
+pub(crate) mod texto;
+pub(crate) mod tiles;
 
 use crate::{Command, CommandError, ErrorCode, ExecContext, Outcome, Session};
 
@@ -90,6 +96,47 @@ pub(crate) fn run(s: &mut Session, cmd: Command, ctx: &ExecContext) -> Result<Ou
         C::ExportFrames(a) => io::export_frames(s, a, ctx),
         C::ExportGif(a) => io::export_gif(s, a, ctx),
         C::ExportGodot(a) => io::export_godot(s, a, ctx),
+        C::RpgMakerTemplate(a) => rpgmaker::template(s, a, ctx),
+        C::ExportRpgMakerCharacter(a) => rpgmaker::export_character(s, a, ctx),
+        C::ExportRpgMakerFaces(a) => rpgmaker::export_faces(s, a, ctx),
+        C::ExportRpgMakerBattler(a) => rpgmaker::export_battler(s, a, ctx),
+        C::TileGridSet(a) => tiles::tile_grid_set(s, a),
+        C::TileInfo(a) => tiles::tile_info(s, a),
+        C::TileCollisionSet(a) => tiles::tile_collision_set(s, a),
+        C::TileTerrainSet(a) => tiles::tile_terrain_set(s, a),
+        C::AutotileGenerate(a) => tiles::autotile_generate(s, a, ctx),
+        C::TilePreviewMapSet(a) => tiles::tile_preview_map_set(s, a, ctx),
+        C::TilePreviewRender(a) => tiles::tile_preview_render(s, a, ctx),
+        C::ExportGodotTileset(a) => tiles::export_godot_tileset(s, a, ctx),
+        C::HitboxCreate(a) => godot::hitbox_create(s, a),
+        C::HitboxUpdate(a) => godot::hitbox_update(s, a),
+        C::HitboxSet(a) => godot::hitbox_set(s, a),
+        C::HitboxList(a) => godot::hitbox_list(s, a),
+        C::ExportGodotScene(a) => godot::export_godot_scene(s, a, ctx),
+        C::ExportJobSet(a) => godot::export_job_set(s, a),
+        C::ExportJobDelete(a) => godot::export_job_delete(s, a),
+        C::ExportJobList(_) => godot::export_job_list(s, ctx),
+        C::ExportJobsRun(a) => godot::export_jobs_run(s, a, ctx),
+        C::SelectColor(a) => ferramentas::select_color(s, a),
+        C::SelectPolygon(a) => ferramentas::select_polygon(s, a),
+        C::SelectionRead(a) => ferramentas::selection_read(s, a),
+        C::DrawText(a) => texto::draw_text(s, a),
+        C::TextMeasure(a) => texto::text_measure(s, a),
+        C::FontDefine(a) => texto::font_define(s, a, ctx),
+        C::FontInfo(a) => texto::font_info(s, a, ctx),
+        C::FontTemplate(a) => texto::font_template(s, a, ctx),
+        C::ExportBitmapFont(a) => texto::export_bitmap_font(s, a, ctx),
+        C::NineSliceSet(a) => texto::nine_slice_set(s, a),
+        C::NineSliceRender(a) => texto::nine_slice_render(s, a, ctx),
+        C::ExportNineSlice(a) => texto::export_nine_slice(s, a, ctx),
+        C::PaletteImport(a) => paletas::palette_import(s, a, ctx),
+        C::PaletteExport(a) => paletas::palette_export(s, a, ctx),
+        C::PaletteVariantSet(a) => paletas::palette_variant_set(s, a),
+        C::PaletteVariantDelete(a) => paletas::palette_variant_delete(s, a),
+        C::PaletteVariantList(a) => paletas::palette_variant_list(s, a),
+        C::PaletteVariantPreview(a) => paletas::palette_variant_preview(s, a, ctx),
+        C::ExportPaletteVariants(a) => paletas::export_palette_variants(s, a, ctx),
+        C::ExportNormalMap(a) => paletas::export_normal_map(s, a, ctx),
         other => Err(CommandError::new(ErrorCode::Unsupported, format!("{} é tratado pelo runtime", other.name()))),
     }
 }

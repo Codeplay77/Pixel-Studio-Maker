@@ -219,6 +219,7 @@ pub(crate) fn import_image(s: &mut Session, a: ImportImage, ctx: &ExecContext) -
     let path = ctx.paths.resolve(&a.path)?;
     // Optional conversion to pixel art first (static pictures only).
     let mut converted: Option<(serde_json::Value, Vec<Color>, Vec<String>)> = None;
+    let mut flattened = false;
     let mut frames: Vec<(Image, u32)> = match &a.pixelate {
         Some(opts) => {
             if a.slice.is_some() {
@@ -237,7 +238,20 @@ pub(crate) fn import_image(s: &mut Session, a: ImportImage, ctx: &ExecContext) -
             converted = Some((crate::picture::summary(&r, &source), r.palette.clone(), warnings));
             vec![(r.image, 100)]
         }
-        None => decode_frames(&read_file(&path)?)?.into_iter().map(|f| (f.image, f.duration_ms)).collect(),
+        None => {
+            let bytes = read_file(&path)?;
+            if sprite_project::aseprite::is_aseprite(&bytes) || sprite_project::aseprite::has_aseprite_extension(&path) {
+                // Aseprite: layers, frames, tags and palette as a new sprite; flattened otherwise.
+                let file = sprite_project::aseprite::parse(&bytes)?;
+                if matches!(a.mode, ImportMode::NewSprite) && a.slice.is_none() {
+                    return super::paletas::import_aseprite_sprite(s, &a, file, &path, ctx);
+                }
+                flattened = true;
+                file.composites().into_iter().map(|f| (f.image, f.duration_ms)).collect()
+            } else {
+                decode_frames(&bytes)?.into_iter().map(|f| (f.image, f.duration_ms)).collect()
+            }
+        }
     };
     if let Some(slice) = &a.slice {
         let first = frames.first().map(|f| f.0.clone()).ok_or_else(|| CommandError::invalid("imagem vazia"))?;
@@ -356,6 +370,9 @@ pub(crate) fn import_image(s: &mut Session, a: ImportImage, ctx: &ExecContext) -
             out.data["palette"] = json!(palette);
         }
         out.data["pixelate"] = summary;
+    }
+    if flattened {
+        out.warnings.push("arquivo do Aseprite importado achatado: a imagem composta de cada frame (layers só no modo new_sprite)".into());
     }
     Ok(out)
 }

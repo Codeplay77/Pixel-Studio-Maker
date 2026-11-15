@@ -5,7 +5,10 @@
 
 pub mod analysis;
 pub mod compose;
+pub mod extras;
 pub mod model;
+pub mod rpgmaker;
 pub mod sheet;
 
+pub use extras::SpriteExtras;
 pub use model::*;

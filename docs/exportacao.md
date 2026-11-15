@@ -56,3 +56,57 @@ original do frame.
 Para usar: copie o PNG e o `.tres` para o projeto Godot (o caminho `res://` pode ser escolhido com
 `res_path`), crie um `AnimatedSprite2D` e aponte `sprite_frames` para o `.tres`. A primeira linha de
 comentário do arquivo traz o `offset` sugerido para o pivô cair na origem do nó.
+
+### Cena com hitboxes (`export_godot_scene`)
+
+Grava `<nome>.tscn` com a sheet `.png` e o SpriteFrames `.tres` ao lado. A cena tem:
+
+- um `Node2D` raiz (`texture_filter = 1`, filtro nearest);
+- um `AnimatedSprite2D` "Sprite" com `centered = false` e `offset` igual a menos o pivô, para que a posição do nó seja o pivô;
+- um `Area2D` para cada hitbox, no grupo do tipo dela, com um `CollisionShape2D` "Shape" e um `RectangleShape2D` próprio;
+- um `Marker2D` para cada anchor;
+- um `AnimationPlayer` com uma animação por trilha, com o mesmo nome usado no SpriteFrames.
+
+Cada animação tem trilhas discretas para `Sprite:animation`, `Sprite:frame`, `Caixa/Shape:position`,
+`Caixa/Shape:shape:size`, `Caixa/Shape:disabled` e `Anchor:position`, todas relativas ao pivô. Se o `.tscn` cair
+dentro de um projeto Godot (há `project.godot` numa pasta acima), os caminhos `res://` saem dessa pasta.
+
+### TileSet (`export_godot_tileset`)
+
+Grava o PNG e um `TileSet` `.tres` com um `TileSetAtlasSource`:
+
+- só os tiles não vazios entram;
+- as colisões vão para `physics_layer_0`, em coordenadas relativas ao centro do tile;
+- os terrenos vão para `terrain_set_N`, com `terrain` e `terrains_peering_bit/*` em cada tile.
+
+Os modos dos conjuntos de terreno são `0` (cantos e lados), `1` (cantos) e `2` (lados).
+
+### Fonte bitmap e 9-slice
+
+- `export_bitmap_font` grava BMFont texto (`.fnt`) e o atlas `.png`. O Godot 4 importa o `.fnt` como FontFile.
+- `export_nine_slice` grava o PNG, um `.tscn` com `NinePatchRect` e um `.json` com as margens. O `NinePatchRect` vem com `patch_margin_*` e com `axis_stretch_*`: 0 estica, 1 repete, 2 repete encaixando.
+
+### Normal map
+
+`export_normal_map` grava um PNG RGB com o alfa copiado, para o campo Normal Map de um `CanvasTexture`. Ele usa
+o mesmo layout da sheet quando recebe `sheet` + `selection`, então casa pixel a pixel com a textura. A
+convenção é OpenGL (Y para cima), a do Godot; para DirectX, use `flip_y`.
+
+### Tarefas de exportação
+
+`export_job_set` guarda uma exportação no projeto: um comando `export_*` e seus argumentos. As tarefas com
+`on_save` rodam depois de cada `project_save`. `psm export projeto.psmproj [--job NOME]...` roda as tarefas sem
+runtime, para scripts de build, e sai com código 1 se alguma falhar.
+
+## RPG Maker (MZ, MV e VX Ace)
+
+| Arquivo | MZ/MV | VX Ace | Comando |
+|---|---|---|---|
+| Personagens | 12×8 células (48 px) = 576×384; `$` = 3×4 células | 32 px = 384×256 | `export_rpgmaker_character` |
+| Faces | 4×2 de 144×144 = 576×288 | 96×96 = 384×192 | `export_rpgmaker_faces` |
+| Battler lateral | 9×6 de 64×64 = 576×384 | não existe | `export_rpgmaker_battler` |
+| Tilesets A1–A5, B–E e Window | tamanhos exatos de cada motor | idem | `rpgmaker_template` (modelo para desenhar) |
+
+Na folha de personagem, as linhas são baixo, esquerda, direita e cima, com 3 colunas por direção. O RPG
+Maker toca as colunas na ordem 0, 1, 2, 1. No battler, o movimento *i* com quadro *p* fica na coluna
+`floor(i/6)*3 + p` e na linha `i % 6`.

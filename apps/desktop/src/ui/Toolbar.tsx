@@ -1,6 +1,13 @@
 import { ArrowLeftRight, Brush, PictureInPicture2, Ruler, Circle, Copy, Crosshair, Eraser, FlipHorizontal2, FlipVertical2, Grid3x3, Hand, Minus, MousePointer2, PaintBucket, Pipette, RotateCw, Scissors, Square, SquareDashed, ClipboardPaste, Trash2 } from "lucide-react";
 import type { ReactNode } from "react";
 import { currentSprite, useEditor, type Tool } from "../core/store";
+import { maskSelectionActions } from "./tools/selection";
+import { FERRAMENTAS_TOOLS, FerramentasOptions } from "./tools/ToolsUi";
+import { Type as TextIcon } from "lucide-react";
+import { TextToolOptions } from "./texto/TextToolOptions";
+import { Swords } from "lucide-react";
+import { HitboxToolHint } from "./godot/HitboxesPanel";
+import { TileModeButton } from "./tiles/TilesPanel";
 
 export const TOOLS: { id: Tool; icon: ReactNode; label: string; key: string }[] = [
   { id: "pencil", icon: <Brush size={17} />, label: "Lápis", key: "B" },
@@ -13,32 +20,14 @@ export const TOOLS: { id: Tool; icon: ReactNode; label: string; key: string }[] 
   { id: "move", icon: <Hand size={17} />, label: "Mover (layer ou seleção)", key: "V" },
   { id: "eyedropper", icon: <Pipette size={17} />, label: "Conta-gotas", key: "I" },
   { id: "anchor", icon: <Crosshair size={17} />, label: "Posicionar anchor", key: "A" },
+  ...FERRAMENTAS_TOOLS,
+  { id: "text", icon: <TextIcon size={17} />, label: "Texto", key: "T" },
+  { id: "hitbox", icon: <Swords size={17} />, label: "Hitbox (arraste a caixa no frame)", key: "H" },
 ];
 
+/** Ações da seleção (retângulo ou máscara): ver tools/selection.ts. */
 export function selectionActions() {
-  const s = useEditor.getState();
-  const t = { sprite: s.spriteId, layer: s.layerId, frame: s.frameId };
-  return {
-    remove: () => s.selection && void s.run("pixel_clear", { ...t, rect: s.selection }),
-    copy: () => {
-      if (!s.selection || s.spriteId === undefined || s.layerId === undefined || s.frameId === undefined) return;
-      s.set({ clipboard: { sprite: s.spriteId, layer: s.layerId, frame: s.frameId, rect: s.selection } });
-      s.toast("Seleção copiada");
-    },
-    cut: () => {
-      const a = selectionActions();
-      a.copy();
-      a.remove();
-    },
-    paste: () => {
-      const c = s.clipboard;
-      if (!c) return;
-      const at = s.selection ? [s.selection.x, s.selection.y] : [c.rect.x, c.rect.y];
-      void s.run("draw_batch", { ...t, label: "Colar", ops: [{ op: "copy", from: { layer: c.layer, frame: c.frame }, rect: c.rect, to: at, mode: "skip_transparent" }] });
-      s.set({ selection: { x: at[0], y: at[1], w: c.rect.w, h: c.rect.h } });
-    },
-    transform: (transform: Record<string, unknown>) => void s.run("draw_transform", { ...t, transform, rect: s.selection ?? undefined }),
-  };
+  return maskSelectionActions();
 }
 
 function Swatch({ color, title, onChange }: { color: string; title: string; onChange: (c: string) => void }) {
@@ -119,20 +108,24 @@ export function Toolbar() {
 export function ToolOptions() {
   const s = useEditor();
   const tool = TOOLS.find((t) => t.id === s.tool)!;
-  const brushTool = ["pencil", "eraser", "line"].includes(s.tool);
+  const brushTool = ["pencil", "eraser", "line", "dither", "shade"].includes(s.tool);
   return <div className="tool-options" aria-label="Opções da ferramenta">
     <span className="flex min-w-24 items-center gap-2 font-medium text-ink">{tool.icon}{tool.label.split(" (")[0]}</span>
     <span className="h-5 w-px bg-line" />
     {brushTool && <label className="flex items-center gap-2 text-muted">Espessura <select aria-label="Espessura do pincel" value={s.brush} onChange={(e) => s.set({ brush: Number(e.target.value) })}>{Array.from({ length: 8 }, (_, i) => <option key={i} value={i + 1}>{i + 1} px</option>)}</select></label>}
     {["rect", "ellipse"].includes(s.tool) && <label className="flex items-center gap-2 text-muted"><input type="checkbox" checked={s.filledShapes} onChange={(e) => s.set({ filledShapes: e.target.checked })} /> Preencher forma</label>}
     {s.tool === "fill" && <span className="text-muted">Shift + clique para substituir a cor em toda a camada</span>}
-    {s.tool === "select" && <span className="text-muted">Arraste para selecionar · Esc para limpar</span>}
+    {s.tool === "select" && <span className="text-muted">Arraste para selecionar · Shift: somar · Alt: subtrair · Esc para limpar</span>}
     {s.tool === "move" && <span className="text-muted">Arraste a camada ou a seleção</span>}
     {s.tool === "eyedropper" && <span className="text-muted">Clique no canvas para capturar uma cor</span>}
     {s.tool === "anchor" && <span className="text-muted">{s.anchorTarget ? `Ponto: ${s.anchorTarget}` : "Escolha um ponto no painel Pontos"}</span>}
+    <FerramentasOptions />
+    {s.tool === "text" && <TextToolOptions />}
+    {s.tool === "hitbox" && <HitboxToolHint />}
     <div className="ml-auto flex items-center gap-1">
       <button className={`btn h-8 ${s.grid ? "text-accent bg-accent/10" : "text-muted"}`} aria-pressed={s.grid} title="Mostrar grade (#)" onClick={() => s.set({ grid: !s.grid })}><Grid3x3 size={14} /> Grade</button>
       <button className={`btn h-8 ${s.showPreview ? "text-accent bg-accent/10" : "text-muted"}`} aria-pressed={s.showPreview} onClick={() => s.set({ showPreview: !s.showPreview })}><PictureInPicture2 size={14} /> Prévia</button>
+      <TileModeButton />
     </div>
   </div>;
 }

@@ -2,6 +2,13 @@ import { open, save } from "@tauri-apps/plugin-dialog";
 import { X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { currentAnimation, currentSprite, useEditor } from "../core/store";
+import { BLANK_TEMPLATE, choiceSize, createRpgMakerProject, RpgMakerTemplateFields, type RpgTemplateChoice } from "./rpgmaker/NewProjectTemplate";
+import { ExportRpgMakerPanel, isRpgMakerExport, RpgMakerExportOptions, rpgMakerExportCalls } from "./rpgmaker/ExportRpgMaker";
+import { TilesetExportNote } from "./tiles/TileDialogs";
+import { ExportOnSaveOption, rememberExportJob } from "./godot/ExportJobs";
+import { NineSliceExportRows } from "./texto/TextPanel";
+import { nineSliceAxes } from "./texto/state";
+import { NormalMapExportOptions, VariantExportOptions, normalMapArgs, variantExportArgs } from "./paletas/ExportOptions";
 
 function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -40,6 +47,8 @@ export function NewProjectDialog() {
   const [w, setW] = useState(64);
   const [h, setH] = useState(64);
   const [bg, setBg] = useState(false);
+  const [tpl, setTpl] = useState<RpgTemplateChoice>(BLANK_TEMPLATE);
+  const fixed = choiceSize(tpl);
   const close = () => s.set({ dialog: null });
   return (
     <Modal title="Novo projeto" onClose={close}>
@@ -47,6 +56,8 @@ export function NewProjectDialog() {
       <Row label="Nome">
         <input autoFocus value={name} onChange={(e) => setName(e.target.value)} className="w-56" />
       </Row>
+      <RpgMakerTemplateFields value={tpl} onChange={setTpl} />
+      {!tpl.kind && (<>
       <Row label="Tamanho">
         <span className="flex items-center gap-1">
           <input type="number" min={1} max={1024} value={w} onChange={(e) => setW(Number(e.target.value))} className="w-16" />×
@@ -63,11 +74,12 @@ export function NewProjectDialog() {
       <Row label="Fundo branco na primeira camada">
         <input type="checkbox" checked={bg} onChange={(e) => setBg(e.target.checked)} />
       </Row>
+      </>)}
       <div className="mt-4 flex justify-end gap-2">
         <button className="btn" onClick={close}>
           Cancelar
         </button>
-        <button className="btn btn-primary" disabled={!name.trim() || !Number.isInteger(w) || !Number.isInteger(h) || w < 1 || h < 1 || w > 1024 || h > 1024} onClick={() => void s.run("project_create", { name, width: w, height: h, background: bg ? "#ffffff" : undefined }).then(close)}>
+        <button className="btn btn-primary" disabled={!name.trim() || (tpl.kind ? !fixed : !Number.isInteger(w) || !Number.isInteger(h) || w < 1 || h < 1 || w > 1024 || h > 1024)} onClick={() => void (tpl.kind ? createRpgMakerProject(s.run, name, tpl) : s.run("project_create", { name, width: w, height: h, background: bg ? "#ffffff" : undefined })).then(close).catch(() => {})}>
           Criar projeto
         </button>
       </div>
@@ -84,7 +96,7 @@ export function ImportDialog() {
   const [anim, setAnim] = useState("");
   const close = () => s.set({ dialog: null });
   const go = async () => {
-    const path = await open({ multiple: false, filters: [{ name: "Imagens", extensions: ["png", "gif"] }] });
+    const path = await open({ multiple: false, filters: [{ name: "Imagens e Aseprite", extensions: ["png", "gif", "aseprite", "ase"] }] });
     if (typeof path !== "string") return;
     await s
       .run("import_image", { sprite: s.spriteId, path, mode, slice: slice ? { cell_width: cw, cell_height: ch } : undefined, animation: anim || undefined })
@@ -95,7 +107,7 @@ export function ImportDialog() {
       .catch(() => {});
   };
   return (
-    <Modal title="Importar PNG ou GIF" onClose={close}>
+    <Modal title="Importar PNG, GIF ou Aseprite" onClose={close}>
       <Row label="Como">
         <select value={mode} onChange={(e) => setMode(e.target.value)} className="w-56">
           <option value="new_sprite">Sprite novo</option>
@@ -118,7 +130,7 @@ export function ImportDialog() {
       <Row label="Criar animação (opcional)">
         <input placeholder="nome" value={anim} onChange={(e) => setAnim(e.target.value)} className="w-40" />
       </Row>
-      <p className="mt-2 text-[12px] text-faint">Os pixels são preservados exatamente, sem suavização.</p>
+      <p className="mt-2 text-[12px] text-faint">Os pixels são preservados exatamente, sem suavização. Um .aseprite como sprite novo mantém layers, frames, tags (animações) e paleta.</p>
       <div className="mt-4 flex justify-end gap-2">
         <button className="btn" onClick={close}>
           Cancelar
@@ -146,9 +158,30 @@ export function ExportDialog() {
   const base = sprite.name.replace(/[^\w-]+/g, "_");
   const selection = onlyAnim && anim ? { animations: [anim.id] } : {};
   const go = async () => {
-    const ext = { png: "png", spritesheet: "png", gif: "gif", godot: "tres", frames: "" }[kind] ?? "png";
+    const exts: Record<string, string> = {
+      png: "png",
+      spritesheet: "png",
+      gif: "gif",
+      godot: "tres",
+      frames: "",
+      rpgmaker_character: "png",
+      rpgmaker_faces: "png",
+      rpgmaker_battler: "png",
+      tileset: "tres",
+      godot_scene: "tscn",
+      bmfont: "fnt",
+      nineslice: "tscn",
+      palette_variants: "",
+      normal_map: "png",
+    };
+    // Formatos que gravam vários arquivos pedem uma pasta.
+    const dirKinds: string[] = [
+      "frames",
+      "palette_variants",
+    ];
+    const ext = exts[kind] ?? "png";
     let path: string | null;
-    if (kind === "frames") {
+    if (dirKinds.includes(kind)) {
       const dir = await open({ directory: true });
       path = typeof dir === "string" ? dir : null;
     } else {
@@ -163,6 +196,15 @@ export function ExportDialog() {
       gif: ["export_gif", { ...t, path, scale, animation: anim?.id, direction: s.direction ?? undefined }],
       godot: ["export_godot_metadata", { ...t, path, scale, sheet, selection }],
       frames: ["export_frames", { ...t, directory: path, scale, selection }],
+      ...rpgMakerExportCalls({ ...t, path, scale, frameId: s.frameId }),
+      tileset: ["export_godot_tileset", { ...t, path, frame: s.frameId, scale }],
+      godot_scene: ["export_godot_scene", { ...t, path, scale, sheet, selection }],
+      // With "Exportar sempre que salvar" on, the same command and arguments become an export job.
+      ...rememberExportJob(() => calls[kind]),
+      bmfont: ["export_bitmap_font", { ...t, font: sprite.id, path, scale }],
+      nineslice: ["export_nine_slice", { ...t, path, scale, frame: s.frameId, ...nineSliceAxes() }],
+      palette_variants: ["export_palette_variants", { ...t, directory: path, scale, ...variantExportArgs({ frame: s.frameId, animation: anim?.id, direction: s.direction ?? undefined, selection }) }],
+      normal_map: ["export_normal_map", { ...t, path, scale, ...normalMapArgs({ frame: s.frameId, selection }) }],
     };
     const [name, args] = calls[kind];
     await s.run(name, args).then(() => (s.toast("Exportado"), close())).catch(() => {});
@@ -178,6 +220,13 @@ export function ExportDialog() {
             GIF da animação {anim ? `"${anim.name}"` : "(escolha uma animação)"}
           </option>
           <option value="frames">Sequência de PNGs</option>
+          <RpgMakerExportOptions />
+          <option value="tileset">Godot 4: TileSet (.tres + PNG)</option>
+          <option value="godot_scene">Godot 4: cena (.tscn com AnimationPlayer, hitboxes e pontos)</option>
+          <option value="bmfont" disabled={!sprite.extras?.texto?.font}>Fonte bitmap (.fnt + PNG){sprite.extras?.texto?.font ? "" : " — defina a fonte na aba Texto"}</option>
+          <option value="nineslice" disabled={!sprite.extras?.texto?.nine_slice}>9-slice (Godot NinePatchRect){sprite.extras?.texto?.nine_slice ? "" : " — defina as margens na aba Texto"}</option>
+          <option value="palette_variants" disabled={!s.doc?.model.extras?.paletas?.variants?.length}>Variantes de paleta (uma sheet/PNG/GIF por variante)</option>
+          <option value="normal_map">Normal map (Godot)</option>
         </select>
       </Row>
       {(kind === "spritesheet" || kind === "godot") && (
@@ -199,11 +248,17 @@ export function ExportDialog() {
           </Row>
         </>
       )}
-      {anim && kind !== "png" && kind !== "gif" && (
+      {anim && ["spritesheet", "godot", "frames", "godot_scene", "palette_variants", "normal_map"].includes(kind) && (
         <Row label={`Só a animação "${anim.name}"`}>
           <input type="checkbox" checked={onlyAnim} onChange={(e) => setOnlyAnim(e.target.checked)} />
         </Row>
       )}
+      {isRpgMakerExport(kind) && <ExportRpgMakerPanel kind={kind} />}
+      {kind === "tileset" && <TilesetExportNote />}
+      <ExportOnSaveOption kind={kind} />
+      {kind === "nineslice" && <NineSliceExportRows />}
+      {kind === "palette_variants" && <VariantExportOptions hasAnimation={!!anim} />}
+      {kind === "normal_map" && <NormalMapExportOptions />}
       <Row label="Escala">
         <select value={scale} onChange={(e) => setScale(Number(e.target.value))} className="w-20">
           {[1, 2, 3, 4, 6, 8].map((v) => (

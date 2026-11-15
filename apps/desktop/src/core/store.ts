@@ -4,8 +4,26 @@
 import { create } from "zustand";
 import * as api from "./api";
 import type { Animation, ClientSummary, OpRecord, ProjectState, ProjectSummary, Rect, RuntimeEvent, Sprite } from "./types";
+import type { ClipboardPixels, DitherPatternName, SelectionMask, SymmetryState } from "../ui/tools/types";
+import type { TextDraft } from "../ui/texto/state";
 
-export type Tool = "pencil" | "eraser" | "fill" | "line" | "rect" | "ellipse" | "select" | "eyedropper" | "move" | "anchor";
+export type Tool =
+  | "pencil"
+  | "eraser"
+  | "fill"
+  | "line"
+  | "rect"
+  | "ellipse"
+  | "select"
+  | "eyedropper"
+  | "move"
+  | "anchor"
+  | "dither"
+  | "shade"
+  | "wand"
+  | "lasso"
+  | "text"
+  | "hitbox";
 
 export type Toast = { id: number; kind: "info" | "error"; text: string };
 
@@ -44,12 +62,63 @@ type EditorState = {
   frameEpoch: Record<number, number>;
   epoch: number;
   toasts: Toast[];
-  panel: "layers" | "palette" | "props" | "regions" | "anchors" | "inspect";
+  panel:
+    | "layers"
+    | "palette"
+    | "props"
+    | "regions"
+    | "anchors"
+    | "inspect"
+    | "tiles"
+    | "hitboxes"
+    | "text";
   mcpOpen: boolean;
-  dialog?: "new" | "export" | "import" | "pixelate" | null;
+  dialog?:
+    | "new"
+    | "export"
+    | "import"
+    | "pixelate"
+    | "autotile"
+    | "tilemap"
+    | "exportJobs"
+    | null;
   lastAgentActivity?: string;
   /** Anchor que a ferramenta "anchor" posiciona ao clicar no canvas. */
   anchorTarget?: string;
+
+  /** Modo tile: o canvas mostra o sprite repetido em volta e os traços dão a volta nas bordas. */
+  tileMode: boolean;
+  /** Grade de tiles e colisões por cima do canvas (sprites com grade). */
+  showTileGrid: boolean;
+  /** Tile [coluna, linha] escolhido no painel Tiles. */
+  tileSelected: [number, number];
+  /** Caixa (nome) que a ferramenta "hitbox" posiciona ao arrastar no canvas. */
+  hitboxTarget?: string;
+  /** Mostrar as hitboxes do frame atual no canvas. */
+  showHitboxes: boolean;
+  /** Caixas ocultas no canvas (ids). */
+  hiddenHitboxes: number[];
+  /** No diálogo Exportar: também gravar a exportação como tarefa que roda ao salvar. */
+  exportOnSave: boolean;
+  /** Seleção por máscara (varinha, laço, Shift/Alt), calculada no Rust. `selection` é a caixa dela: o mesmo objeto que `selectionMask.bounds`. */
+  selectionMask?: SelectionMask;
+  /** Pixels copiados (selection_read); colar escreve exatamente estes pixels. */
+  clipboardPixels?: ClipboardPixels;
+  /** Simetria do lápis, da borracha e dos pincéis de dithering e sombreado. */
+  symmetry: SymmetryState;
+  ditherPattern: DitherPatternName;
+  /** Densidade da cor no pincel de dithering (0 a 1). */
+  ditherDensity: number;
+  /** Pincel de dithering pinta a outra cor onde o padrão não pinta. */
+  ditherFill: boolean;
+  wandTolerance: number;
+  wandContiguous: boolean;
+  /** Varinha amostra a imagem composta (todas as layers visíveis). */
+  wandComposite: boolean;
+  /** Caixa aberta da ferramenta Texto (posição, texto e caixa medida pelo Rust). */
+  textDraft?: TextDraft;
+  /** Mostrar as linhas-guia do 9-slice no canvas. */
+  nineSliceGuides: boolean;
 
   set: (p: Partial<EditorState>) => void;
   toast: (text: string, kind?: Toast["kind"]) => void;
@@ -85,6 +154,21 @@ export const useEditor = create<EditorState>((set, get) => ({
   toasts: [],
   panel: "layers",
   mcpOpen: false,
+
+  tileMode: false,
+  showTileGrid: true,
+  tileSelected: [0, 0],
+  showHitboxes: true,
+  hiddenHitboxes: [],
+  exportOnSave: false,
+  symmetry: { x: false, y: false },
+  ditherPattern: "bayer4",
+  ditherDensity: 0.5,
+  ditherFill: false,
+  wandTolerance: 0,
+  wandContiguous: true,
+  wandComposite: false,
+  nineSliceGuides: false,
 
   set: (p) => set(p),
 
