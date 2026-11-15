@@ -122,7 +122,6 @@ export function PixelateDialog() {
       }
     }, 220);
     return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, argsKey, valid]);
 
   const choose = async () => {

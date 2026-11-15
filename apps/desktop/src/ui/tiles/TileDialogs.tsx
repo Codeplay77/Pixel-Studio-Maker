@@ -118,7 +118,6 @@ export function TileMapDialog() {
   useEffect(() => {
     if (!sprite || !hasMap) return;
     void s.run("tile_preview_render", { sprite: sprite.id, frame: s.frameId, grid: true }).then(show).catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sprite?.id, hasMap]);
   if (!sprite) return null;
   const edit = (args: Record<string, unknown>) => void s.run("tile_preview_map_set", { sprite: sprite.id, ...args }).then(show).catch(() => {});

@@ -113,7 +113,6 @@ export function ExportJobsDialog() {
   }, []);
   useEffect(() => {
     void api.call("export_job_list", {}, s.projectId).then((r) => setBaseDir(r.data.base_dir)).catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jobs.length]);
   const runJobs = (names: string[]) =>
     void s

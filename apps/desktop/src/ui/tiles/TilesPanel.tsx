@@ -295,7 +295,6 @@ function TerrainSection({ sprite, data }: { sprite: Sprite; data: TileData }) {
     setSetIndex(current?.set ?? 0);
     setTerrain(current?.terrain ?? (sets[0]?.terrains.length ? 0 : undefined));
     setBits(current?.peering ?? {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
   const set = sets[setIndex];
   const sendSet = (name: string, mode: TerrainMode, terrains: { name: string; color: string }[]) =>

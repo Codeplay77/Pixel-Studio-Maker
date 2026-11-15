@@ -65,7 +65,6 @@ function SpriteFontSection({ sprite }: { sprite: Sprite }) {
     setSpacing(def.letter_spacing);
     setSpace(def.space_width);
     setLineHeight(def.line_height);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, sprite.id]);
   useEffect(() => setSample(undefined), [sprite.id]);
 
@@ -208,7 +207,6 @@ function NineSliceSection({ sprite }: { sprite: Sprite }) {
     setTop(m.top);
     setRight(m.right);
     setBottom(m.bottom);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, sprite.id]);
   useEffect(() => {
     setImg(undefined);

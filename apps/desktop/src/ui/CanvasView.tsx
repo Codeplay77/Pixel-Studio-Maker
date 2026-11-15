@@ -94,7 +94,6 @@ export function CanvasView() {
     const z = Math.max(1, Math.min(32, Math.floor(Math.min((size.w - 80) / sprite.width, (size.h - 80) / sprite.height))));
     s.set({ zoom: z });
     setPan({ x: 0, y: 0 });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spriteKey]);
 
   useEffect(() => {

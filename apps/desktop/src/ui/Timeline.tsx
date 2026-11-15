@@ -68,7 +68,6 @@ export function Timeline() {
     };
     tick();
     return () => window.clearTimeout(timer.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [s.playing, anim?.id, anim?.loop_mode, frames.join(","), sprite?.id]);
 
   if (!sprite) return <footer className="h-[150px] shrink-0 border-t border-line bg-shell" />;
