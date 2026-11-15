@@ -13,7 +13,7 @@ import { PixelateDialog } from "./PixelateDialog";
 import { RightPanel } from "./RightPanel";
 import { Timeline } from "./Timeline";
 import { selectionActions, ToolOptions, Toolbar } from "./Toolbar";
-import { openProjectDialog, saveProject, TopBar } from "./TopBar";
+import { openProjectDialog, requestCloseProject, saveProject, TopBar } from "./TopBar";
 import { AutotileDialog, TileMapDialog } from "./tiles/TileDialogs";
 import { ExportJobsDialog } from "./godot/ExportJobs";
 import { FERRAMENTAS_KEYS } from "./tools/ToolsUi";
@@ -134,6 +134,10 @@ export function App() {
     if (ctrl && k === "s") return e.preventDefault(), void saveProject(e.shiftKey);
     if (ctrl && k === "o") return e.preventDefault(), void openProjectDialog();
     if (ctrl && k === "n") return e.preventDefault(), st.set({ dialog: "new" });
+    if (ctrl && k === "w") {
+      const p = st.projects.find((x) => x.id === st.projectId);
+      return e.preventDefault(), p && requestCloseProject(p);
+    }
     if (ctrl && k === "c") return selectionActions().copy();
     if (ctrl && k === "x") return selectionActions().cut();
     if (ctrl && k === "v") return selectionActions().paste();

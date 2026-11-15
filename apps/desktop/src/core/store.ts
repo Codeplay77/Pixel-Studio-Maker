@@ -85,6 +85,8 @@ type EditorState = {
   lastAgentActivity?: string;
   /** Anchor que a ferramenta "anchor" posiciona ao clicar no canvas. */
   anchorTarget?: string;
+  /** Projeto cuja aba pediu para fechar com alterações não salvas (abre a confirmação). */
+  closingProject?: string;
 
   /** Modo tile: o canvas mostra o sprite repetido em volta e os traços dão a volta nas bordas. */
   tileMode: boolean;
