@@ -2,6 +2,14 @@
 
 ## Não publicado
 
+## 0.2.2 — 2026-11-20
+
+- **Revisão de assets para agentes:** `frame_inspect` informa ocupação, margens, luminância, cores próximas e diferenças entre bordas; `frame_compare` mostra mudanças por região e deslocamento de anchors.
+- **Tiles:** `frame_preview` oferece prévia repetida 3×3 para avaliar a continuidade visual.
+- **Animações:** valida a transição de fechamento dos ciclos e a posição em relação ao chão; a prévia GIF respeita animações sem repetição. Limites de validação podem ser ajustados.
+- **Confiabilidade MCP:** evita repetir automaticamente escritas após uma desconexão e orienta a conferir o estado; corrige o prompt de caminhada e a geração de patches para paletas com transparência.
+- **Desempenho e testes:** reduz renderizações desnecessárias no editor, adiciona testes de regressão e um benchmark reproduzível do motor.
+
 ## 0.2.1 — 2026-11-20
 
 - Desenho mais fluido: agrupa movimentos do pincel, reduz atualizações do projeto e limita o redesenho do fundo à área visível.
