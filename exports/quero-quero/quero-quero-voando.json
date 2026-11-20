@@ -1,0 +1,361 @@
+{
+  "animations": [
+    {
+      "direction": "W",
+      "durations": [
+        90,
+        70,
+        60,
+        60,
+        70,
+        90,
+        80,
+        70,
+        60,
+        60,
+        70,
+        80
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "loop": "loop",
+      "name": "Voo"
+    }
+  ],
+  "app": "Pixel Studio Maker",
+  "cell": {
+    "h": 80,
+    "w": 80
+  },
+  "format": "psm-sheet",
+  "frames": [
+    {
+      "animation": "Voo",
+      "dest": [
+        0,
+        0
+      ],
+      "direction": "W",
+      "duration": 90,
+      "frame": 6,
+      "h": 80,
+      "index": 0,
+      "pivot": [
+        40,
+        40
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        80,
+        0
+      ],
+      "direction": "W",
+      "duration": 70,
+      "frame": 7,
+      "h": 80,
+      "index": 1,
+      "pivot": [
+        120,
+        40
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 80,
+      "y": 0
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        160,
+        0
+      ],
+      "direction": "W",
+      "duration": 60,
+      "frame": 8,
+      "h": 80,
+      "index": 2,
+      "pivot": [
+        200,
+        40
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 160,
+      "y": 0
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        240,
+        0
+      ],
+      "direction": "W",
+      "duration": 60,
+      "frame": 9,
+      "h": 80,
+      "index": 3,
+      "pivot": [
+        280,
+        40
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 240,
+      "y": 0
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        0,
+        80
+      ],
+      "direction": "W",
+      "duration": 70,
+      "frame": 10,
+      "h": 80,
+      "index": 4,
+      "pivot": [
+        40,
+        120
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 0,
+      "y": 80
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        80,
+        80
+      ],
+      "direction": "W",
+      "duration": 90,
+      "frame": 11,
+      "h": 80,
+      "index": 5,
+      "pivot": [
+        120,
+        120
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 80,
+      "y": 80
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        160,
+        80
+      ],
+      "direction": "W",
+      "duration": 80,
+      "frame": 12,
+      "h": 80,
+      "index": 6,
+      "pivot": [
+        200,
+        120
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 160,
+      "y": 80
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        240,
+        80
+      ],
+      "direction": "W",
+      "duration": 70,
+      "frame": 13,
+      "h": 80,
+      "index": 7,
+      "pivot": [
+        280,
+        120
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 240,
+      "y": 80
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        0,
+        160
+      ],
+      "direction": "W",
+      "duration": 60,
+      "frame": 14,
+      "h": 80,
+      "index": 8,
+      "pivot": [
+        40,
+        200
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 0,
+      "y": 160
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        80,
+        160
+      ],
+      "direction": "W",
+      "duration": 60,
+      "frame": 15,
+      "h": 80,
+      "index": 9,
+      "pivot": [
+        120,
+        200
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 80,
+      "y": 160
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        160,
+        160
+      ],
+      "direction": "W",
+      "duration": 70,
+      "frame": 16,
+      "h": 80,
+      "index": 10,
+      "pivot": [
+        200,
+        200
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 160,
+      "y": 160
+    },
+    {
+      "animation": "Voo",
+      "dest": [
+        240,
+        160
+      ],
+      "direction": "W",
+      "duration": 80,
+      "frame": 17,
+      "h": 80,
+      "index": 11,
+      "pivot": [
+        280,
+        200
+      ],
+      "source": {
+        "h": 80,
+        "w": 80,
+        "x": 0,
+        "y": 0
+      },
+      "w": 80,
+      "x": 240,
+      "y": 160
+    }
+  ],
+  "image": "quero-quero-voando.png",
+  "scale": 1,
+  "size": {
+    "h": 240,
+    "w": 320
+  },
+  "sprite": {
+    "h": 80,
+    "name": "lapwing-bird-cartoon-free-png",
+    "origin": [
+      40,
+      40
+    ],
+    "w": 80
+  },
+  "version": 1
+}

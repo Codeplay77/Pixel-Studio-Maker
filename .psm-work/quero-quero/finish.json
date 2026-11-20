@@ -1,0 +1,6 @@
+[
+  {"tool":"animation_update","args":{"project":"f6286130","animation":"Voo","cycle":{"key_frames":[6,9,11,14],"contact_frames":[],"notes":"Voo lateral para a esquerda. Asas no alto, passagem, impulso para baixo e recuperacao com penas recolhidas. Corpo oscila 4 pixels; pernas recolhidas. Loop de 860 ms, 12 poses."}}},
+  {"tool":"project_save","args":{"project":"f6286130","path":"E:/CodePlay77 - YouTube/Github/Pixel Studio Maker/exports/quero-quero/quero-quero-voando.psmproj"}},
+  {"tool":"export_gif","args":{"project":"f6286130","animation":"Voo","direction":"W","scale":4,"path":"E:/CodePlay77 - YouTube/Github/Pixel Studio Maker/exports/quero-quero/quero-quero-voando.gif"}},
+  {"tool":"export_spritesheet","args":{"project":"f6286130","selection":{"animations":["Voo"]},"sheet":{"layout":"grid","columns":4},"path":"E:/CodePlay77 - YouTube/Github/Pixel Studio Maker/exports/quero-quero/quero-quero-voando.png"}}
+]

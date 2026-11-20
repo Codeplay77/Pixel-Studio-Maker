@@ -1,0 +1,10 @@
+[
+  {"tool":"snapshot_create","args":{"project":"f6286130","expected_revision":20,"name":"Original antes do voo"}},
+  {"tool":"sprite_update","args":{"project":"f6286130","sprite":1,"size":[80,80],"anchor":"center","origin":[40,40]}},
+  {"tool":"animation_create","args":{"project":"f6286130","sprite":1,"name":"Parado","use_frames":[3]}},
+  {"tool":"animation_create","args":{"project":"f6286130","sprite":1,"name":"Voo","directions":["W"],"frames":12,"duration_ms":70,"tags":["voo","loop","quero-quero"]}},
+  {"tool":"layer_properties","args":{"project":"f6286130","sprite":1,"layer":2,"name":"Corpo"}},
+  {"tool":"layer_create","args":{"project":"f6286130","sprite":1,"name":"Asa distante"}},
+  {"tool":"layer_reorder","args":{"project":"f6286130","sprite":1,"layer":"Asa distante","index":0}},
+  {"tool":"layer_create","args":{"project":"f6286130","sprite":1,"name":"Asa proxima"}}
+]

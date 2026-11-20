@@ -6,7 +6,7 @@ import { useEditor, type Tool } from "../../core/store";
 import type { Point } from "../../core/types";
 import type { SymmetryState } from "./types";
 
-export type StrokeDrag = { kind: "stroke"; points: Point[]; label: string; base: Record<string, unknown>; redrawing?: boolean };
+export type StrokeDrag = { kind: "stroke"; points: Point[]; label: string; base: Record<string, unknown>; redrawing?: boolean; sent?: number };
 
 type Target = () => Record<string, unknown>;
 type Enqueue = (fn: () => Promise<unknown>) => unknown;
@@ -67,19 +67,23 @@ export function extendStroke(d: StrokeDrag, p: Point, enqueue: Enqueue, target: 
   const last = d.points[d.points.length - 1];
   if (last[0] === p[0] && last[1] === p[1]) return;
   d.points.push(p);
-  if (d.base.mode === "shade") {
-    // Shading is not idempotent (segments share pixels): redraw the whole stroke, coalesced.
-    if (d.redrawing) return;
-    d.redrawing = true;
-    enqueue(async () => {
-      d.redrawing = false;
+  // Coalesce pointer events while the runtime is busy, preserving every sampled point.
+  if (d.redrawing) return;
+  d.redrawing = true;
+  enqueue(async () => {
+    d.redrawing = false;
+    if (d.base.mode === "shade") {
+      // Shading cannot be applied twice to the shared endpoints of segments.
       await api.call("transaction_rollback", {}, pid);
       await api.call("transaction_begin", { label: d.label }, pid);
       await api.call("draw_batch", { ...target(), ops: [{ ...d.base, points: [...d.points] }] }, pid);
-    });
-    return;
-  }
-  enqueue(() => api.call("draw_batch", { ...target(), ops: [{ ...d.base, points: [last, p] }] }, pid));
+    } else {
+      const end = d.points.length;
+      const points = d.points.slice(d.sent ?? 0, end);
+      d.sent = end - 1;
+      await api.call("draw_batch", { ...target(), ops: [{ ...d.base, points }] }, pid);
+    }
+  });
 }
 
 /** Troca o traço ao vivo por uma única op `stroke` com todos os pontos (um passo de desfazer). */

@@ -152,7 +152,7 @@ export function App() {
     if (k === "t") return st.set({ tool: "text" });
     if (k === "h") return st.set({ tool: "hitbox" });
     if (k === "delete" || k === "backspace") return selectionActions().remove();
-    if (k === "escape") return st.set({ selection: undefined, mcpOpen: false, dialog: null });
+    if (k === "escape") return st.set({ selection: undefined, selectionMask: undefined, mcpOpen: false, dialog: null });
     if (k === "x") return st.set({ primary: st.secondary, secondary: st.primary });
     if (k === "[") return st.set({ brush: Math.max(1, st.brush - 1) });
     if (k === "]") return st.set({ brush: Math.min(8, st.brush + 1) });

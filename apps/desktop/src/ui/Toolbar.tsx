@@ -71,7 +71,7 @@ export function Toolbar() {
           <button className="btn-icon" title="Apagar seleção (Delete)" onClick={a.remove}>
             <Trash2 size={17} />
           </button>
-          <button className="btn-icon" title="Limpar seleção (Esc)" onClick={() => s.set({ selection: undefined })}>
+          <button className="btn-icon" title="Limpar seleção (Esc)" onClick={() => s.set({ selection: undefined, selectionMask: undefined })}>
             <MousePointer2 size={17} />
           </button>
         </>

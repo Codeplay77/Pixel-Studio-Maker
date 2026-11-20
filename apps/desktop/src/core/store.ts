@@ -131,6 +131,11 @@ type EditorState = {
 };
 
 let toastId = 0;
+let refreshTimer: ReturnType<typeof setTimeout> | undefined;
+function scheduleRefresh() {
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(() => void useEditor.getState().refresh(), 100);
+}
 
 export const useEditor = create<EditorState>((set, get) => ({
   connected: false,
@@ -186,6 +191,7 @@ export const useEditor = create<EditorState>((set, get) => ({
     try {
       const doc = await api.getState(projectId);
       const s = get();
+      if (s.projectId !== projectId) return;
       const sprite = doc.model.sprites.find((x) => x.id === s.spriteId) ?? doc.model.sprites[0];
       const patch: Partial<EditorState> = { doc, epoch: s.epoch + 1 };
       if (sprite) {
@@ -209,7 +215,7 @@ export const useEditor = create<EditorState>((set, get) => ({
 
   openProject: async (id) => {
     await api.selectProject(id).catch(() => {});
-    set({ projectId: id, spriteId: undefined, layerId: undefined, frameId: undefined, animationId: undefined, direction: undefined, selection: undefined });
+    set({ projectId: id, spriteId: undefined, layerId: undefined, frameId: undefined, animationId: undefined, direction: undefined, selection: undefined, selectionMask: undefined });
     await get().refresh();
   },
 
@@ -226,7 +232,7 @@ export const useEditor = create<EditorState>((set, get) => ({
         }
         const agent = e.source !== "Editor";
         set({ frameEpoch: frames, epoch: s.epoch + (structural ? 1 : 0), lastAgentActivity: agent ? `${e.source}: ${e.command}` : s.lastAgentActivity });
-        void get().refresh();
+        scheduleRefresh();
         return;
       }
       case "operation":

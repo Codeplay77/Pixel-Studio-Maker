@@ -55,7 +55,7 @@ export function wandAt(p: Point, e: Modifiers, target: Target) {
   const st = useEditor.getState();
   const mode = selectMode(e);
   if (!inside(p)) {
-    if (mode === "replace") st.set({ selection: undefined });
+    if (mode === "replace") st.set({ selection: undefined, selectionMask: undefined });
     return;
   }
   void st
@@ -68,7 +68,7 @@ export function wandAt(p: Point, e: Modifiers, target: Target) {
 export function lassoFinish(points: Point[], mode: SelectMode) {
   const st = useEditor.getState();
   if (points.length < 3) {
-    if (mode === "replace") st.set({ selection: undefined });
+    if (mode === "replace") st.set({ selection: undefined, selectionMask: undefined });
     return;
   }
   void st.run("select_polygon", { sprite: st.spriteId, points, ...combineArgs(mode) }).then((r) => applyMask(r.data)).catch(() => {});

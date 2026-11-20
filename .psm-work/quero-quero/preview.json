@@ -1,0 +1,27 @@
+[
+    {
+        "args":  {
+                     "direction":  "W",
+                     "scale":  2,
+                     "project":  "f6286130",
+                     "animation":  "Voo"
+                 },
+        "tool":  "animation_preview"
+    },
+    {
+        "args":  {
+                     "scale":  6,
+                     "project":  "f6286130",
+                     "frame":  6
+                 },
+        "tool":  "frame_preview"
+    },
+    {
+        "args":  {
+                     "scale":  6,
+                     "project":  "f6286130",
+                     "frame":  11
+                 },
+        "tool":  "frame_preview"
+    }
+]

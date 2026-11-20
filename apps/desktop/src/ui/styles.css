@@ -62,11 +62,11 @@
   .tab-close { @apply inline-flex h-5 w-5 shrink-0 items-center justify-center rounded text-faint opacity-0 transition-opacity hover:bg-hover hover:text-ink focus-visible:opacity-100; }
   .project-tab:hover .tab-close, .project-tab.is-active .tab-close { @apply opacity-100; }
   .project-tab.is-active { @apply border-accent bg-panel text-ink; }
-  .tool-rail { @apply flex w-[60px] shrink-0 flex-col items-center gap-1 overflow-y-auto border-r border-line bg-shell px-2 py-3; }
+  .tool-rail { @apply flex min-h-0 w-[60px] shrink-0 flex-col items-center gap-1 overflow-y-auto border-r border-line bg-shell px-2 py-3; }
   .tool-rail > .btn-icon { @apply relative h-9 w-10; }
   .tool-key { @apply absolute right-1 bottom-0.5 text-[8px] text-faint; }
   .tool-rail .btn-icon-active .tool-key { @apply text-accent; }
-  .tool-options { @apply flex min-h-12 shrink-0 flex-wrap items-center gap-3 border-b border-line bg-shell/60 px-4 py-1.5 text-[12px]; }
+  .tool-options { @apply flex max-h-[35vh] min-h-12 shrink-0 flex-wrap overflow-y-auto items-center gap-3 border-b border-line bg-shell/60 px-4 py-1.5 text-[12px]; }
   .inspector { @apply flex w-[300px] shrink-0 flex-col border-l border-line bg-shell; }
   .inspector-tabs { @apply grid shrink-0 grid-cols-3 gap-1 border-b border-line p-2; }
   .inspector-tab { @apply flex items-center justify-center gap-1.5 rounded-md px-1 py-2 text-[11px] text-muted hover:bg-hover; }

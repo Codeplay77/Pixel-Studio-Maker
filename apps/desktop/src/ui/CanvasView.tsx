@@ -140,8 +140,10 @@ export function CanvasView() {
     g.beginPath();
     g.rect(ox, oy, W, H);
     g.clip();
-    for (let y = 0; y < H; y += cell) {
-      for (let x = 0; x < W; x += cell) {
+    const startY = Math.max(0, Math.floor(-oy / cell) * cell);
+    const startX = Math.max(0, Math.floor(-ox / cell) * cell);
+    for (let y = startY; y < Math.min(H, size.h - oy); y += cell) {
+      for (let x = startX; x < Math.min(W, size.w - ox); x += cell) {
         g.fillStyle = ((x / cell + y / cell) & 1) === 0 ? "#343a3d" : "#41484b";
         g.fillRect(ox + x, oy + y, cell, cell);
       }
@@ -408,7 +410,7 @@ export function CanvasView() {
   const onPointerMove = (e: React.PointerEvent) => {
     if (!sprite) return;
     const p = toPixel(e);
-    setHover(p);
+    setHover((previous) => previous && previous[0] === p[0] && previous[1] === p[1] ? previous : p);
     if (!drag) return;
     if (drag.kind === "pan") {
       setPan({ x: drag.panX + e.clientX - drag.startX, y: drag.panY + e.clientY - drag.startY });
@@ -443,7 +445,7 @@ export function CanvasView() {
       clipped.h = Math.min(sprite.height, r.y + r.h) - clipped.y;
       const valid = clipped.w > 0 && clipped.h > 0 && !(r.w === 1 && r.h === 1);
       const mode = d.mode ?? "replace";
-      if (mode === "replace" || (mode === "add" && !s.selection)) s.set({ selection: valid ? clipped : undefined });
+      if (mode === "replace" || (mode === "add" && !s.selection)) s.set({ selection: valid ? clipped : undefined, selectionMask: undefined });
       else if (valid && s.selection) marqueeCombine(clipped, mode);
     } else if (d.kind === "move") {
       const dx = d.to[0] - d.from[0];
@@ -485,6 +487,7 @@ export function CanvasView() {
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
         onPointerLeave={() => setHover(undefined)}
         onWheel={onWheel}
       />
