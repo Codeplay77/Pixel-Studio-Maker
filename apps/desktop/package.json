@@ -1,7 +1,7 @@
 {
   "name": "pixel-studio-maker-desktop",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "description": "Editor visual do Pixel Studio Maker (Tauri + React).",
   "author": "CodePlay77",

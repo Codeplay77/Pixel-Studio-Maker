@@ -2,6 +2,12 @@
 
 ## Não publicado
 
+## 0.2.1 — 2026-11-20
+
+- Desenho mais fluido: agrupa movimentos do pincel, reduz atualizações do projeto e limita o redesenho do fundo à área visível.
+- Ajusta a rolagem das ferramentas e opções em telas menores.
+- Corrige a limpeza da máscara de seleção ao usar Esc, trocar de projeto ou substituir a seleção.
+
 ## 0.2.0 — 2026-11-15
 
 - **RPG Maker MZ/MV/VX Ace**:

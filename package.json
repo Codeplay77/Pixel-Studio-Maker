@@ -1,7 +1,7 @@
 {
   "name": "pixel-studio-maker-workspace",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Pixel Studio Maker: editor de pixel art e sprite sheets com controle completo via MCP.",
   "author": "CodePlay77",
   "license": "MIT",

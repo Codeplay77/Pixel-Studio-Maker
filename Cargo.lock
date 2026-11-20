@@ -2569,7 +2569,7 @@ dependencies = [
 
 [[package]]
 name = "psm-integration-tests"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "serde_json",
  "sprite-commands",
@@ -3228,7 +3228,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-animation"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "schemars 1.2.3",
  "serde",
@@ -3240,7 +3240,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-cli"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "base64 0.23.1",
  "rmcp",
@@ -3255,7 +3255,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-commands"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "base64 0.23.1",
  "schemars 1.2.3",
@@ -3270,7 +3270,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-core"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "png",
  "schemars 1.2.3",
@@ -3281,7 +3281,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-desktop"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "base64 0.23.1",
  "serde",
@@ -3296,7 +3296,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-drawing"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "schemars 1.2.3",
  "serde",
@@ -3307,7 +3307,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-mcp"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "base64 0.23.1",
  "rmcp",
@@ -3321,7 +3321,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-project"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "gif",
  "miniz_oxide 0.8.9",
@@ -3338,7 +3338,7 @@ dependencies = [
 
 [[package]]
 name = "sprite-runtime"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "base64 0.23.1",
  "dirs",

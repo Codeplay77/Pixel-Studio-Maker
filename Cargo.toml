@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/*", "apps/desktop/src-tauri", "tools/sprite-cli", "tests"]
 
 [workspace.package]
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
 authors = ["CodePlay77"]
 license = "MIT"
