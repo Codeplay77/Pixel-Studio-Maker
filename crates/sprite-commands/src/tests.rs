@@ -474,3 +474,74 @@ fn composite_cache_recomposes_only_changed_regions() {
     let (_, hits, _, misses) = s.cache_stats();
     assert!(hits >= 1 && misses >= 1);
 }
+
+#[test]
+fn visual_review_and_repeat_preview() {
+    let (mut s, ctx) = session(8, 8);
+    run(
+        &mut s,
+        &ctx,
+        "draw_batch",
+        json!({ "ops": [
+        { "op": "pixel", "x": 1, "y": 2, "color": "#101010" },
+        { "op": "pixel", "x": 2, "y": 2, "color": "#121212" },
+        { "op": "pixel", "x": 0, "y": 3, "color": "#ffffff" }
+    ] }),
+    );
+    let inspect = run(&mut s, &ctx, "frame_inspect", json!({}));
+    let review = &inspect.data["visual_review"];
+    assert_eq!(review["margins"]["left"], 0);
+    assert_eq!(review["tile_edge_mismatches"]["left_right"], 1);
+    assert_eq!(review["near_colors"].as_array().unwrap().len(), 1);
+    let preview = run(&mut s, &ctx, "frame_preview", json!({ "repeat": true }));
+    assert_eq!(preview.images.len(), 2);
+    assert_eq!(&preview.images[1].data[1..4], b"PNG");
+}
+
+#[test]
+fn animation_gif_preview_respects_once_mode() {
+    let (mut s, ctx) = session(8, 8);
+    let base = first_frame(&s);
+    run(&mut s, &ctx, "animation_create", json!({ "name": "attack", "frames": 2, "copy_from": base, "loop_mode": "once" }));
+    let once = run(&mut s, &ctx, "animation_preview", json!({ "animation": "attack", "mode": "gif" }));
+    assert!(!once.images[0].data.windows(11).any(|b| b == b"NETSCAPE2.0"));
+    run(&mut s, &ctx, "animation_set_timing", json!({ "animation": "attack", "loop_mode": "loop" }));
+    let looping = run(&mut s, &ctx, "animation_preview", json!({ "animation": "attack", "mode": "gif" }));
+    assert!(looping.images[0].data.windows(11).any(|b| b == b"NETSCAPE2.0"));
+}
+
+/// Reproducible local benchmark for edits and inspections; run in release mode with --ignored.
+#[test]
+#[ignore = "manual performance benchmark"]
+fn benchmark_agent_edit_and_inspect() {
+    use std::time::Instant;
+    let (mut s, ctx) = session(256, 256);
+    for n in 0..4 {
+        run(&mut s, &ctx, "layer_create", json!({ "name": format!("layer-{n}") }));
+        run(
+            &mut s,
+            &ctx,
+            "draw_batch",
+            json!({"layer": format!("layer-{n}"), "ops": [
+                { "op": "rect", "x": n * 16, "y": n * 16, "w": 160, "h": 160, "fill": true, "color": "#56789a" }
+            ]}),
+        );
+    }
+    let start = Instant::now();
+    for n in 0..100 {
+        run(
+            &mut s,
+            &ctx,
+            "draw_batch",
+            json!({"layer": "layer-3", "ops": [
+                {"op": "stroke", "points": [[n, 0], [255 - n, 255]], "color": "#abcdef"}
+            ]}),
+        );
+    }
+    let edits = start.elapsed();
+    let start = Instant::now();
+    for _ in 0..10 {
+        run(&mut s, &ctx, "frame_inspect", json!({}));
+    }
+    eprintln!("256x256, 4 layers: 100 edits = {:?}; 10 inspections = {:?}", edits, start.elapsed());
+}

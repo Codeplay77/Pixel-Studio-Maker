@@ -1176,6 +1176,9 @@ pub struct FramePreview {
     /// Desenhar as 4 linhas-guia do 9-slice (margens definidas com nine_slice_set).
     #[serde(default)]
     pub nine_slice: bool,
+    /// Incluir uma segunda imagem com a regiao repetida 3x3 para avaliar encaixe de tiles.
+    #[serde(default)]
+    pub repeat: bool,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
@@ -1204,6 +1207,9 @@ pub struct FrameInspect {
     /// Inspecionar a imagem composta (padrão) ou só `layer`.
     #[serde(default)]
     pub layer_only: bool,
+    /// Distancia RGBA maxima para cores proximas (0 desativa, padrao 12).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub near_color_distance: Option<u8>,
 }
 
 // ---- paletas --------------------------------------------------------------------------------
@@ -1451,6 +1457,12 @@ pub struct ProjectValidate {
     /// Deslocamento máximo do centro entre frames seguidos, em px.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub max_jump: Option<f64>,
+    /// Fracao maxima de pixels alterados entre frames (padrao 0.6).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub max_change: Option<f64>,
+    /// Tolerancia para o chao e pivo, em pixels (padrao 1).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ground_tolerance: Option<i32>,
 }
 
 // Argumentos de cada área ficam em args/<área>.rs, registrados aqui.

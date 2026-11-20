@@ -245,3 +245,16 @@ Os dados destes recursos ficam em `extras` de cada sprite (veja `project_info`) 
   tags (viram animações), paleta e slices (viram regiões).
 - `export_normal_map` gera o normal map de um frame ou de uma sheet inteira, no mesmo layout, para a
   iluminação 2D do Godot. A altura vem de `bevel`, `luminance` ou `mix`, na convenção OpenGL; use `flip_y` para DirectX.
+
+
+## Revisão assistida para assets
+
+- `frame_inspect` inclui `visual_review`: fração visível, margens, pares de cores próximas e diferenças nas bordas. A faixa de luminância cobre apenas cores opacas. `near_color_distance` configura a distância RGBA; 0 desativa a busca. A distância das cores é RGBA e a análise é limitada às 64 cores mais frequentes. Não são julgamentos estéticos automáticos.
+- Para textura, use `frame_preview` com `repeat: true` e confira a imagem 3x3. Bordas diferentes podem se encaixar e bordas iguais não garantem uma boa transição: examine a imagem.
+- `frame_compare` inclui deslocamento dos anchors e pixels alterados na união das máscaras de cada região. Regiões podem se sobrepor; as contagens não são exclusivas.
+- Em `project_validate`, ajuste `max_jump`, `max_change` e `ground_tolerance` ao tipo de movimento. A base medida usa o pixel visível mais baixo, que pode ser um efeito ou objeto, não um pé. Examine anchors e imagens para decidir.
+- Uma falha de conexão durante uma escrita deixa o resultado incerto: consulte o estado e a revisão antes de tentar novamente.
+
+Para medir o motor localmente em um cenário fixo de 256×256 e quatro layers, rode
+`cargo test -p sprite-commands --release benchmark_agent_edit_and_inspect -- --ignored --nocapture`.
+O teste mede comandos e inspeção, não a latência visual do editor nem clientes simultâneos.

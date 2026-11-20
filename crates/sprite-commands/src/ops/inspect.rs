@@ -93,6 +93,21 @@ pub(crate) fn validate(s: &mut Session, a: ProjectValidate) -> Result<Outcome, C
     if let Some(j) = a.max_jump {
         opts.max_jump = j;
     }
+    if let Some(v) = a.max_change {
+        if !v.is_finite() || !(0.0..=2.0).contains(&v) {
+            return Err(CommandError::new(crate::ErrorCode::InvalidArgument, "max_change deve estar entre 0 e 2"));
+        }
+        opts.max_change = v;
+    }
+    if let Some(v) = a.ground_tolerance {
+        if v < 0 {
+            return Err(CommandError::new(crate::ErrorCode::InvalidArgument, "ground_tolerance deve ser nao negativa"));
+        }
+        opts.ground_tolerance = v;
+    }
+    if !opts.max_jump.is_finite() || opts.max_jump < 0.0 {
+        return Err(CommandError::new(crate::ErrorCode::InvalidArgument, "max_jump deve ser nao negativo"));
+    }
     let issues = run_validate(sp, s.doc.images(), &opts);
     let warnings = issues.iter().filter(|i| i.severity == sprite_animation::analysis::Severity::Warning).count();
     Ok(Outcome::data(json!({
@@ -240,7 +255,7 @@ pub(crate) fn animation_preview(s: &mut Session, a: AnimationPreview, ctx: &Exec
         PreviewMode::Gif => {
             let scale = check_scale(sp.width, sp.height, a.scale.unwrap_or_else(|| auto_scale(sp.width, sp.height, max).min(8)), max)?;
             let list: Vec<(Image, u32)> = frames.iter().map(|(_, img, ms)| (img.clone(), *ms)).collect();
-            let data = encode_gif(&list, scale, true)?;
+            let data = encode_gif(&list, scale, an.loop_mode != sprite_animation::LoopMode::Once)?;
             out.images.push(RenderedImage {
                 label: format!("{} gif", an.name),
                 mime: "image/gif".into(),
@@ -288,7 +303,7 @@ fn encode_patch(a: &Image, b: &Image, palette: &[Color]) -> Option<serde_json::V
     let rect = bounds.rect()?;
     let alphabet: Vec<char> = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&*+-=?@^<>()[]{}/|!:;,_".chars().collect();
     let mut table: Vec<(Color, char)> =
-        palette.iter().zip(alphabet.iter()).filter(|(c, _)| !c.is_transparent()).map(|(c, ch)| (*c, *ch)).collect();
+        palette.iter().filter(|c| !c.is_transparent()).copied().take(alphabet.len()).zip(alphabet.iter().copied()).collect();
     let mut next = table.len();
     let mut legend: BTreeMap<String, serde_json::Value> = BTreeMap::new();
     legend.insert(".".into(), serde_json::Value::Null);
@@ -349,6 +364,37 @@ pub(crate) fn frame_compare(s: &mut Session, a: FrameCompare, ctx: &ExecContext)
         "a_bounds": ma.bounds, "b_bounds": mb.bounds,
         "center_shift": match (ma.center, mb.center) { (Some(p), Some(q)) => Some([q[0] - p[0], q[1] - p[1]]), _ => None },
     });
+    let anchor_changes: Vec<_> = sp
+        .anchors
+        .iter()
+        .filter_map(|anchor| {
+            let (a, b) = (anchor.at(fa)?, anchor.at(fb)?);
+            Some(json!({ "name": anchor.name, "a": a, "b": b, "delta": [b.x - a.x, b.y - a.y] }))
+        })
+        .collect();
+    data["anchor_changes"] = json!(anchor_changes);
+    if !sp.regions.is_empty() {
+        let changes = diff_pixels(&ia, &ib);
+        let regions: Vec<_> = sp
+            .regions
+            .iter()
+            .filter_map(|region| {
+                let before = region.shape(fa).map(|shape| shape.to_mask(sp.width, sp.height));
+                let after = region.shape(fb).map(|shape| shape.to_mask(sp.width, sp.height));
+                if before.is_none() && after.is_none() {
+                    return None;
+                }
+                let count = changes
+                    .iter()
+                    .filter(|c| {
+                        before.as_ref().is_some_and(|m| m.get(c.at.x, c.at.y)) || after.as_ref().is_some_and(|m| m.get(c.at.x, c.at.y))
+                    })
+                    .count();
+                Some(json!({ "name": region.name, "changed": count }))
+            })
+            .collect();
+        data["region_changes"] = json!(regions);
+    }
     let mut out = Outcome::default();
     if matches!(a.output, CompareOutput::Full) {
         let palette = palette_colors(&s.doc, si);
@@ -436,6 +482,21 @@ pub(crate) fn frame_preview(s: &mut Session, a: FramePreview, ctx: &ExecContext)
     let m = frame_metrics(&img);
     let mut out = Outcome::default();
     out.images.push(render::png(format!("frame {frame} ({}x{}, escala {scale}x)", img.width(), img.height()), &out_img)?);
+    if a.repeat {
+        let (w, h) = (img.width() * 3, img.height() * 3);
+        let repeat_scale = check_scale(w, h, auto_scale(w, h, max), max)?;
+        let mut repeated = Image::new(w, h);
+        for y in 0..3 {
+            for x in 0..3 {
+                repeated.paste(
+                    &img,
+                    sprite_core::Point::new((x * img.width()) as i32, (y * img.height()) as i32),
+                    sprite_core::image::PasteMode::Replace,
+                );
+            }
+        }
+        out.images.push(render::png("repeticao 3x3", &preview(&repeated, repeat_scale, a.background, false))?);
+    }
     out.data = json!({
         "frame": frame, "rect": rect, "scale": scale, "image_size": [out_img.width(), out_img.height()],
         "bounds": m.bounds, "opaque_pixels": m.opaque_pixels, "colors": m.color_count, "overlays": legend,
@@ -456,6 +517,38 @@ pub(crate) fn frame_inspect(s: &mut Session, a: FrameInspect) -> Result<Outcome,
     let palette = palette_colors(&s.doc, r.si);
     let mut colors: Vec<(Color, u32)> = img.color_counts().into_iter().collect();
     colors.sort_by(|x, y| y.1.cmp(&x.1).then(x.0.cmp(&y.0)));
+    // Bounded comparisons keep inspection useful for imported photographs with many colors.
+    let mut near_colors = Vec::new();
+    let near_distance = i32::from(a.near_color_distance.unwrap_or(12));
+    let luminance = |c: Color| {
+        let linear = |v: u8| {
+            let v = f64::from(v) / 255.0;
+            if v <= 0.04045 { v / 12.92 } else { ((v + 0.055) / 1.055).powf(2.4) }
+        };
+        0.2126 * linear(c.r) + 0.7152 * linear(c.g) + 0.0722 * linear(c.b)
+    };
+    // Only opaque colors: contrast of translucent pixels depends on the background.
+    let lumas: Vec<_> = colors.iter().filter(|(c, _)| c.a == 255).map(|(c, _)| luminance(*c)).collect();
+    let luminance_range = lumas.iter().copied().reduce(f64::min).zip(lumas.iter().copied().reduce(f64::max));
+    for (i, (a, _)) in colors.iter().take(64).enumerate() {
+        for (b, _) in colors.iter().take(64).skip(i + 1) {
+            let d = (a.r as i32 - b.r as i32).pow(2)
+                + (a.g as i32 - b.g as i32).pow(2)
+                + (a.b as i32 - b.b as i32).pow(2)
+                + (a.a as i32 - b.a as i32).pow(2);
+            if d > 0 && d <= near_distance * near_distance {
+                near_colors.push(json!({ "a": a, "b": b, "distance_rgba": (d as f64).sqrt() }));
+            }
+        }
+    }
+    near_colors.truncate(32);
+    let horizontal_seam =
+        (0..img.height()).filter(|&y| img.get_or_clear(0, y as i32) != img.get_or_clear(img.width() as i32 - 1, y as i32)).count();
+    let vertical_seam =
+        (0..img.width()).filter(|&x| img.get_or_clear(x as i32, 0) != img.get_or_clear(x as i32, img.height() as i32 - 1)).count();
+    let margins = m.bounds.map(
+        |b| json!({"left": b.x, "top": b.y, "right": sp.width as i64 - b.right() as i64, "bottom": sp.height as i64 - b.bottom() as i64}),
+    );
     let colors: Vec<serde_json::Value> =
         colors.iter().map(|(c, n)| json!({ "color": c, "pixels": n, "palette_index": palette.iter().position(|p| p == c) })).collect();
     let off_palette = if palette.is_empty() { 0 } else { colors.iter().filter(|c| c["palette_index"].is_null()).count() };
@@ -480,8 +573,41 @@ pub(crate) fn frame_inspect(s: &mut Session, a: FrameInspect) -> Result<Outcome,
         "bounds": m.bounds, "opaque_pixels": m.opaque_pixels, "translucent_pixels": m.translucent_pixels,
         "ground_y": m.ground_y, "center": m.center,
         "holes": { "count": holes.count(), "bounds": holes.bounds() },
+        "visual_review": {
+            "visible_fraction": m.opaque_pixels as f64 / (sp.width as f64 * sp.height as f64),
+            "margins": margins,
+            "near_colors": near_colors,
+            "near_color_distance": near_distance,
+            "near_colors_sample_limit": 64,
+            "opaque_luminance_range": luminance_range.map(|(min, max)| [min, max]),
+            "tile_edge_mismatches": { "left_right": horizontal_seam, "top_bottom": vertical_seam },
+            "note": "As bordas sao uma heuristica, nao uma prova de continuidade; inspecione a repeticao visualmente. Cores proximas usam distancia RGBA, nao perceptual."
+        },
         "colors": colors, "off_palette_colors": off_palette,
         "anchors": anchors, "regions": regions, "cels": cels,
         "pivot": sp.pivot(r.frame),
     })))
+}
+
+#[cfg(test)]
+mod review_tests {
+    use super::*;
+
+    #[test]
+    fn patch_uses_distinct_symbols_with_transparent_palette_entry() {
+        let a = Image::new(2, 1);
+        let mut b = Image::new(2, 1);
+        let red = Color::rgb(255, 0, 0);
+        let blue = Color::rgb(0, 0, 255);
+        b.set(0, 0, red);
+        b.set(1, 0, blue);
+        let patch = encode_patch(&a, &b, &[Color::TRANSPARENT, red]).unwrap();
+        let row = patch["rows"][0].as_str().unwrap();
+        let mut chars = row.chars();
+        let first = chars.next().unwrap().to_string();
+        let second = chars.next().unwrap().to_string();
+        assert_ne!(first, second);
+        assert_eq!(patch["legend"][first], json!(red));
+        assert_eq!(patch["legend"][second], json!(blue));
+    }
 }

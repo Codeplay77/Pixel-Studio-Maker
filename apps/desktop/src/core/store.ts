@@ -193,7 +193,7 @@ export const useEditor = create<EditorState>((set, get) => ({
       const s = get();
       if (s.projectId !== projectId) return;
       const sprite = doc.model.sprites.find((x) => x.id === s.spriteId) ?? doc.model.sprites[0];
-      const patch: Partial<EditorState> = { doc, epoch: s.epoch + 1 };
+      const patch: Partial<EditorState> = { doc };
       if (sprite) {
         patch.spriteId = sprite.id;
         if (!sprite.layers.some((l) => l.id === s.layerId)) {
@@ -249,6 +249,7 @@ export const useEditor = create<EditorState>((set, get) => ({
         set({ clients: e.clients });
         return;
       case "resync":
+        set({ epoch: s.epoch + 1 });
         void get().refresh();
         return;
     }

@@ -146,12 +146,23 @@ impl PsmServer {
         let project = args.remove("project").and_then(|v| v.as_str().map(String::from));
         let expected = args.remove("expected_revision").and_then(|v| v.as_u64());
         let args = Value::Object(args);
+        // A lost response does not prove that a write failed. Never replay it automatically.
+        let read_only = specs().iter().any(|spec| spec.name == name && spec.kind == Kind::Read);
         for attempt in 0..2 {
             let client = self.client().await?;
             match client.call(project.clone(), name, args.clone(), expected).await {
-                Err(e) if attempt == 0 && !client.is_alive() => {
+                Err(e) if attempt == 0 && read_only && !client.is_alive() => {
                     let _ = e;
                     *self.inner.client.lock().await = None;
+                }
+                Err(e) if !read_only && !client.is_alive() => {
+                    return Err(CommandError::new(
+                        sprite_commands::ErrorCode::Internal,
+                        format!(
+                            "Conexao perdida durante escrita; o resultado e incerto. Consulte project_info e o estado antes de tentar novamente: {}",
+                            e.message
+                        ),
+                    ));
                 }
                 other => return other,
             }

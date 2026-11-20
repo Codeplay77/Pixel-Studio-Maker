@@ -43,7 +43,7 @@ const WORKFLOWS: &[Workflow] = &[
         ],
         template: "Anime uma caminhada de {frames} frames na direção {direcao}, a partir do frame {frame_base}.\n\
 1. animation_info e region_list/anchor_list para conhecer partes e anchors.\n\
-2. animation_create {\"name\": \"walk\", \"directions\": [\"{direcao}\"], \"frames\": {frames}, \"copy_from\": {frame_base}}.\n\
+2. Consulte project_info para identificar o ID do frame {frame_base}; use esse ID em copy_from ao chamar animation_create para walk, direcao {direcao} e {frames} frames.\n\
 3. animation_update com cycle: key_frames = contatos e passagens, ground_y = linha do chão.\n\
 4. Redesenhe as poses-chave primeiro (contato, passagem), depois os intermediários. Para cada frame: region_transform nas pernas/braços e redesenho das junções com draw_batch; cabeça e tronco sobem/descem no máximo 1–2 px.\n\
 5. frame_preview com onion {\"before\": 1} enquanto desenha; frame_compare entre vizinhos.\n\
@@ -122,4 +122,16 @@ pub fn get(name: &str, args: Map<String, Value>) -> Result<GetPromptResult, McpE
         text = text.replace(&format!("{{{arg}}}"), &value);
     }
     Ok(GetPromptResult::new(vec![PromptMessage::new_text(Role::User, text)]).with_description(w.description))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn walking_prompt_resolves_frame_before_calling_animation_create() {
+        let prompt = get("animar_caminhada", Map::new()).unwrap();
+        let text = format!("{:?}", prompt.messages);
+        assert!(text.contains("project_info"));
+        assert!(!text.contains("copy_from\": o primeiro frame"));
+    }
 }

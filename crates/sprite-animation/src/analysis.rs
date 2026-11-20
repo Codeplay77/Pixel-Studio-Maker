@@ -259,8 +259,11 @@ pub fn validate(sprite: &Sprite, images: &ImageStore, opts: &ValidateOptions) ->
                 }
                 metrics.push((f, m));
             }
-            for pair in track.frames.windows(2) {
-                let (a, b) = (pair[0], pair[1]);
+            let mut adjacent: Vec<(u32, u32)> = track.frames.windows(2).map(|p| (p[0], p[1])).collect();
+            if track.frames.len() > 2 && matches!(anim.loop_mode, crate::model::LoopMode::Loop | crate::model::LoopMode::Reverse) {
+                adjacent.push((*track.frames.last().unwrap(), track.frames[0]));
+            }
+            for (a, b) in adjacent.iter().copied() {
                 let (Some(ia), Some(ib)) = (composites.get(&a), composites.get(&b)) else { continue };
                 if a != b && ia == ib {
                     out.push(tag(issue(Severity::Warning, "duplicate_frame", format!("frame {b} é idêntico ao anterior ({a})")), b));
@@ -286,21 +289,18 @@ pub fn validate(sprite: &Sprite, images: &ImageStore, opts: &ValidateOptions) ->
                     ));
                 }
             }
-            for pair in metrics.windows(2) {
-                let ((fa, ma), (fb, mb)) = (&pair[0], &pair[1]);
-                if let (Some(ca), Some(cb)) = (ma.center, mb.center) {
+            for (fa, fb) in adjacent {
+                let ma = metrics.iter().find(|(f, _)| *f == fa).map(|(_, m)| m);
+                let mb = metrics.iter().find(|(f, _)| *f == fb).map(|(_, m)| m);
+                if let (Some(ca), Some(cb)) = (ma.and_then(|m| m.center), mb.and_then(|m| m.center)) {
                     let jump = ((ca[0] - cb[0]).powi(2) + (ca[1] - cb[1]).powi(2)).sqrt();
                     if jump > opts.max_jump {
-                        out.push(tag(issue(Severity::Warning, "jump", format!("o centro se desloca {jump:.1}px de {fa} para {fb}")), *fb));
+                        out.push(tag(issue(Severity::Warning, "jump", format!("o centro se desloca {jump:.1}px de {fa} para {fb}")), fb));
                     }
                 }
             }
             let grounds: Vec<(u32, i32)> = metrics.iter().filter_map(|(f, m)| m.ground_y.map(|g| (*f, g))).collect();
-            if let (Some(lo), Some(hi)) = (grounds.iter().map(|g| g.1).min(), grounds.iter().map(|g| g.1).max())
-                && hi - lo > opts.ground_tolerance
-                && anim.cycle.ground_y.is_some()
-            {
-                let ground = anim.cycle.ground_y.unwrap_or(hi);
+            if let Some(ground) = anim.cycle.ground_y {
                 for (f, g) in &grounds {
                     if (g - ground).abs() > opts.ground_tolerance {
                         out.push(tag(issue(Severity::Warning, "ground_drift", format!("base em y={g}, chão definido em y={ground}")), *f));
@@ -388,5 +388,43 @@ mod tests {
         assert!(codes.contains(&"holes"), "{codes:?}");
         assert!(codes.contains(&"jump"), "{codes:?}");
         assert!(codes.contains(&"big_change"), "{codes:?}");
+    }
+    #[test]
+    fn ground_and_loop_closure_are_checked_independently() {
+        let mut n = 0;
+        let mut ids = || {
+            n += 1;
+            n
+        };
+        let mut sprite = Sprite::new(100, "s", 16, 16, &mut ids);
+        let layer = sprite.layers[0].id;
+        let first = sprite.frames[0].id;
+        let mut images = ImageStore::new();
+        for (i, x) in [0, 3, 6].iter().enumerate() {
+            let frame = if i == 0 { first } else { 40 + i as u32 };
+            if i > 0 {
+                sprite.frames.push(Frame { id: frame, duration_ms: 100, tags: vec![] });
+            }
+            let mut image = Image::new(16, 16);
+            image.set(*x, 5, Color::BLACK);
+            images.insert(i as u32 + 1, image);
+            sprite.cels.push(Cel { layer, frame, image: i as u32 + 1, opacity: 255 });
+        }
+        let frames: Vec<_> = sprite.frames.iter().map(|f| f.id).collect();
+        sprite.animations.push(Animation {
+            id: 50,
+            name: "walk".into(),
+            loop_mode: crate::model::LoopMode::Loop,
+            tags: vec![],
+            tracks: vec![Track { direction: None, frames }],
+            cycle: CycleInfo { ground_y: Some(10), ..Default::default() },
+        });
+        let mut opts = ValidateOptions::for_sprite(&sprite);
+        opts.max_jump = 4.0;
+        let issues = validate(&sprite, &images, &opts);
+        assert!(issues.iter().any(|i| i.code == "ground_drift"));
+        assert!(issues.iter().any(|i| i.code == "jump" && i.frame == Some(first)));
+        sprite.animations[0].loop_mode = crate::model::LoopMode::Once;
+        assert!(!validate(&sprite, &images, &opts).iter().any(|i| i.code == "jump"));
     }
 }
